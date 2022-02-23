@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="io.dourl.mqtt">
+
+    <application>
+        <activity
+            android:name=".ui.TestActivity"
+            android:exported="true" />
+    </application>
+
+</manifest>
