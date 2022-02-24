@@ -1,0 +1,1503 @@
+<resources>
+
+        <!-- 0 -->
+        <string name="zero_0">0</string>
+
+        <!-- 乐乐小游戏 -->
+        <string name="app_name">T_T</string>
+
+        <!-- 确定 -->
+        <string name="ok">OK</string>
+
+        <!-- 取消 -->
+        <string name="cancel">Cancel</string>
+
+        <!-- 已有账号？ -->
+        <string name="regist_note">Already have an account?</string>
+
+        <!-- 注册 -->
+        <string name="regist_button_regit">Register</string>
+
+        <!-- 没有帐号 -->
+        <string name="login_note">Don\'t have an account?</string>
+
+        <!-- 立即注册！ -->
+        <string name="login_regist_now">Register now!</string>
+
+        <!-- 请输入Game.com全球唯一ID -->
+        <string name="regist_hint">Enter your unique Game.com ID.</string>
+
+        <!-- 登录 -->
+        <string name="login_button_login">Log in</string>
+
+        <!-- 用户名 -->
+        <string name="login_regist_hint_name">Username</string>
+
+        <!-- 密码 -->
+        <string name="login_regist_hint_pwd">Password</string>
+
+        <!-- 登录 -->
+        <string name="login_regist_sign_with">Log in</string>
+
+        <!-- Wechat -->
+        <string name="login_wechat">WeChat</string>
+
+        <!-- Facebook -->
+        <string name="login_facebook">Facebook</string>
+
+        <!-- Weibo -->
+        <string name="login_weibo">WeiBo</string>
+
+        <!-- QQ -->
+        <string name="login_qq">QQ</string>
+
+        <!-- 用户名是必须的 -->
+        <string name="login_error_empty_name">Username is required.</string>
+
+        <!-- 密码是必须的 -->
+        <string name="login_error_empty_pwd">Password is required.</string>
+
+        <!-- 邮箱是必须的 -->
+        <string name="regist_error_empty_email">Email is required.</string>
+
+        <!-- 请输入正确的邮箱 -->
+        <string name="regist_error_invalid_email">Please enter a valid email address.</string>
+
+        <!-- 密码必须是连续的6~18位的字母数字 -->
+        <string name="login_error_invalid_pwd">Password must be 6-18 letters and numbers.</string>
+
+        <!-- 点击注册表示同意用户协议 -->
+        <string name="regist_agreement_link_1">By tapping Register you agree to the User Agreement.</string>
+
+        <!-- 用户服务协议 -->
+        <string name="regist_agreement_link_2">User Agreement</string>
+
+        <!-- 交易记录 -->
+        <string name="trade_record">Transaction History</string>
+
+        <!-- 用户钱包 -->
+        <string name="user_purse">User Wallet</string>
+
+        <!-- 帐户信息 -->
+        <string name="account_information">Account Information</string>
+
+        <!-- 设置 -->
+        <string name="setting">Settings</string>
+
+        <!-- 推送通知 -->
+        <string name="push_notification">Push Notifications</string>
+
+        <!-- 接收新消息通知 -->
+        <string name="msg_notification">Receive new message notifications</string>
+
+        <!-- 关于 -->
+        <string name="about">About</string>
+
+        <!-- 背景图片 -->
+        <string name="background_photos">Background Picture</string>
+
+        <!-- 昵称 -->
+        <string name="name">Nickname</string>
+
+        <!-- 介绍 -->
+        <string name="introduce">About</string>
+
+        <!-- 密码 -->
+        <string name="password">Password</string>
+
+        <!-- 退出登录 -->
+        <string name="logout">Log out</string>
+
+        <!-- 提示 -->
+        <string name="hint">Hint</string>
+
+        <!-- 用户名不能为空 -->
+        <string name="username_cannot_empty">Username cannot be empty.</string>
+
+        <!-- 反馈成功 -->
+        <string name="report_success">Feedback submitted successfully.</string>
+
+        <!-- 点击登录 -->
+        <string name="click_to_login">Tap to log in</string>
+
+        <!-- 保存 -->
+        <string name="save">Save</string>
+
+        <!-- 相机 -->
+        <string name="camera">Camera</string>
+
+        <!-- 相册 -->
+        <string name="album">Gallery</string>
+
+        <!-- 查找 -->
+        <string name="search_page_title">Search</string>
+
+        <!-- 输入要搜索的内容 -->
+        <string name="search_hint">Enter search terms</string>
+
+        <!-- 你没有交易记录 -->
+        <string name="order_list_order_record_empty">You don\'t have any transaction records.</string>
+
+        <!-- 媒体未找到 -->
+        <string name="media_not_found">Media not found.</string>
+
+        <!-- 确认 -->
+        <string name="confirm">OK</string>
+
+        <!-- 关闭 -->
+        <string name="close">Close</string>
+
+        <!-- 您确定要注销？ -->
+        <string name="confirm_logout">Are you sure you want to log out?</string>
+
+        <!-- 关注 -->
+        <string name="follow">Follow</string>
+
+        <!-- 已关注 -->
+        <string name="following">Following</string>
+
+        <!-- 关注者 -->
+        <string name="followers">Followers</string>
+
+        <!-- 微信 -->
+        <string name="wechat_session">WeChat</string>
+
+        <!-- 朋友圈 -->
+        <string name="wechat_timeline">Moments</string>
+
+        <!-- Facebook -->
+        <string name="facebook_share">Facebook</string>
+
+        <!-- 微博 -->
+        <string name="weibo">WeiBo</string>
+
+        <!-- 密码修改成功 -->
+        <string name="password_is_changed">Password successfully changed.</string>
+
+        <!-- 修改密码 -->
+        <string name="password_update">Change password</string>
+
+        <!-- 请输入原密码 -->
+        <string name="please_enter_old_password">Enter current password</string>
+
+        <!-- 密码不匹配 -->
+        <string name="password_not_match">Password\'s don\'t match</string>
+
+        <!-- 你的用户信息已经过期 -->
+        <string name="your_user_info_was_expired">Your user information has expired.</string>
+
+        <!-- 无法连接到网络，请检查网络 -->
+        <string name="no_internet">Unable to connect to network, check your connection.</string>
+
+        <!-- 订阅 -->
+        <string name="subscribed">Subscribe</string>
+
+        <!-- 免费 -->
+        <string name="free">Free</string>
+
+        <!-- 搜索结果 -->
+        <string name="search_results">Search results</string>
+
+        <!-- 无结果 -->
+        <string name="no_search_results">No results</string>
+
+        <!-- 分享 -->
+        <string name="share">Share</string>
+
+        <!-- 视频加载失败，请重试 -->
+        <string name="video_loading_fail_to_retry">Video failed to load, please try again.</string>
+
+        <!-- 确定新密码 -->
+        <string name="confirm_password_hint">Confirm new password</string>
+
+        <!-- 输入新密码 -->
+        <string name="new_password_hint">Enter new password</string>
+
+        <!-- 输入旧密码 -->
+        <string name="old_password_hint">Enter current password</string>
+
+        <!-- 删除 -->
+        <string name="delete">Delete</string>
+
+        <!-- 开始 -->
+        <string name="start">Start</string>
+
+        <!-- 多语言 -->
+        <string name="language">Language</string>
+
+        <!-- 跟随系统 -->
+        <string name="system">System</string>
+
+        <!-- 您还没有任何消息，去发现更多精彩吧 -->
+        <string name="you_do_not_have_any_message_to_find_more_exciting">You don\'t have any messages yet, go find something interesting!</string>
+
+        <!-- 没有使用这些功能所需的权限。请授予设备的设置访问权限。 -->
+        <string name="permission_error_unable_to_use_feature">You don\'t have the permissions to use these features, please grant the necessary permissions in your device settings.</string>
+
+        <!-- 上传失败，请重试 -->
+        <string name="upload_failed_hint">Upload failed, please try again.</string>
+
+        <!-- 充值 -->
+        <string name="recharge">Recharge</string>
+
+        <!-- 去充值 -->
+        <string name="goto_recharge">Recharge Now</string>
+
+        <!-- 发送 -->
+        <string name="send">Send</string>
+
+        <!-- 余额不足请前去充值 -->
+        <string name="balance_not_enough">Balance is too low, please recharge.</string>
+
+        <!-- 忘记密码？ -->
+        <string name="login_foget_pwd">Forgot password?</string>
+
+        <!-- 找回密码 -->
+        <string name="login_find_pwd_title">Recover password</string>
+
+        <!-- 请输入您的fame ID -->
+        <string name="find_pwd_id_input">Enter your Fame ID</string>
+
+        <!-- fameID 不能为空 -->
+        <string name="find_pwd_id_empty">Fame ID cannot be empty.</string>
+
+        <!-- 电话号码不能为空 -->
+        <string name="find_pwd_phonenum_empty">Phone number cannot be empty.</string>
+
+        <!-- 邮箱不能为空 -->
+        <string name="find_pwd_email_empty">Email cannot be empty.</string>
+
+        <!-- 下一步 -->
+        <string name="find_pwd_next">Next</string>
+
+        <!-- 通过绑定手机号找回 -->
+        <string name="find_pwd_by_phone">Recover password via linked phone number.</string>
+
+        <!-- 通过绑定邮箱找回 -->
+        <string name="find_pwd_by_email">Recover password via link email.</string>
+
+        <!-- 请输入验证码 -->
+        <string name="find_pwd_verify_code_input">Enter verification code</string>
+
+        <!-- 请输入手机号 -->
+        <string name="input_phone_num">Enter phone number</string>
+
+        <!-- 请输入邮箱 -->
+        <string name="input_email">Enter email</string>
+
+        <!-- %1$s秒后重发 -->
+        <string name="resend_verify_code_interval">Can send again in %1$s sec</string>
+
+        <!-- 获取验证码 -->
+        <string name="get_verify_code">Send verification code</string>
+
+        <!-- 手机号输入有误，请重新输入 -->
+        <string name="bind_pwd_error_phone_tip">Invalid phone number, please try again.</string>
+
+        <!-- 账号安全 -->
+        <string name="account_security">Account Security</string>
+
+        <!-- 绑定手机号 -->
+        <string name="bind_phone_title">Link phone</string>
+
+        <!-- 更改绑定手机号 -->
+        <string name="bind_phone_title_update">Change linked phone</string>
+
+        <!-- 绑定邮箱 -->
+        <string name="account_security_bind_email">Link email</string>
+
+        <!-- 未绑定 -->
+        <string name="account_security_no_bind">Not linked</string>
+
+        <!-- 选择要充值的金额 -->
+        <string name="select_recharge_value">Select the amount you\'d like to recharge</string>
+
+        <!-- 自定义金额 -->
+        <string name="custom_amount">Custom amount</string>
+
+        <!-- 付款方式 -->
+        <string name="payment_method">Payment method</string>
+
+        <!-- 当前余额 -->
+        <string name="current_balance">Current balance</string>
+
+        <!-- 请输入新密码 -->
+        <string name="find_pwd_input_new_pwd">Enter new password</string>
+
+        <!-- 点击获取验证码，您绑定的手机号 %1$s 会收到一条含有验证码的信息 -->
+        <string name="find_pwd_bind_tip_phone">Tap to send verification code. Your linked phone %1$s will receive a verification code.</string>
+
+        <!-- 点击获取验证码，您绑定的邮箱 %1$s 会收到一条含有验证码的信息 -->
+        <string name="find_pwd_bind_tip_email">Tap to send verification code. Your linked email %1$s will receive a verification code.</string>
+
+        <!-- 密码重置成功，请重新登陆 -->
+        <string name="find_pwd_success">Password changed successfully, please log in again.</string>
+
+        <!-- 重新登陆 -->
+        <string name="find_pwd_re_log_in">Log in again</string>
+
+        <!-- 您没有绑定手机号或邮箱，无法找回密码 -->
+        <string name="find_pwd_fail_no_bind">You don\'t have a linked phone or email, unable to recover your password.</string>
+
+        <!-- 绑定成功 -->
+        <string name="bind_success">Link successful</string>
+
+        <!-- 绑定失败 -->
+        <string name="bind_fail">Link failed</string>
+
+        <!-- 修改成功 -->
+        <string name="reset_success">Change successful</string>
+
+        <!-- 修改失败 -->
+        <string name="reset_fail">Change failed</string>
+
+        <!-- * 绑定手机号或邮箱可用于找回密码 -->
+        <string name="bind_pwd_tips">* Link your phone or email to be able to recover your password.</string>
+
+        <!-- 完成 -->
+        <string name="finish">Finish</string>
+
+        <!-- 返回 -->
+        <string name="back">Back</string>
+
+        <!-- 修改手机号 -->
+        <string name="rebind_phone">Change phone number</string>
+
+        <!-- 修改邮箱 -->
+        <string name="rebind_email">Change email</string>
+
+        <!-- 取消关注 -->
+        <string name="unfollow">Unfollow</string>
+
+        <!-- 下一步 -->
+        <string name="next">Next</string>
+
+        <!-- Sign in -->
+        <string name="action_sign_in_short">Sign in</string>
+
+        <!-- 点击上传头像 -->
+        <string name="upload_avatar">Tap to upload a profile pic</string>
+
+        <!-- 昵称 -->
+        <string name="nickname">Nickname</string>
+
+        <!-- 请输入6-8位的字母或数字 -->
+        <string name="nickname_hint">Enter 6-8 letters or numbers</string>
+
+        <!-- 跳过 -->
+        <string name="skip">Skip</string>
+
+        <!-- 按住说话 -->
+        <string name="record_state_normal">Hold to talk</string>
+
+        <!-- 上滑取消 -->
+        <string name="record_state_recording">Swipe up to cancel</string>
+
+        <!-- 取消发送 -->
+        <string name="record_state_cancel">Cancel</string>
+
+        <!-- [图片] -->
+        <string name="image_content_desc">[Image]</string>
+
+        <!-- [语音] -->
+        <string name="audio_content_desc">[Audio]</string>
+
+        <!-- [视频] -->
+        <string name="video_content_desc">[Video]</string>
+
+        <!-- [你好] -->
+        <string name="empty_emoji_content_desc">[Hello]</string>
+
+        <!-- 编辑个人信息 -->
+        <string name="edit_profile_info">Edit profile</string>
+
+        <!-- GAME.COM -->
+        <string name="logo_title">GAME.COM</string>
+
+        <!-- 请输入您的Game ID -->
+        <string name="login_name_hint">Enter your Game ID</string>
+
+        <!-- 请输入密码 -->
+        <string name="login_password_hint">Enter password</string>
+
+        <!-- 还没有账号? -->
+        <string name="have_no_account">Don\'t have an account?</string>
+
+        <!-- 去注册 -->
+        <string name="to_regist">Register Now</string>
+
+        <!-- 快速登录 -->
+        <string name="quick_login">Express Login</string>
+
+        <!-- 去登录 -->
+        <string name="to_login">Log in now</string>
+
+        <!-- 挑选属于你的个性的颜色吧 -->
+        <string name="select_color_tip">Select your favorite color</string>
+
+        <!-- 您还没上传头像 -->
+        <string name="not_upload_image">You haven\'t uploaded a profile photo</string>
+
+        <!-- 您还没设定昵称 -->
+        <string name="not_set_fullname">You haven\'t set a nickname</string>
+
+        <!-- 编辑 -->
+        <string name="edit">Edit</string>
+
+        <!-- 游戏等级 -->
+        <string name="game_level">Game Level</string>
+
+        <!-- Profile -->
+        <string name="profile">Profile</string>
+
+        <!-- 重试 -->
+        <string name="retry">Retry</string>
+
+        <!-- 女，19岁，北京市 朝阳区 -->
+        <string name="long_account_info">Female, 19, Beijing, Chaoyang District</string>
+
+        <!-- 头像 -->
+        <string name="avatar">Profile Photo</string>
+
+        <!-- 幸运色 -->
+        <string name="lucky_color">Lucky Color</string>
+
+        <!-- 搜索 -->
+        <string name="search">Search</string>
+
+        <!-- 搜索ID -->
+        <string name="search_id">Search ID</string>
+
+        <!-- 男 -->
+        <string name="gender_boy">Male</string>
+
+        <!-- 女 -->
+        <string name="gender_girl">Female</string>
+
+        <!-- 未知 -->
+        <string name="gender_unkown">Unknown</string>
+
+        <!-- 性别 -->
+        <string name="gender">Gender</string>
+
+        <!-- 生日 -->
+        <string name="birthday">Birthday</string>
+
+        <!-- 地区 -->
+        <string name="area">Location</string>
+
+        <!-- 当前位置 -->
+        <string name="current_location">Current location</string>
+
+        <!-- 通讯录 -->
+        <string name="contacts">Contacts</string>
+
+        <!-- 游戏 -->
+        <string name="game">Games</string>
+
+        <!-- 用户 -->
+        <string name="user">Users</string>
+
+        <!-- 部落 -->
+        <string name="tribe">Clans</string>
+
+        <!-- 您还没选择生日 -->
+        <string name="no_birthday_select">You haven\'t selected your birthday</string>
+
+        <!-- 您还没选择颜色 -->
+        <string name="no_color_select">You haven\'t selected a color</string>
+
+        <!-- 您还没选择城市 -->
+        <string name="no_city_select">You haven\'t selected a city</string>
+
+        <!-- 昵称是必须的 -->
+        <string name="no_nickname_select">Nickname is required</string>
+
+        <!-- 头像是必须的 -->
+        <string name="no_avatar_select">Profile photo is required</string>
+
+        <!-- 编辑昵称 -->
+        <string name="edit_fullname">Edit nickname</string>
+
+        <!-- 岁 -->
+        <string name="age_unit">Age</string>
+
+        <!-- 聊天 -->
+        <string name="chat">Chat</string>
+
+        <!-- 游戏部落 -->
+        <string name="game_clan">Game Clan</string>
+
+        <!-- 游戏论坛 -->
+        <string name="game_forum">Game Forum</string>
+
+        <!-- 游戏平台 -->
+        <string name="game_platform">Game Platform</string>
+
+        <!-- 屏蔽ta -->
+        <string name="screen">Block</string>
+
+        <!-- 解除屏蔽 -->
+        <string name="unscreen">Unblock</string>
+
+        <!-- 加入通讯录 -->
+        <string name="contacts_add">Add to contacts</string>
+
+        <!-- 移出通讯录 -->
+        <string name="contacts_move">Delete from contacts</string>
+
+        <!-- 举报 -->
+        <string name="report">Report</string>
+
+        <!-- 没有找到您搜索的东西哦~ -->
+        <string name="search_empty">Your search returned no result~</string>
+
+        <!-- 举报成功 -->
+        <string name="tipoff_success">Report Successful</string>
+
+        <!-- 个人中心 -->
+        <string name="user_center">Profile</string>
+
+        <!-- 你的信息已被对方拒收 -->
+        <string name="hint_chat_reject">Your message was rejected.</string>
+
+        <!-- 欢迎加入%s -->
+        <string name="hint_group_creat">You are welcome to join %s</string>
+
+        <!-- %s刚刚被批准加入部落 -->
+        <string name="hint_group_add_user">%s was just approved to join the clan.</string>
+
+        <!-- %s刚刚被邀请加入部落 -->
+        <string name="hint_group_invite_user">%s was just invited to join the clan.</string>
+
+        <!-- %s刚刚加入部落 -->
+        <string name="hint_group_user_add">%s just joined the clan.</string>
+
+        <!-- %s已被提出群聊 -->
+        <string name="hint_group_delete_user">%s has been removed from group chat.</string>
+
+        <!-- %s成为新部落首领 -->
+        <string name="hint_group_trans_owner">%s has become the new clan leader.</string>
+
+        <!-- 部落头像已更改 -->
+        <string name="hint_group_update_icon">Clan avatar has been updated</string>
+
+        <!-- 部落名已改为%s -->
+        <string name="hint_group_update_name">Clan name is now %s</string>
+
+        <!-- 部落颜色已更改 -->
+        <string name="hint_group_update_color">Clan color has been updated</string>
+
+        <!-- 部落增加%s游戏 -->
+        <string name="hint_group_add_game">The game %s was added to the clan</string>
+
+        <!-- 部落已改为%s -->
+        <string name="hint_group_update_type">Clan was updated to %s</string>
+
+        <!-- 公开 -->
+        <string name="type_group_public">Public</string>
+
+        <!-- 需要批准 -->
+        <string name="type_group_protected">Requires approval</string>
+
+        <!-- 私密 -->
+        <string name="type_group_private">Private</string>
+
+        <!-- 扫一扫 -->
+        <string name="scan">Scan</string>
+
+        <!-- 所在地区 -->
+        <string name="city_pick">Region</string>
+
+        <!-- 定位中... -->
+        <string name="get_location_ing">Locating&#8230;</string>
+
+        <!-- 清除缓存 -->
+        <string name="clear_cache">Clear cache</string>
+
+        <!-- 在线客服 -->
+        <string name="online_customer_service">Online Service</string>
+
+        <!-- 帮助与反馈 -->
+        <string name="help_report">Help and Feedback</string>
+
+        <!-- 视频与照片 -->
+        <string name="vedio_photo">Video and Photos</string>
+
+        <!-- 保存到本地相册 -->
+        <string name="vedio_photo_save">Save to local gallery</string>
+
+        <!-- 不保存到本地相册 -->
+        <string name="vedio_photo_unsave">Don\'t save to local gallery</string>
+
+        <!-- 发送验证码 -->
+        <string name="send_verify_code">Send code</string>
+
+        <!-- 请输入验证码 -->
+        <string name="input_sms_verify_code">Enter verification code</string>
+
+        <!-- 请输入手机号 -->
+        <string name="bind_phone_hint">Enter phone number</string>
+
+        <!-- 为保障账户安全，请绑定手机号以便找回密码 -->
+        <string name="bind_phone_text">To protect your account, link your phone number so you can recover your password.</string>
+
+        <!-- 为保障账户安全，请验证手机号再进行下一步操作， -->
+        <string name="change_phone_hint_top">To protect your account, verify your phone number before proceeding with the next step.</string>
+
+        <!-- 手机绑定成功 -->
+        <string name="bind_phone_success">Phone linked successfully.</string>
+
+        <!-- 清除会话列表 -->
+        <string name="clear_conversition">Clear chat list</string>
+
+        <!-- 清除会话列表成功 -->
+        <string name="clear_conversition_success">Chat list cleared successfully</string>
+
+        <!-- 清除所有聊天记录 -->
+        <string name="clear_msg">Delete all chats</string>
+
+        <!-- 清除聊天记录成功 -->
+        <string name="clear_msg_success">All chats deleted successfully</string>
+
+        <!-- 清除缓存数据 -->
+        <string name="clear_data">Clear cached data</string>
+
+        <!-- 清除缓存数据成功 -->
+        <string name="clear_data_success">Cached data cleared successfully</string>
+
+        <!-- 清除会话列表后聊天记录依然保留，确认清除会话列表？ -->
+        <string name="clear_conversition_hint">Clearing your chat list will not delete your chat history. Are you sure you want to clear your chat list?</string>
+
+        <!-- 真要残忍地清除所有聊天记录么？\n（会话列表也将一并清除） -->
+        <string name="clear_msg_hint">Are you sure you want to delete your entire chat history? \n (Chat list will also be cleared)</string>
+
+        <!-- 确认清除本地缓存数据？\n (包括语音，图片，视频) -->
+        <string name="clear_data_hint">Are you sure you want to delete local cached data? \n (including voice messages, images, videos)</string>
+
+        <!-- 意见与反馈 -->
+        <string name="feed_back">Comments and Feedback</string>
+
+        <!-- 有任何问题可以反馈给我们哦～ -->
+        <string name="input_your_feedback">Let us know if you have an questions or issues~</string>
+
+        <!-- %d/200 -->
+        <string name="feed_back_length">%d/200</string>
+
+        <!-- 反馈提交成功 -->
+        <string name="feed_back_success">Feedback submitted successfully.</string>
+
+        <!-- 反馈内容为空 -->
+        <string name="feed_back_is_empty">Feedback content is empty.</string>
+
+        <!-- 点击添加游戏 -->
+        <string name="click_to_addgame">Tap to add an app</string>
+
+        <!-- 热门游戏 -->
+        <string name="hot_game">Trending Games</string>
+
+        <!-- 添加 -->
+        <string name="add">Add</string>
+
+        <!-- 已添加 -->
+        <string name="added">Added</string>
+
+        <!-- 请打开相机权限 -->
+        <string name="please_enable_camera_permission">Please enable camera permissions</string>
+
+        <!-- 解析二维码失败 -->
+        <string name="scan_qrcode_fail">Failed to scan QR code</string>
+
+        <!-- 最近加入 -->
+        <string name="recent_join">Recently joined</string>
+
+        <!-- 部落成员 %1$d/%2$d -->
+        <string name="clan_member_count">Clan members %1$d/%2$d</string>
+
+        <!-- 我的二维码 -->
+        <string name="my_qr">My QR code</string>
+
+        <!-- Ta的二维码 -->
+        <string name="he_qr">Their QR code</string>
+
+        <!-- 部落二维码 -->
+        <string name="clan_qr">Clan QR code</string>
+
+        <!-- 保存到本地相册 -->
+        <string name="save_album">Save to local gallery</string>
+
+        <!-- Game.com -->
+        <string name="game_com">Game.com</string>
+
+        <!-- 图片保存成功 -->
+        <string name="save_image_success">Saved to gallery</string>
+
+        <!-- 全球唯一ID -->
+        <string name="id_qr_tip">Global unique ID</string>
+
+        <!-- 我的钱包 -->
+        <string name="assert_manage">My Wallet</string>
+
+        <!-- 估值 -->
+        <string name="estimation">Valuation</string>
+
+        <!-- 历史记录 -->
+        <string name="history">History</string>
+
+        <!-- 可用资产 -->
+        <string name="available_asset">Available assets</string>
+
+        <!-- 冻结资产 -->
+        <string name="freeze_currency">Order frozen</string>
+
+        <!-- ETH资产 -->
+        <string name="eth_asset">ETH Assets</string>
+
+        <!-- BTC资产 -->
+        <string name="btc_asset">BTC Assets</string>
+
+        <!-- 估值 -->
+        <string name="valuation">Valuation</string>
+
+        <!-- $%s -->
+        <string name="money_value">$%s</string>
+
+        <!-- 0 BTC -->
+        <string name="zero_0_btc">0 BTC</string>
+
+        <!-- BTC -->
+        <string name="btc">BTC</string>
+
+        <!-- ETH -->
+        <string name="eth">ETH</string>
+
+        <!-- 复制地址 -->
+        <string name="copy_address">Copy address</string>
+
+        <!-- 保存二维码 -->
+        <string name="save_qrcode">Save QR code</string>
+
+        <!-- 复制到剪贴板成功 -->
+        <string name="copy_to_clipboard_success">Successfully copied to clipboard</string>
+
+        <!-- 提现记录 -->
+        <string name="asset_tab1">Withdrawal successful</string>
+
+        <!-- 充值记录 -->
+        <string name="asset_tab2">Deposit successful</string>
+
+        <!-- 复制Txid -->
+        <string name="copy_txid">Copy Txid</string>
+
+        <!-- 地址 -->
+        <string name="address">Address</string>
+
+        <!-- Txid -->
+        <string name="txid">Txid</string>
+
+        <!-- %1$s %2$s -->
+        <string name="space_crypo">%1$s %2$s</string>
+
+        <!-- %s BTC -->
+        <string name="space_btc">%s BTC</string>
+
+        <!-- %s ETH -->
+        <string name="space_eth">%s ETH</string>
+
+        <!-- 余额 -->
+        <string name="balance">Balance</string>
+
+        <!-- 充值 -->
+        <string name="charge">Deposit</string>
+
+        <!-- 提现 -->
+        <string name="withdraw">Withdraw</string>
+
+        <!-- 待审核 -->
+        <string name="not_confirm">Pending</string>
+
+        <!-- 待确认(%1$s/%2$s) -->
+        <string name="process">Confirmed (%1$s/%2$s)</string>
+
+        <!-- 失败 -->
+        <string name="fail">Failed</string>
+
+        <!-- 日提现额度： -->
+        <string name="day_withdraw_limit">Daily withdrawal limit</string>
+
+        <!-- 今日已用： -->
+        <string name="today_use">Used today:</string>
+
+        <!-- 数量 -->
+        <string name="num">Amount</string>
+
+        <!-- 最小提现数量%s -->
+        <string name="mini_withdraw_num">Min. withdrawal amount %s</string>
+
+        <!-- 全部提现 -->
+        <string name="withdraw_all">Withdraw all</string>
+
+        <!-- 可用： -->
+        <string name="available">Available:</string>
+
+        <!-- 手续费： -->
+        <string name="poundage">Processing fee:</string>
+
+        <!-- 实际到账： -->
+        <string name="actual_to_account">Actual deposit amount:</string>
+
+        <!-- 您还没有地址 -->
+        <string name="no_asset_address_hint">You don\'t have an address yet</string>
+
+        <!-- 添加%s地址 -->
+        <string name="new_asset_address">Add %s address</string>
+
+        <!-- 成功 -->
+        <string name="success">Success</string>
+
+        <!-- 备注名称 -->
+        <string name="remark_name">Remark name</string>
+
+        <!-- 请输入%s地址 -->
+        <string name="enter_address_hint">Enter %s address</string>
+
+        <!-- 扫描二维码 -->
+        <string name="scan_qr_code">Scan QR code</string>
+
+        <!-- 确认 -->
+        <string name="confirm_ren">OK</string>
+
+        <!-- 账户安全 -->
+        <string name="account_secure">Account Security</string>
+
+        <!-- 为保障您的账户安全，请绑定手机号或邮箱以便找回密码。您可以在 个人中心-通用设置-账户安全 中进行绑定或修改手机号 -->
+        <string name="bind_hint_text">To protect your account, please link your phone to enable password recovery. This can be done in Profile - General Settings - Account Security.</string>
+
+        <!-- 绑定邮箱 -->
+        <string name="bind_email_title">Link email</string>
+
+        <!-- 请输入邮箱地址 -->
+        <string name="input_email_address">Enter email address</string>
+
+        <!-- 为保障账户安全，请绑定邮箱以便找回密码 -->
+        <string name="bind_email_text">To protect your account, link your email to enable password recovery.</string>
+
+        <!-- 邮箱绑定成功 -->
+        <string name="bind_email_success">Email linked successfully.</string>
+
+        <!-- 充值 -->
+        <string name="topup_title">Deposit</string>
+
+        <!-- 提现 -->
+        <string name="with_draw_title">Withdraw</string>
+
+        <!-- %1$s钱包地址禁止充值除%2$s之外的其他资产\n任何非%3$s资产充值将不可找回 -->
+        <string name="topup_hint">%1$s wallet addresses only accept %2$s. \n Any non-%3$s assets will not be refunded.</string>
+
+        <!-- 二维码已保存在相册中 -->
+        <string name="save_qr_code_path">QR code was saved to gallery</string>
+
+        <!-- 二维码保存失败 -->
+        <string name="save_qr_code_fail">QR code failed to save</string>
+
+        <!-- 0.00 -->
+        <string name="zero">0</string>
+
+        <!-- 使用新地址 -->
+        <string name="use_new_address">Use new address</string>
+
+        <!-- 超过日限额 -->
+        <string name="exceed_day_limit">Daily limit exceeded</string>
+
+        <!-- 确认提现吗？ -->
+        <string name="wd_dialog_title">Confirm Withdrawal</string>
+
+        <!-- 手续费：%s -->
+        <string name="wd_dialog_fee">Processing fee: %s</string>
+
+        <!-- 实际到账：%s -->
+        <string name="wd_dialog_actual">Acount amount: %s</string>
+
+        <!-- 地址：%s -->
+        <string name="wd_dialog_address">Address: %s</string>
+
+        <!-- 提交成功 -->
+        <string name="commit_success">Submitted successfully</string>
+
+        <!-- 确认删除地址？ -->
+        <string name="withdraw_delete_dialog_content">Are you sure you want to delete this address?</string>
+
+        <!-- 手机 -->
+        <string name="forgot_phone">Phone</string>
+
+        <!-- 邮箱 -->
+        <string name="forgot_mail">Email</string>
+
+        <!-- 你的邮箱 -->
+        <string name="input_your_email">Your email</string>
+
+        <!-- 选择国家 -->
+        <string name="select_area">Select country</string>
+
+        <!-- 重置密码 -->
+        <string name="reset_pwd">Reset password</string>
+
+        <!-- 请输入验证码 -->
+        <string name="input_verify_code">Enter verification code</string>
+
+        <!-- 请输入新密码 -->
+        <string name="input_new_pwd">Enter new password</string>
+
+        <!-- 请再次输入新密码 -->
+        <string name="input_new_pwd_again">Confirm new password</string>
+
+        <!-- 复制 -->
+        <string name="chat_action_copy">Copy</string>
+
+        <!-- 删除 -->
+        <string name="chat_action_delete">Delete</string>
+
+        <!-- 转发 -->
+        <string name="chat_action_forword">Forward</string>
+
+        <!-- 撤回 -->
+        <string name="chat_action_withdraw">Retract</string>
+
+        <!-- 普通 -->
+        <string name="common">Common</string>
+
+        <!-- 推荐 -->
+        <string name="recommend">Recommended</string>
+
+        <!-- 热门 -->
+        <string name="hot">Popular</string>
+
+        <!-- 活动 -->
+        <string name="active">Events</string>
+
+        <!-- 最新 -->
+        <string name="newest">Latest</string>
+
+        <!-- 论坛 -->
+        <string name="forum">Forum</string>
+
+        <!-- 战绩 -->
+        <string name="battle_record">Score</string>
+
+        <!-- 游戏活动 -->
+        <string name="game_activity">Game Events</string>
+
+        <!-- 付费场 -->
+        <string name="game_charge">Paid Games</string>
+
+        <!-- 换场 -->
+        <string name="change_site">Switch mode</string>
+
+        <!-- 选择游戏场 -->
+        <string name="select_game_site">Select an arcade</string>
+
+        <!-- 两次输入的密码不一致 -->
+        <string name="pwd_not_same">Password\'s don\'t match</string>
+
+        <!-- 密码重置成功 -->
+        <string name="pwd_reset_success">Password reset successfully</string>
+
+        <!-- 应用中心 -->
+        <string name="app_center">App Center</string>
+
+        <!-- 快捷入口 -->
+        <string name="quick_entry">Shortcut</string>
+
+        <!-- 可添加应用 -->
+        <string name="add_applications">You can add a shortcut button</string>
+
+        <!-- 应用入口 -->
+        <string name="app_portal">App portal</string>
+
+        <!-- 开启谷歌验证器 -->
+        <string name="open_google_auth">Enable Google Authenticator</string>
+
+        <!-- 提币验证 -->
+        <string name="withdraw_verify">Withdrawal verification</string>
+
+        <!-- 请输入由谷歌身份验证器生成的验证码 -->
+        <string name="verify_google_auth_hint">Enter the code from Google Authenticator</string>
+
+        <!-- 粘贴 -->
+        <string name="paste">Paste</string>
+
+        <!-- 确认提现 -->
+        <string name="confirm_withdraw">Confirm Withdrawal</string>
+
+        <!-- 请输入%s接收的验证码 -->
+        <string name="verify_phone_hint">Enter the code received by %s</string>
+
+        <!-- 还没有绑定谷歌验证，请先去网页端绑定 -->
+        <string name="add_verify_hint">You haven\'t linked a Google Authenticator, please do so in the web version.</string>
+
+        <!-- 战绩 -->
+        <string name="play_record">Achievements</string>
+
+        <!-- 当前还没有战绩 -->
+        <string name="empty_play_record">Don\'t have any achievements yet</string>
+
+        <!-- 找个朋友聊聊吧～ -->
+        <string name="session_empty_hint">Find a friend to chat with~</string>
+
+        <!-- 立即体验 -->
+        <string name="guide_open">Try now</string>
+
+        <!-- 游戏社交 -->
+        <string name="guide_title3">Game Community</string>
+
+        <!-- 和对战小伙伴一起畅聊 -->
+        <string name="guide_desc3">Chat freely with your opponents</string>
+
+        <!-- 游戏中心 -->
+        <string name="guide_title1">Game Center</string>
+
+        <!-- 支持数字货币的娱乐游戏 -->
+        <string name="guide_desc1">Games that support digital currency</string>
+
+        <!-- 糖果礼盒 -->
+        <string name="guide_title2">Candy Gift Box</string>
+
+        <!-- 来发现它的独特之处 -->
+        <string name="guide_desc2">Full of cool surprises!</string>
+
+        <!-- 未知星球 -->
+        <string name="unknow_address">Unknown planet</string>
+
+        <!-- 立即定位 -->
+        <string name="set_address">Get location</string>
+
+        <!-- 重新定位 -->
+        <string name="reset_address">Refresh location</string>
+
+        <!-- 清除位置 -->
+        <string name="clear_address">Clear location</string>
+
+        <!-- 所在地区 -->
+        <string name="local_address">Location</string>
+
+        <!-- %1$s %2$s %3$s -->
+        <string name="format_address">%1$s %2$s %3$s</string>
+
+        <!-- 登录失败 -->
+        <string name="login_failure">Login failed</string>
+
+        <!-- 看你们聊得这么开心还不快把Ta加到通讯录 -->
+        <string name="chat_hint_info">You\'ve had such a great time chatting, why not add them to your contacts.</string>
+
+        <!-- 开心的时光 -->
+        <string name="happy_time">Fun times</string>
+
+        <!-- 加入通讯录 -->
+        <string name="add_address_book">Add to contacts</string>
+
+        <!-- 下次再说 -->
+        <string name="next_time">Not now</string>
+
+        <!-- 确定退出游戏吗？ -->
+        <string name="confirm_quit_game">Are you sure you want to exit the game?</string>
+
+        <!-- 消息免打扰 -->
+        <string name="no_hint">Turn off notifications</string>
+
+        <!-- 你申请的部落为私密部落 -->
+        <string name="join_fail_privacy">The clan you requested to join is private</string>
+
+        <!-- 此部落人员已满！ -->
+        <string name="join_fail_over_mem">This clan has reached its member limit!</string>
+
+        <!-- Lv %d -->
+        <string name="level_format">Lv %d</string>
+
+        <!-- Game等级Lv %1$d，已添加%2$d个游戏 -->
+        <string name="game_level_format">Game level %1$d, %2$d games added</string>
+
+        <!-- 已是最新版本 -->
+        <string name="upgrade_is_new">This is the latest version</string>
+
+        <!-- 检测失败 -->
+        <string name="upgrade_check_error">Update check failed</string>
+
+        <!-- 下次再说 -->
+        <string name="tell_me_next">Not now</string>
+
+        <!-- 立即更新 -->
+        <string name="upgrade_now">Update now</string>
+
+        <!-- 乐乐小游戏发布新版本啦！ -->
+        <string name="upgrade_tip">A new version of Game.com is available!</string>
+
+        <!-- 检查更新 -->
+        <string name="check_upgrade">Check for updates</string>
+
+        <!-- 等级说明 -->
+        <string name="level_desc">Level Info</string>
+
+        <!-- 链接错误 -->
+        <string name="link_error">Invalid link</string>
+
+        <!-- 游戏规则 -->
+        <string name="game_rules">Game rules</string>
+
+        <!-- 长按可删除 -->
+        <string name="long_click_delete">Long press to delete</string>
+
+        <!-- 现在还没有活动哦~ -->
+        <string name="game_activity_empty">Currently no events</string>
+
+        <!-- 游戏正在维护中~ -->
+        <string name="game_empty_content">Game is undergoing maintenance</string>
+
+        <!-- 没有任何充值记录 -->
+        <string name="topup_empty_hint">No deposit history</string>
+
+        <!-- 没有任何提现记录 -->
+        <string name="withdraw_empty_hint">No withdrawal history</string>
+
+        <!-- 添加几个应用吧！ -->
+        <string name="app_empty_tip">Add a few apps!</string>
+
+        <!-- Register -->
+        <string name="action_registered">Register</string>
+
+        <!-- 消息免打扰 -->
+        <string name="msg_not_disturb">Turn Off Notifications</string>
+
+        <!-- 置顶聊天 -->
+        <string name="stick_chat">Pin chat</string>
+
+        <!-- 查看更多群成员 -->
+        <string name="check_more_clan_member">View more members</string>
+
+        <!-- 消息 -->
+        <string name="clan_detail_msg">Pending approval</string>
+
+        <!-- 申请加入 -->
+        <string name="apply_to_join">Join</string>
+
+        <!-- %1$d条新消息 -->
+        <string name="hint_chat_unread_msg">%1$d New message(s)</string>
+
+        <!-- 热门部落 -->
+        <string name="hot_clan">Popular Clans</string>
+
+        <!-- 创建部落 -->
+        <string name="create_clan">Create</string>
+
+        <!-- 加入 -->
+        <string name="join">Join</string>
+
+        <!-- 已满 -->
+        <string name="over_mem">already fulled</string>
+
+        <!-- 说说你为什么想加入... -->
+        <string name="apply_join_hint">Why do you want to join?</string>
+
+        <!-- 您的申请已成功发送！ -->
+        <string name="apply_join_success_hint">Your application has been submitted</string>
+
+        <!-- 部落公告 -->
+        <string name="clan_notice">Announcements</string>
+
+        <!-- 转让首领 -->
+        <string name="transfer_leader">Change leader</string>
+
+        <!-- 退出 -->
+        <string name="clan_detail_exit">Quit</string>
+
+        <!-- 我在本部落的昵称 -->
+        <string name="title_clan_set_alias">My clan nickname</string>
+
+        <!-- 部落成员 %1$d/%2$d -->
+        <string name="format_clan_member">Clan members %1$d/%2$d</string>
+
+        <!-- 退出后不会通知部落中其他成员，且不会再接收此部落消息 -->
+        <string name="quit_clan_tip">If you quit you wil not be able to receive any clan messages</string>
+
+        <!-- 请先转让首领再退出部落 -->
+        <string name="quit_clan_leader_tip">Please resign as leader before quitting</string>
+
+        <!-- 这个昵称只会在此部落内显示 -->
+        <string name="clan_set_nick_tip">This nickname is only displayed in the clan</string>
+
+        <!-- 部落成员 -->
+        <string name="clan_members">Clan members</string>
+
+        <!-- ID %s -->
+        <string name="format_clan_id">ID %s</string>
+
+        <!-- - %s -->
+        <string name="format_clan_auth">- %s</string>
+
+        <!-- 分享部落 -->
+        <string name="btn_share_clan">Share</string>
+
+        <!-- 添加游戏 -->
+        <string name="add_game">Add</string>
+
+        <!-- 点击输入部落名称 -->
+        <string name="click_input_clan_name">Enter Clan Name</string>
+
+        <!-- 点击输入描述 -->
+        <string name="click_input_clan_desc">Enter Description</string>
+
+        <!-- 我的游戏 -->
+        <string name="my_game">My Games</string>
+
+        <!-- 选择 -->
+        <string name="select">Select</string>
+
+        <!-- %1$s人已添加 -->
+        <string name="game_add_times">%1$s Person added</string>
+
+        <!-- 还没有加入部落哦 -->
+        <string name="empty_hint_game_clan">You haven\'t joined any clans yet</string>
+
+        <!-- Game.com全球社群官方认证部落。 -->
+        <string name="clan_vip_hint">Game.com community official verified clan.</string>
+
+        <!-- 立即加入 -->
+        <string name="join_now">Join Now</string>
+
+        <!-- 您将加入 %1$s\n将需要冻结 %2$s\n\n当您退出部落后将会立即解冻返还至您的钱包内 -->
+        <string name="add_vip_hint">You are joining %1$s \n  %2$s will be frozen \n\nOnce you leave the clan, it will be unfrozen and immediately returned to your wallet</string>
+
+        <!-- 当您退出部落后将会立即解冻返还至您的钱包内 -->
+        <string name="add_vip_hint_child">Once you leave the clan, it will be unfrozen and immediately returned to your wallet</string>
+
+        <!-- 您目前不符合加入条件\n加入部落需要冻结%1$s -->
+        <string name="add_vip_fail_hint">You are currently not eligible to join \n Joining this clan requires freezing %1$s</string>
+
+        <!-- 已选择 -->
+        <string name="had_select">Selected</string>
+
+        <!-- 请先安装微信 -->
+        <string name="install_wechat_tip">Install WeChat first please</string>
+
+        <!-- \&#064;&#160;所有人&#160;&#160; -->
+        <string name="chat_all">\&#064;&#160;ALL&#160;&#160;\n</string>
+
+        <!-- 我的邀请 -->
+        <string name="my_invite_title">My Invites</string>
+
+        <!-- 邀请 -->
+        <string name="invite">Invite</string>
+
+        <!-- 全球唯一Game.com iD： %s -->
+        <string name="format_game_id_invite">Unique Game.com ID: %s</string>
+
+        <!-- 邀请记录 -->
+        <string name="invite_record">Invite History</string>
+
+        <!-- 累计邀请人数: -->
+        <string name="invite_count">Total invites:</string>
+
+        <!-- 我的奖励金: -->
+        <string name="my_invite_reward">My reward amount:</string>
+
+        <!-- 提取 -->
+        <string name="btn_withdraw">Withdraw</string>
+
+        <!-- 邀请人数： -->
+        <string name="invite_count_tip">Invites:</string>
+
+        <!-- 获得奖励： -->
+        <string name="invite_reward_tip">Reward received:</string>
+
+        <!-- 奖池总额： -->
+        <string name="total_act_reward">Total prize pool:</string>
+
+        <!-- 正在进行 -->
+        <string name="tab_invite_act_type_ing">Processing</string>
+
+        <!-- 即将开始 -->
+        <string name="tab_invite_act_type_pending">Starting soon</string>
+
+        <!-- 已结束 -->
+        <string name="tab_invite_act_type_end">Ended</string>
+
+        <!-- 当前还没有邀请活动～ -->
+        <string name="invite_act_empty_str">Currently no invite events~</string>
+
+        <!-- 活动时间：%1$s - %2$s -->
+        <string name="format_item_invite_act_time">Event period: %1$s - %2$s</string>
+
+        <!-- 单人奖励上限：%1$d %2$s -->
+        <string name="format_single_reward_limit">Single reward limit: %1$s %2$s</string>
+
+        <!-- 每日获得奖励上限：%d 次 -->
+        <string name="format_daily_reward_limit">Daily reward limit: %s times</string>
+
+        <!-- 温馨小提示：奖励额度需要在邀请人和被邀请人都绑定【手机号】之后才会发放。 -->
+        <string name="invite_act_detail_tip">Please note: Rewards will not be issued until both the inviter and invitee have linked their mobile numbers.</string>
+
+        <!-- 快去邀请好友，赢取%s吧 -->
+        <string name="format_invite_act_detail_coin_type">Invite a friend now and win %s!</string>
+
+        <!-- 今日还剩 %s 次邀请机会 -->
+        <string name="format_invite_detail_left_times">You can still invite %s friends today</string>
+
+        <!-- 保存邀请卡 -->
+        <string name="save_invite_card">Save invite</string>
+
+        <!-- 直接分享 -->
+        <string name="direct_share">Share</string>
+
+        <!-- 保存失败 -->
+        <string name="save_failure">Save failed</string>
+
+        <!-- 填写邀请人ID -->
+        <string name="input_inviter_id">Enter inviter\'s ID</string>
+
+        <!-- 请输入邀请人的 Game.com ID -->
+        <string name="input_invite_code">Inviter\'s Game.com ID</string>
+
+        <!-- 填写后不可以修改哦～ -->
+        <string name="can_not_edit_after_input">Cannot be changed once added~</string>
+
+        <!-- 验证 -->
+        <string name="valid_inviter">Verification</string>
+
+        <!-- 需要超过 %1$d %2$s才可以提取奖励 -->
+        <string name="invite_withdraw_limit_top">You must have more than %1$s %2$s to withdraw your reward</string>
+
+        <!-- 累计获得 %1$d %2$s 奖励，当前还可提取 -->
+        <string name="format_invite_withdraw_tip_pre">You\'ve received a total of %1$s %2$s in rewards, you can still collect</string>
+
+        <!-- 邀请奖励领取成功 -->
+        <string name="invite_reward_get_success">Invite reward collected successfully.</string>
+
+        <!-- (已获得奖励) -->
+        <string name="already_get_reward">(Reward received)</string>
+
+        <!-- (等待奖励激活) -->
+        <string name="waiting_reward">(Reward activation pending)</string>
+
+        <!-- 进行中 -->
+        <string name="invite_act_status_ing">Processing</string>
+
+        <!-- 即将开始 -->
+        <string name="invite_act_status_pending">Starting soon</string>
+
+        <!-- 已经结束 -->
+        <string name="invite_act_status_end">Ended</string>
+
+        <!-- 当前已经邀请 %1$d 人，共获得 %2$s %3$s 奖励 -->
+        <string name="format_invite_record_header_tip">You\'ve invited %1$d people, and received a total of %2$s %3$s in rewards.</string>
+
+        <!-- 已获得 %1$d %2$s -->
+        <string name="item_invite_record_status_get">Received %1$s %2$s</string>
+
+        <!-- 等待奖励激活 -->
+        <string name="item_invite_record_status_pending">Reward activation pending</string>
+
+        <!-- 您还没有邀请过好友～ -->
+        <string name="item_empty_invite_record_list">You haven\'t invited anyone yet~</string>
+
+        <!-- 人数已达上限，无法邀请成员加入 -->
+        <string name="hint_select_user_fail">Member limit reached, cannot invite more.</string>
+
+        <!-- 下载 Game.com 乐乐小游戏，邀请人填写我的Game.com ID -->
+        <string name="invite_qr_lay_desc">Download Game.com, inviter enters my Game.com ID</string>
+
+        <!-- 扫码下载 Game.com 乐乐小游戏 -->
+        <string name="invite_qr_lay_scan_code_download">Scan to download Game.com</string>
+
+        <!-- 提取奖励 -->
+        <string name="withdraw_reward">Withdraw Reward</string>
+
+        <!-- \@%1$s&#160;&#160; -->
+        <string name="at">\@%1$s&#160;&#160;</string>
+
+        <!-- %1$s&#160;&#160; -->
+        <string name="at_first">%1$s&#160;&#160;</string>
+
+        <!-- [有人@我]&#160; -->
+        <string name="hint_at">[@you]&#160;</string>
+
+        <!-- 二次验证 -->
+        <string name="login_pre_verify">Two-factor authentication</string>
+
+        <!-- 请电脑访问 play.game.com\n开启二次验证以确保资金安全 -->
+        <string name="tip_bind_google_verify">Visit play.game.com on your desktop device\nEnable two-factor authentication to ensure your funds are secure</string>
+
+        <!-- play.game.com -->
+        <string name="play_game_come">play.game.com</string>
+
+        <!-- 申请加入%1$s -->
+        <string name="apply_join_clan">Join %1$s</string>
+
+
+
+
+        <!-- 隐私设置 -->
+        <string name="privacy_setting">Privacy Settings</string>
+        <string name="allow_other_pull_group_directly">Allow others to add me to groups</string>
+        <string name="allow_other_chat_directly">Allow others to start chats with me</string>
+
+        <string name="permission_denied">Permission denied</string>
+        <string name="update_log">Update Log</string>
+
+
+        <!--红包-->
+        <string name="you">You</string>
+        <string name="your">your</string>
+        <string name="yourself">your own</string>
+        <string name="red_packet">&#160;gift pack</string>
+        <string name="red_packet_format_1">%1$s collected %2$s</string>
+        <string name="red_packet_format_2">,&#160;%s gift pack has been fully collected</string>
+        <string name="of">\'s</string>
+        <string name="chat_function_tip_1">Tap to view picture, long press to view video</string>
+        <string name="chat_function_tip_2">Tap to take photo, long press to record video</string>
+        <string name="red_packet_finished">Gift pack has been collected</string>
+        <string name="red_packet_received">Gift pack collected</string>
+        <string name="red_packet_to_receive">Collect Gift Pack</string>
+        <string name="red_packet_expired">Gift pack expired</string>
+        <string name="red_p_check_detail">View Collection Details</string>
+        <string name="no_blacklist_vote_toast">Blacklist is empty</string>
+        <string name="red_packet_logo">Luck</string>
+        <string name="total_money">Total Amount</string>
+        <string name="single_price">Amount</string>
+        <string name="target_red_random_desc">&#160;change to random</string>
+        <string name="target_red_normal_desc">&#160;change to standard</string>
+        <string name="current_red_normal_desc">Currently set to standard gift pack,</string>
+        <string name="current_red_random_desc">Currently set to random gift pack,</string>
+        <string name="send_red_packet">Send Gift Pack</string>
+        <string name="red_packet_record">History</string>
+        <string name="red_packet_num">Quantity</string>
+        <string name="num_unit"></string>
+        <string name="format_group_num">%d members</string>
+        <string name="hint_add_num">Enter quantity</string>
+        <string name="hint_red_packet_desc">Best wishes</string>
+        <string name="send_red_packet_btn">Prepare Gift Pack</string>
+        <string name="format_red_received_status">%1$s/%2$s collected</string>
+        <string name="format_total_send">Total %s sent</string>
+        <string name="format_total_send_desc">Total sent %s</string>
+        <string name="format_total_receive">Total %s received</string>
+        <string name="best_luck">Most lucky</string>
+        <string name="receive_red_packet">Received gift packs</string>
+        <string name="red_packet_send">Sent gift packs</string>
+        <string name="red_packet_receive">Received gift packs</string>
+        <string name="wallet_balance_not_enough">Wallet balance too low</string>
+        <string name="red_packet_num_limit_tip">Number of gift packs cannot exceed %s</string>
+        <string name="red_packet_grab">OPEN</string>
+        <string name="red_packet_title">Gift Pack</string>
+        <string name="red_packet_history">Gift Pack History</string>
+        <string name="red_packet_already_save">Saved to wallet balance</string>
+        <string name="red_packet_already_get">%1$s collected, %2$s total</string>
+        <string name="red_packet_luck">Most lucky</string>
+        <string name="red_packet_for_you">sent you a gift pack</string>
+        <string name="red_packet_in_clan">sent a gift pack</string>
+        <string name="red_packet_lucky">sent a gift pack with a random amount</string>
+        <string name="red_packet_end">%s gift pack</string>
+        <string name="normal_red_packet">Standard Gift Pack</string>
+        <string name="lucky_red_packet">Lucky Gift Pack</string>
+        <string name="red_packet_over">Sorry, gift packs are all gone</string>
+        <string name="red_packet_timeout">Gift pack expired</string>
+        <string name="red_pkg_content_desc">[%1$s Gift Pack]&#160;%2$s</string>
+
+    </resources>
