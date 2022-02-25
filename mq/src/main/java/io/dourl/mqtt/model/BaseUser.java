@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.dourl.mqtt.base.BaseObject;
-import io.dourl.mqtt.dao.bean.UserModel;
+import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.model.customenum.ManagerType;
 
 /**

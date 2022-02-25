@@ -2,7 +2,7 @@ plugins {
     id 'com.android.library'
 }
 apply plugin: 'kotlin-android'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdk 31
     defaultConfig {
@@ -29,6 +29,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    greendao {
+        // 数据库版本号
+        schemaVersion 2
+        // 生成数据库文件的目录
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -44,6 +50,7 @@ dependencies {
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.4'
     implementation "androidx.core:core-ktx:+"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'org.greenrobot:greendao:3.3.0'
     implementation 'org.greenrobot:eventbus:3.1.1'

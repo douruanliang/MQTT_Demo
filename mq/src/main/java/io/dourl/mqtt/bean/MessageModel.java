@@ -1,4 +1,4 @@
-package io.dourl.mqtt.dao.bean;
+package io.dourl.mqtt.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,15 +6,12 @@ import android.os.Parcelable;
 import android.text.Spannable;
 
 import androidx.annotation.Keep;
-import androidx.annotation.WorkerThread;
-
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.JsonAdapter;
 
-import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -38,6 +35,7 @@ import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.typeadapter.BodyTypeAdapter;
 import io.dourl.mqtt.utils.IMTextBodyUtils;
 import io.dourl.mqtt.utils.chat.TextBodyContentUtils;
+import org.greenrobot.greendao.DaoException;
 
 
 /**
@@ -59,6 +57,9 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
             return clazz == Spannable.class;
         }
     }).create();
+
+    public void setClan(ClanModel clanModel) {
+    }
 
     public enum Status {
         sending, fail, success
@@ -156,25 +157,6 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
     public MessageModel() {
     }
 
-    
-
-    @Keep
-    public MessageModel(MessageModel messageModel) {
-        this.msgid = messageModel.msgid;
-        this.type = messageModel.type;
-        this.fromUid = messageModel.fromUid;
-        this.from = messageModel.getFromUser();
-        this.toUid = messageModel.toUid;
-        this.to = messageModel.to;
-        this.time = messageModel.time;
-        this.localTime = messageModel.localTime;
-        this.isRead = messageModel.isRead;
-        this.sessionId = messageModel.sessionId;
-        this.isMine = messageModel.isMine;
-        this.sendStatus = messageModel.sendStatus;
-        this.downloading = messageModel.downloading;
-        this.body = messageModel.body;
-    }
 
     public long getTime() {
         return time;
@@ -303,7 +285,6 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         this.isMine = isMine;
     }
 
-    @Keep
     public BodyType getBodyType() {
         return body != null ? body.getType() : BodyType.UN_RECOGNIZE;
     }
@@ -401,11 +382,9 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         }
         return from;
     }*/
-
     public UserModel getFromUser() {
         return from;
     }
-
 
 
     static class StatusConverter implements PropertyConverter<Status, String> {
@@ -537,18 +516,33 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
     public ClanModel getClan() {
         return this.clan;
     }
-
-    public void setClan(ClanModel clan) {
-        this.clan = clan;
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1865722337)
+    public void setFrom(@NotNull UserModel from) {
+        if (from == null) {
+            throw new DaoException("To-one property 'fromUid' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.from = from;
+            fromUid = from.getUid();
+            from__resolvedKey = fromUid;
+        }
     }
 
-    public void setFrom(UserModel from) {
-        this.from = from;
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 989421431)
+    public void setTo(@NotNull UserModel to) {
+        if (to == null) {
+            throw new DaoException("To-one property 'toUid' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.to = to;
+            toUid = to.getUid();
+            to__resolvedKey = toUid;
+        }
     }
 
-    public void setTo(UserModel to) {
-        this.to = to;
-    }
 
     public void setRead(boolean read) {
         isRead = read;
@@ -595,6 +589,93 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         dest.writeSerializable(this.body);
     }
 
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1297302993)
+    public UserModel getFrom() {
+        String __key = this.fromUid;
+        if (from__resolvedKey == null || from__resolvedKey != __key) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            UserModelDao targetDao = daoSession.getUserModelDao();
+            UserModel fromNew = targetDao.load(__key);
+            synchronized (this) {
+                from = fromNew;
+                from__resolvedKey = __key;
+            }
+        }
+        return from;
+    }
+
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 677666723)
+    public UserModel getTo() {
+        String __key = this.toUid;
+        if (to__resolvedKey == null || to__resolvedKey != __key) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            UserModelDao targetDao = daoSession.getUserModelDao();
+            UserModel toNew = targetDao.load(__key);
+            synchronized (this) {
+                to = toNew;
+                to__resolvedKey = __key;
+            }
+        }
+        return to;
+    }
+
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
+
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
+
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
+
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 666652324)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getMessageModelDao() : null;
+    }
+
     protected MessageModel(Parcel in) {
         this.id = (Long) in.readValue(Long.class.getClassLoader());
         this.msgid = in.readString();
@@ -615,7 +696,6 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         this.downloading = in.readByte() != 0;
         this.body = (BaseMsgBody) in.readSerializable();
     }
-
 
 
     @Generated(hash = 152672021)
@@ -648,6 +728,23 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
             return new MessageModel[size];
         }
     };
+
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @Generated(hash = 1033270558)
+    private transient MessageModelDao myDao;
+
+    @Generated(hash = 126835137)
+    private transient String from__resolvedKey;
+
+    @Generated(hash = 1352623207)
+    private transient String to__resolvedKey;
+
+
+
 }
 
 

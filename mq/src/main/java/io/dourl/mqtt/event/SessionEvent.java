@@ -1,6 +1,6 @@
 package io.dourl.mqtt.event;
 
-import io.dourl.mqtt.dao.bean.SessionModel;
+import io.dourl.mqtt.bean.SessionModel;
 
 /**
  * @author: dou

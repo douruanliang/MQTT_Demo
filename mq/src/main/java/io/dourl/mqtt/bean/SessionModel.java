@@ -1,4 +1,4 @@
-package io.dourl.mqtt.dao.bean;
+package io.dourl.mqtt.bean;
 
 import com.google.gson.Gson;
 
@@ -67,6 +67,50 @@ public class SessionModel implements BaseObject {
 
     @ToOne(joinProperty = "msgDbId")
     protected MessageModel sessionMsg;
+
+    /** Used to resolve relations */
+    @Generated(hash = 2040040024)
+    private transient DaoSession daoSession;
+
+    /** Used for active entity operations. */
+    @Generated(hash = 93931440)
+    private transient SessionModelDao myDao;
+
+
+    @Generated(hash = 354459021)
+    public SessionModel(Long id, String sessionID, String sessionName, String sessionIcon,
+            String content, Long createTime, Long msgDbId, MessageType msgType, String uid,
+            int unreadMsgCount, MessageModel.Status sendStatus, String draft,
+            Integer priority, ClanModel clan, Long localId) {
+        this.id = id;
+        this.sessionID = sessionID;
+        this.sessionName = sessionName;
+        this.sessionIcon = sessionIcon;
+        this.content = content;
+        this.createTime = createTime;
+        this.msgDbId = msgDbId;
+        this.msgType = msgType;
+        this.uid = uid;
+        this.unreadMsgCount = unreadMsgCount;
+        this.sendStatus = sendStatus;
+        this.draft = draft;
+        this.priority = priority;
+        this.clan = clan;
+        this.localId = localId;
+    }
+
+    @Generated(hash = 1381345516)
+    public SessionModel() {
+    }
+
+
+
+
+    @Generated(hash = 1867105156)
+    private transient String user__resolvedKey;
+
+    @Generated(hash = 474787524)
+    private transient Long sessionMsg__resolvedKey;
 
 
     public Long getId() {
@@ -252,5 +296,106 @@ public class SessionModel implements BaseObject {
     @Override
     public boolean equals(Object obj) {
         return sessionID.equals(((SessionModel) obj).sessionID);
+    }
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 386367976)
+    public UserModel getUser() {
+        String __key = this.uid;
+        if (user__resolvedKey == null || user__resolvedKey != __key) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            UserModelDao targetDao = daoSession.getUserModelDao();
+            UserModel userNew = targetDao.load(__key);
+            synchronized (this) {
+                user = userNew;
+                user__resolvedKey = __key;
+            }
+        }
+        return user;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 865374984)
+    public void setUser(UserModel user) {
+        synchronized (this) {
+            this.user = user;
+            uid = user == null ? null : user.getUid();
+            user__resolvedKey = uid;
+        }
+    }
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1014715134)
+    public MessageModel getSessionMsg() {
+        Long __key = this.msgDbId;
+        if (sessionMsg__resolvedKey == null || !sessionMsg__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            MessageModelDao targetDao = daoSession.getMessageModelDao();
+            MessageModel sessionMsgNew = targetDao.load(__key);
+            synchronized (this) {
+                sessionMsg = sessionMsgNew;
+                sessionMsg__resolvedKey = __key;
+            }
+        }
+        return sessionMsg;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1331023254)
+    public void setSessionMsg(MessageModel sessionMsg) {
+        synchronized (this) {
+            this.sessionMsg = sessionMsg;
+            msgDbId = sessionMsg == null ? null : sessionMsg.getId();
+            sessionMsg__resolvedKey = msgDbId;
+        }
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 128553479)
+    public void delete() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.delete(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#refresh(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 1942392019)
+    public void refresh() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.refresh(this);
+    }
+
+    /**
+     * Convenient call for {@link org.greenrobot.greendao.AbstractDao#update(Object)}.
+     * Entity must attached to an entity context.
+     */
+    @Generated(hash = 713229351)
+    public void update() {
+        if (myDao == null) {
+            throw new DaoException("Entity is detached from DAO context");
+        }
+        myDao.update(this);
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1560088805)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getSessionModelDao() : null;
     }
 }

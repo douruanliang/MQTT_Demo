@@ -8,8 +8,8 @@ import com.google.gson.Gson;
 import java.io.File;
 
 import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.dao.bean.MessageModel;
-import io.dourl.mqtt.dao.bean.SessionModel;
+import io.dourl.mqtt.bean.MessageModel;
+import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.model.message.chat.AImageBody;

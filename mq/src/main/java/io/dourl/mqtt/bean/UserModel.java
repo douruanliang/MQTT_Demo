@@ -1,4 +1,4 @@
-package io.dourl.mqtt.dao.bean;
+package io.dourl.mqtt.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -48,7 +48,6 @@ public class UserModel implements BaseObject, Parcelable {
     protected int max_exp;
     protected int id_change_times;
     protected int from_third;
-    //add on scheme version 3
     protected Integer is_cryptomate_agent = 0;//是否为代理商0：不是 1：是
 
     /**
@@ -182,39 +181,6 @@ public class UserModel implements BaseObject, Parcelable {
         return uid.hashCode();
     }
 
-    @Keep
-    @Generated(hash = 715586913)
-    public UserModel(String uid, String username, String fullname, String email, String mobile, String avatar, String avatar_thumb,
-                     int push_notify, String share_link, int age, String country, String province, String city, int level, int game_count,
-                     String birthday, String color, int gender, int is_friend, String country_code, int city_code, int save_static,
-                     int now_exp, int max_exp, int id_change_times, int from_third) {
-        this.uid = uid;
-        this.username = username;
-        this.fullname = fullname;
-        this.email = email;
-        this.mobile = mobile;
-        this.avatar = avatar;
-        this.avatar_thumb = avatar_thumb;
-        this.push_notify = push_notify;
-        this.share_link = share_link;
-        this.age = age;
-        this.country = country;
-        this.province = province;
-        this.city = city;
-        this.level = level;
-        this.game_count = game_count;
-        this.birthday = birthday;
-        this.color = color;
-        this.gender = gender;
-        this.is_friend = is_friend;
-        this.country_code = country_code;
-        this.city_code = city_code;
-        this.save_static = save_static;
-        this.now_exp = now_exp;
-        this.max_exp = max_exp;
-        this.id_change_times = id_change_times;
-        this.from_third = from_third;
-    }
 
     public String getEmail() {
         return this.email;
@@ -395,39 +361,6 @@ public class UserModel implements BaseObject, Parcelable {
         this.id_change_times = id_change_times;
     }
 
-    @Generated(hash = 49380387)
-    public UserModel(String uid, String username, String fullname, String email, String mobile, String avatar, String avatar_thumb,
-            int push_notify, String share_link, int age, String country, String province, String city, int level, int game_count,
-            String birthday, String color, int gender, int is_friend, String country_code, int city_code, int save_static, int now_exp,
-            int max_exp, int id_change_times, int from_third, Integer is_cryptomate_agent) {
-        this.uid = uid;
-        this.username = username;
-        this.fullname = fullname;
-        this.email = email;
-        this.mobile = mobile;
-        this.avatar = avatar;
-        this.avatar_thumb = avatar_thumb;
-        this.push_notify = push_notify;
-        this.share_link = share_link;
-        this.age = age;
-        this.country = country;
-        this.province = province;
-        this.city = city;
-        this.level = level;
-        this.game_count = game_count;
-        this.birthday = birthday;
-        this.color = color;
-        this.gender = gender;
-        this.is_friend = is_friend;
-        this.country_code = country_code;
-        this.city_code = city_code;
-        this.save_static = save_static;
-        this.now_exp = now_exp;
-        this.max_exp = max_exp;
-        this.id_change_times = id_change_times;
-        this.from_third = from_third;
-        this.is_cryptomate_agent = is_cryptomate_agent;
-    }
 
     @Override
     public int describeContents() {
@@ -501,6 +434,42 @@ public class UserModel implements BaseObject, Parcelable {
         this.id_change_times = in.readInt();
         this.from_third = in.readInt();
         this.is_cryptomate_agent = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
+
+    @Generated(hash = 49380387)
+    public UserModel(String uid, String username, String fullname, String email, String mobile,
+            String avatar, String avatar_thumb, int push_notify, String share_link, int age,
+            String country, String province, String city, int level, int game_count, String birthday,
+            String color, int gender, int is_friend, String country_code, int city_code,
+            int save_static, int now_exp, int max_exp, int id_change_times, int from_third,
+            Integer is_cryptomate_agent) {
+        this.uid = uid;
+        this.username = username;
+        this.fullname = fullname;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.avatar_thumb = avatar_thumb;
+        this.push_notify = push_notify;
+        this.share_link = share_link;
+        this.age = age;
+        this.country = country;
+        this.province = province;
+        this.city = city;
+        this.level = level;
+        this.game_count = game_count;
+        this.birthday = birthday;
+        this.color = color;
+        this.gender = gender;
+        this.is_friend = is_friend;
+        this.country_code = country_code;
+        this.city_code = city_code;
+        this.save_static = save_static;
+        this.now_exp = now_exp;
+        this.max_exp = max_exp;
+        this.id_change_times = id_change_times;
+        this.from_third = from_third;
+        this.is_cryptomate_agent = is_cryptomate_agent;
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {

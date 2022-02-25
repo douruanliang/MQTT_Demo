@@ -7,8 +7,8 @@ import java.io.File;
 import java.util.UUID;
 
 import io.dourl.mqtt.base.log.LoggerUtil;
-import io.dourl.mqtt.dao.bean.MessageModel;
-import io.dourl.mqtt.dao.bean.SessionModel;
+import io.dourl.mqtt.bean.MessageModel;
+import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.model.message.chat.AudioBody;

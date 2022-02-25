@@ -50,7 +50,7 @@ public class MqttManager {
         }
         String cId = LoginManager.getInstance().getCurrentUserId();
         mqttAndroidClient = new MqttAndroidClient(BaseApp.getApp(),
-                MqttConstant.URI, cId);
+                MqttConstant.PAHO_TEST_URI, cId);
         if (BuildConfig.DEBUG) {
             mqttAndroidClient.setTraceCallback(new MqttTraceCallback());
             mqttAndroidClient.setTraceEnabled(true);
@@ -67,20 +67,21 @@ public class MqttManager {
         //NHLog.e("deviceid: " + Constants.DEVICEID);
         if (LoginManager.isLogin()) {
             userName = LoginManager.getToken() + "_" +" Constants.DEVICEID";
-            password = "DigestUtils.md5Hex(userName + LoginManager.getSecret())";
+            //password = "DigestUtils.md5Hex(userName + LoginManager.getSecret())";
+            password = LoginManager.getSecret();
         } else {
             return null;
         }
-        NotificationHelper.showNoti(ActionListener.Action.CONNECT, false, "CONNECTING");
+       // NotificationHelper.showNoti(ActionListener.Action.CONNECT, false, "CONNECTING");
         MqttConnectOptions conOpt = new MqttConnectOptions();
-        X509TrustManager tm = new MqttX509TrustManager();
+       /* X509TrustManager tm = new MqttX509TrustManager();
         try {
             SSLContext sslContext = SSLContext.getInstance("TLS");
             sslContext.init(null, new TrustManager[]{tm}, null);
             conOpt.setSocketFactory(sslContext.getSocketFactory());
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         conOpt.setConnectionTimeout(MqttConstant.TIMEOUT);
         conOpt.setKeepAliveInterval(MqttConstant.KEEP_ALIVE);
         conOpt.setUserName(userName);
@@ -160,8 +161,6 @@ public class MqttManager {
                 TopicUtils.getImTopic(), 1, false));
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
                 TopicUtils.getNewsTopic(), 1, false));
-//        JobManager.getInstance().addJob(new MqttConAndSubJob(
-//                TopicUtils.getDefaultClanTopic(), 1, false));
     }
 
     public static void wakeMqtt() {

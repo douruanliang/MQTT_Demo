@@ -12,6 +12,7 @@
  */
 package io.dourl.mqtt;
 
+import android.content.Intent;
 import android.util.Log;
 
 
@@ -21,7 +22,9 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.event.mqtt.MqttOpFailEvent;
 import io.dourl.mqtt.job.msg.ReceiveMsgJob;
+import io.dourl.mqtt.manager.EventBusManager;
 
 /**
  * Handles call backs from the MQTT Client
@@ -42,13 +45,13 @@ public class MqttCallbackHandler implements MqttCallback {
     @Override
     public void connectionLost(Throwable cause) {//cause 为空时，代表主动调用disconnect
         if (cause != null) {
-            /*if (BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG) {
                 cause.printStackTrace();
-            }*/
-            if (BaseApp.getApp() != null) {
-               // AppConstant.getApp().sendBroadcast(new Intent(IntentAction.ACTION_WAKE_MQTT));
             }
-           // EventBusManager.getInstance().post(new MqttOpFailEvent(ActionListener.Action.CONNECT));
+            /*if (BaseApp.getApp() != null) {
+                BaseApp.getApp().sendBroadcast(new Intent(IntentAction.ACTION_WAKE_MQTT));
+            }*/
+            EventBusManager.getInstance().post(new MqttOpFailEvent(ActionListener.Action.CONNECT));
         }
        Log.e(TAG,"connectionLost, cause: " + (cause != null ? cause.getMessage() : null));
         NotificationHelper.showNoti(ActionListener.Action.DISCONNECT, false, "CONNECTION LOST");

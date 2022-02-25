@@ -2,7 +2,7 @@ package io.dourl.mqtt.manager;
 
 import android.text.TextUtils;
 
-import io.dourl.mqtt.dao.bean.UserModel;
+import io.dourl.mqtt.bean.UserModel;
 
 /**
  * 已登录用户管理类
@@ -22,11 +22,11 @@ public class LoginManager {
     /**
      * access_token
      */
-    private static volatile String mToken = null;
+    private static volatile String mToken = "mToken";
     /**
      * app_secret
      */
-    private static volatile String mSecret = null;
+    private static volatile String mSecret = "mSecret";
 
     private int mInviteMark;
     private int mInviteId;

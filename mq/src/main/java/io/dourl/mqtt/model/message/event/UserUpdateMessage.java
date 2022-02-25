@@ -2,7 +2,7 @@ package io.dourl.mqtt.model.message.event;
 
 
 import io.dourl.mqtt.base.BaseObject;
-import io.dourl.mqtt.dao.bean.MessageModel;
+import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.model.BaseUser;
 
 /**
