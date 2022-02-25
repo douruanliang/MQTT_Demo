@@ -1,7 +1,6 @@
 package io.dourl.mqtt.model.message.chat;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -11,7 +10,10 @@ import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import java.util.List;
+
+import androidx.core.content.ContextCompat;
 import io.dourl.mqtt.R;
+import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.base.BaseObject;
 import io.dourl.mqtt.manager.LoginManager;
 
@@ -53,7 +55,7 @@ public class RedPacketOpenBody extends BaseMsgBody {
             //领取人信息 占位符1
             String to = "";
             if (!TextUtils.isEmpty(entity.getTo_uid()) && entity.getTo_uid().equals(mUid)) {
-                to = AppConstant.getApp().getString(R.string.you);
+                to = BaseApp.getApp().getString(R.string.you);
             } else {
                 to = entity.getTo_name();
             }
@@ -62,46 +64,46 @@ public class RedPacketOpenBody extends BaseMsgBody {
             if (!TextUtils.isEmpty(entity.getTo_uid()) && entity.getTo_uid().equals(mUid)) {
 
                 if (!TextUtils.isEmpty(entity.getFrom_uid()) && entity.getFrom_uid().equals(mUid)) {
-                    from = AppConstant.getApp().getString(R.string.yourself);
+                    from = BaseApp.getApp().getString(R.string.yourself);
                 } else {
-                    from = entity.getC() + AppConstant.getApp().getString(R.string.of);
+                    from = entity.getC() + BaseApp.getApp().getString(R.string.of);
                 }
 
             } else {
                 if (!TextUtils.isEmpty(entity.getFrom_uid()) && entity.getFrom_uid().equals(mUid))
-                    from = AppConstant.getApp().getString(R.string.your);
+                    from = BaseApp.getApp().getString(R.string.your);
             }
 
 
-            String redPacket = AppConstant.getApp().getString(R.string.red_packet);
+            String redPacket = BaseApp.getApp().getString(R.string.red_packet);
             SpannableString spannableStr = new SpannableString(redPacket);
 
             //添加点击事件
             spannableStr.setSpan(new ClickableSpan() {
                 @Override
                 public void onClick(View widget) {
-                    RedPacketResultActivity.intentTo(mContext, entity.getPacket_id());
+                    //RedPacketResultActivity.intentTo(mContext, entity.getPacket_id());
                 }
 
                 @Override
                 public void updateDrawState(TextPaint ds) {
                     super.updateDrawState(ds);
-                    ds.setColor(ContextCompat.getColor(AppConstant.getApp(), R.color.color_ff944d));//设置文字颜色
+                    //ds.setColor(ContextCompat.getColor(BaseApp.getApp(), R.color.color_ff944d));//设置文字颜色
                     ds.setUnderlineText(false);//去除超链接自带的下划线
                 }
             }, 0, redPacket.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
 
-            builder.append(AppConstant.getApp().getString(R.string.red_packet_format_1, to, from));
+            //builder.append(AppConstant.getApp().getString(R.string.red_packet_format_1, to, from));
             builder.append(spannableStr);
             if (!TextUtils.isEmpty(entity.getFrom_uid()) && entity.getFrom_uid().equals(mUid) && entity.getState() == RedPkgStatus.FINISHED) {
                 //发送人信息（用于 %s的红包被领取完） 占位符3
                 String owner = "";
                 if (!TextUtils.isEmpty(entity.getFrom_uid()) && entity.getFrom_uid().equals(mUid)) {
-                    owner = AppConstant.getApp().getString(R.string.your);
+                    owner =BaseApp.getApp().getString(R.string.your);
                 } else {
-                    owner = entity.getC() + AppConstant.getApp().getString(R.string.of);
+                    owner = entity.getC() + BaseApp.getApp().getString(R.string.of);
                 }
-                builder.append(AppConstant.getApp().getString(R.string.red_packet_format_2, owner));
+                builder.append(BaseApp.getApp().getString(R.string.red_packet_format_2, owner));
             }
         }
         setSpanContent(builder);

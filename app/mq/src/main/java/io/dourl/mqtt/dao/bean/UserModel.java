@@ -4,15 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
-import com.being.fame.R;
-import com.being.fame.utils.AppContextUtil;
-import com.zhp.base.http.model.BaseObject;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.Unique;
+
+import io.dourl.mqtt.base.BaseObject;
 
 /**
  * 基础User类
@@ -146,12 +145,12 @@ public class UserModel implements BaseObject, Parcelable {
     }
 
     public String getFullAddress() {
-        String address;
+        String address ="";
         if (TextUtils.isEmpty(country) && TextUtils.isEmpty(province) && TextUtils.isEmpty(city)) {
-            address = AppContextUtil.getContext().getString(R.string.unknow_address);
+           // address = AppContextUtil.getContext().getString(R.string.unknow_address);
         } else {
-            String addressFormat = AppContextUtil.getContext().getString(R.string.format_address);
-            address = String.format(addressFormat, country, province, city);
+           // String addressFormat = AppContextUtil.getContext().getString(R.string.format_address);
+           // address = String.format(addressFormat, country, province, city);
         }
         return address;
     }

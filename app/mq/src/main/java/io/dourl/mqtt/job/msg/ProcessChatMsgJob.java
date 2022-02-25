@@ -126,7 +126,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
 
     protected void saveMsgAndPostEvent(MessageModel msg) throws InterruptedException {
 
-        if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
+        /*if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
             EventBusManager.getInstance().post(new ChatMsgEvent(msg.getSessionId(), msg));
             return;
         }
@@ -178,7 +178,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
             public void onFail(Throwable e) {
 
             }
-        }).await();
+        }).await();*/
 
 
     }

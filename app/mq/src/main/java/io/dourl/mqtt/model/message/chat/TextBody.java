@@ -60,7 +60,7 @@ public class TextBody extends BaseMsgBody {
 //                span = ImSmileUtils.getSmiledText(mContext, builder.toString());
 //            }
 //        }
-        span = TextBodyContentUtils.getSpannableContent(mContext,getContent());
+        //span = TextBodyContentUtils.getSpannableContent(mContext,getContent());
         setSpanContent(span);
         return span;
     }

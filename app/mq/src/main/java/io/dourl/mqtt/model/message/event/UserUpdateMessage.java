@@ -1,8 +1,9 @@
 package io.dourl.mqtt.model.message.event;
 
-import com.zhp.base.http.model.BaseObject;
-import com.being.fame.dao.bean.MessageModel;
-import com.being.fame.model.BaseUser;
+
+import io.dourl.mqtt.base.BaseObject;
+import io.dourl.mqtt.dao.bean.MessageModel;
+import io.dourl.mqtt.model.BaseUser;
 
 /**
  * 好友状态更新消息

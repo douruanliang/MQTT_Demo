@@ -1,6 +1,6 @@
 package io.dourl.mqtt.model.message.chat;
 
-import com.zhp.base.http.model.BaseObject;
+import io.dourl.mqtt.base.BaseObject;
 
 /**
  * Created by zhangpeng on 16/4/25.

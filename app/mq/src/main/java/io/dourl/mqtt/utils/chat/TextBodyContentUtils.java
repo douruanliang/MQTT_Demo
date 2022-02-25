@@ -55,7 +55,7 @@ public class TextBodyContentUtils {
                                 if (url.length() <= 4 || (!url.substring(0, 4).equals("http"))) {
                                     url = "http://" + url;
                                 }
-                                clickableSpan = new LinkSpan(url);
+                               // clickableSpan = new LinkSpan(url);
                                 start = builder.length();
                                 builder.append(text.u);
                             }
@@ -63,7 +63,7 @@ public class TextBodyContentUtils {
                         case email:
                             start = builder.length();
                             builder.append(text.c);
-                            clickableSpan = new LinkSpan("mailto:" + text.c);
+                           // clickableSpan = new LinkSpan("mailto:" + text.c);
                             break;
                         case at:
 //                            clickableSpan = new UserSpan(text.c);

@@ -9,6 +9,7 @@ import com.google.gson.annotations.JsonAdapter;
 import java.util.List;
 
 import io.dourl.mqtt.base.BaseObject;
+import io.dourl.mqtt.model.typeadapter.BaseClanModel;
 
 /**
  * Created by zhangheng on 2018/1/22.
@@ -21,9 +22,9 @@ public class ClanModel extends BaseClanModel implements BaseObject, Parcelable {
     public String avatar;
     public int member_cnt;
     public List<String> game_icons;
-    @JsonAdapter(BooleanJsonAdapter.class)
+    //@JsonAdapter(BooleanJsonAdapter.class)
     public boolean msg_receive;
-    @JsonAdapter(BooleanJsonAdapter.class)
+    //@JsonAdapter(BooleanJsonAdapter.class)
     public boolean msg_top;
     public boolean hasAt = false;
 

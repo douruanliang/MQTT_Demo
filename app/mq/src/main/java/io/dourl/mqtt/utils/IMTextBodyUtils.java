@@ -13,6 +13,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.dourl.mqtt.R;
+import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.HintBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
@@ -91,7 +93,7 @@ public class IMTextBodyUtils {
 
         for (BaseUser user : mAtUsers) {
             if (!ats.containsValue(user))
-                ats.put(Pattern.compile(Pattern.quote(AppConstant.getApp().getString(R.string.at, user.getFullNameOrUserName()))), user);
+                ats.put(Pattern.compile(Pattern.quote(BaseApp.getApp().getString(R.string.at, user.getFullNameOrUserName()))), user);
         }
 
         Spannable spannable = Spannable.Factory.getInstance().newSpannable(content);
@@ -99,7 +101,7 @@ public class IMTextBodyUtils {
         for (Map.Entry<Pattern, Object> entry : ats.entrySet()) {
             Matcher matcher = entry.getKey().matcher(spannable);
             while (matcher.find()) {
-                atEntities.add(new TextBody.TextEntity(TextBody.TextEntity.TextEntityType.txt, AppConstant.getApp().getString(R.string.at, ((BaseUser) entry.getValue()).getFullNameOrUserName()), matcher.start(), matcher.end()));
+                atEntities.add(new TextBody.TextEntity(TextBody.TextEntity.TextEntityType.txt, BaseApp.getApp().getString(R.string.at, ((BaseUser) entry.getValue()).getFullNameOrUserName()), matcher.start(), matcher.end()));
             }
         }
 
@@ -119,10 +121,10 @@ public class IMTextBodyUtils {
 
         Map<Pattern, Object> ats = new HashMap<Pattern, Object>();
 
-        for (BaseUser user : mAtUsers) {
+       /* for (BaseUser user : mAtUsers) {
             if (!ats.containsValue(user))
                 ats.put(Pattern.compile(Pattern.quote(AppConstant.getApp().getString(R.string.at, user.getFullNameOrUserName()))), user);
-        }
+        }*/
 
         Spannable spannable = Spannable.Factory.getInstance().newSpannable(content);
         List<BaseMsgBody.UserEntity> extraEntities = new ArrayList<>();
@@ -147,7 +149,7 @@ public class IMTextBodyUtils {
     public static String processHintTxt(HintBody body) {
         String hintTxt = "";
         String fillTxt = "";
-        try {
+        /*try {
             if (body.getContent() != null)
                 for (HintBody.ContentEntity item : body.getContent()) {
                     if (LocaleHelper.getLanguage().contains("zh")) {
@@ -222,7 +224,7 @@ public class IMTextBodyUtils {
             }
         } catch (Exception e) {
 
-        }
+        }*/
         return hintTxt;
     }
 }

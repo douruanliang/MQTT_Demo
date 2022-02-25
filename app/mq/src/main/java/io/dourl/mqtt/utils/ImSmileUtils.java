@@ -157,7 +157,7 @@ public class ImSmileUtils {
         for (Emojicon emojicon : emojicons) {
             addPattern(emojicon.getEmojiText(), emojicon);
         }
-        EmojiconInfoProvider emojiconInfoProvider = new EmojiconInfoProvider() {
+       /* EmojiconInfoProvider emojiconInfoProvider = new EmojiconInfoProvider() {
             @Override
             public Emojicon getEmojiconInfo(String emojiconIdentityCode) {
                 return null;
@@ -167,12 +167,12 @@ public class ImSmileUtils {
             public Map<String, Object> getTextEmojiconMapping() {
                 return null;
             }
-        };
-        if (emojiconInfoProvider != null && emojiconInfoProvider.getTextEmojiconMapping() != null) {
+        };*/
+        /*if (emojiconInfoProvider != null && emojiconInfoProvider.getTextEmojiconMapping() != null) {
             for (Entry<String, Object> entry : emojiconInfoProvider.getTextEmojiconMapping().entrySet()) {
                 addPattern(entry.getKey(), entry);
             }
-        }
+        }*/
 
     }
 

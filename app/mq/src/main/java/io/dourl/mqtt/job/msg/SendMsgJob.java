@@ -1,21 +1,16 @@
 package io.dourl.mqtt.job.msg;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
-import android.os.FileUtils;
 import android.text.TextUtils;
 
-
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
-import java.util.concurrent.Future;
 
 import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.dao.bean.MessageModel;
 import io.dourl.mqtt.dao.bean.SessionModel;
-import io.dourl.mqtt.manager.LoginManager;
+import io.dourl.mqtt.event.SessionEvent;
+import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.model.message.chat.AudioBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.HintBody;
@@ -29,7 +24,7 @@ import io.dourl.mqtt.model.message.chat.VideoBody;
  */
 public class SendMsgJob extends BaseMessageJob {
 
-    private String TAG = "sendmsgjob";
+    private String TAG = "SendMsgJob";
     protected MessageModel mMessageModel;
     protected SessionModel mSession;
 
@@ -48,7 +43,7 @@ public class SendMsgJob extends BaseMessageJob {
             EventBusManager.getInstance().post(new SessionEvent(mSession));
             doUpload();
             dbOp();
-            doSend();
+            //doSend();
             updateMessageAndSession();
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,8 +54,8 @@ public class SendMsgJob extends BaseMessageJob {
     }
 
     private void prepare() throws Exception {
-        LoggerUtil.d(TAG,"prepare");
-        MessageDao.insertOrUpdate(mMessageModel).await();
+        LoggerUtil.d(TAG, "prepare");
+       /* MessageDao.insertOrUpdate(mMessageModel).await();
         mSession = SessionManager.createChatSession(mMessageModel.getTo(), mMessageModel);
         mSession.setMsgDbId(mMessageModel.getId());
         SessionDao.insertOrUpdate(mSession).await();
@@ -128,7 +123,7 @@ public class SendMsgJob extends BaseMessageJob {
             }
             default:
                 notifyNew();
-        }
+        }*/
     }
 
     protected boolean needUpload() {
@@ -162,8 +157,8 @@ public class SendMsgJob extends BaseMessageJob {
         if (!needUpload()) {
             return;
         }
-        NHLog.tag(TAG).d("do Upload");
-        String key;
+        LoggerUtil.d("do Upload");
+       /* String key;
         UpLoadParam param = new UpLoadParam(UploadType.image);
         File file = new File(mMessageModel.getLocalPath());
         switch (mMessageModel.getBodyType()) {
@@ -207,17 +202,17 @@ public class SendMsgJob extends BaseMessageJob {
                 break;
             }
 
-        }
-        NHLog.tag(TAG).d("upload success, so do send");
+        }*/
+        LoggerUtil.d("upload success, so do send");
     }
 
-    protected String doFileUpload(final File file, UpLoadParam p) throws Exception {
+    /*protected String doFileUpload(final File file, UpLoadParam p) throws Exception {
         if (file == null || !file.exists()) {
             throw new NullPointerException("file not found");
         }
-        NHLog.d("file size %s", FileUtils.showFileSize(file.length()));
+        LoggerUtil.d("file size %s", FileUtils.showFileSize(file.length()));
         final String[] result = new String[1];
-        UploadManager.getInstance().uploadFile(file, p, new UploadCallback() {
+        *//*UploadManager.getInstance().uploadFile(file, p, new UploadCallback() {
             @Override
             public void onSuccess(String key) {
                 result[0] = key;
@@ -232,7 +227,7 @@ public class SendMsgJob extends BaseMessageJob {
             public void onProgress(double p) {
                 NHLog.tag(TAG).d("upload progress %s, %s", file.getName(), String.valueOf(p));
             }
-        }).waitForCompletion();
+        }).waitForCompletion();*//*
         return result[0];
     }
 
@@ -269,23 +264,23 @@ public class SendMsgJob extends BaseMessageJob {
             updateMessageAndSession();
         }
 
-    }
+    }*/
 
     protected void notifyNew() {
-        EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));
+        //EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));
     }
 
     protected void updateMessageAndSession() {
         dbOp();
-        EventBusManager.getInstance().post(new MsgStatusUpdateEvent(mMessageModel));
-        EventBusManager.getInstance().post(new SessionEvent(mSession));
+        //EventBusManager.getInstance().post(new MsgStatusUpdateEvent(mMessageModel));
+        //EventBusManager.getInstance().post(new SessionEvent(mSession));
     }
 
     protected void dbOp() {
         try {
-            SessionDao.updateSendStatus(mSession.getSessionID(), mMessageModel.getSendStatus());
-            MessageDao.insertOrUpdate(mMessageModel).await();
-        } catch (InterruptedException e) {
+            //SessionDao.updateSendStatus(mSession.getSessionID(), mMessageModel.getSendStatus());
+            // MessageDao.insertOrUpdate(mMessageModel).await();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -294,7 +289,7 @@ public class SendMsgJob extends BaseMessageJob {
         File resultFile = file;
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(file.getPath());
-        int bitrate;
+        /*int bitrate;
         int w = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
         int h = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
         int d = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)) / 1000;
@@ -348,16 +343,16 @@ public class SendMsgJob extends BaseMessageJob {
         } catch (Exception e) {
             NHLog.tag(TAG).d("video transcode fail: %s", e.getMessage());
             e.printStackTrace();
-        }
+        }*/
         return resultFile;
     }
 
     protected void processErrorCode(int errorCode) {
-        switch (ErrorCode.valueOf(errorCode)) {
+        /*switch (ErrorCode.valueOf(errorCode)) {
             case CodeMsgBlocked:
                 addErrorMessage();
                 break;
-        }
+        }*/
     }
 
     protected void addErrorMessage() {
@@ -371,8 +366,9 @@ public class SendMsgJob extends BaseMessageJob {
             baseMsgBody.setType(BodyType.TYPE_CHAT_REJECT);
             errorModel.setBody(baseMsgBody);
             errorModel.setShowTime(false);
-            EventBusManager.getInstance().post(new ChatMsgEvent(errorModel.getSessionId(), errorModel));
-            MessageDao.insertOrUpdate(errorModel);
+            /*EventBusManager.getInstance().post(new ChatMsgEvent(errorModel.getSessionId(), errorModel));
+            MessageDao.insertOrUpdate(errorModel)*/
+            ;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }

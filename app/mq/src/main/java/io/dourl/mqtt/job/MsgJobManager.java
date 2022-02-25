@@ -1,16 +1,4 @@
 package io.dourl.mqtt.job;
-
-import android.content.Context;
-
-import androidx.annotation.WorkerThread;
-
-import com.birbit.android.jobqueue.CancelResult;
-import com.birbit.android.jobqueue.Job;
-import com.birbit.android.jobqueue.JobManager;
-import com.birbit.android.jobqueue.TagConstraint;
-import com.birbit.android.jobqueue.config.Configuration;
-import com.birbit.android.jobqueue.log.JqLog;
-
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

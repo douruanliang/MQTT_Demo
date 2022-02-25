@@ -3,9 +3,6 @@ package io.dourl.mqtt.job.msg;
 
 
 import android.util.Log;
-
-import com.birbit.android.jobqueue.JobManager;
-
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import io.dourl.mqtt.TopicUtils;
@@ -72,7 +69,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
     }
 
     private void processNewsMessage(String msgString) {
-        MsgJobManager.getInstance().addJob(new ProcessNewsMsgJob(msgString));
+      //  MsgJobManager.getInstance().addJob(new ProcessNewsMsgJob(msgString));
     }
 
 }
