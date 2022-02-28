@@ -1,4 +1,6 @@
-package io.dourl.mqtt;
+package io.dourl.mqtt.job.core;
+
+import io.dourl.mqtt.manager.MqttManager;
 
 /**
  * Created by zhangpeng on 16/9/20.

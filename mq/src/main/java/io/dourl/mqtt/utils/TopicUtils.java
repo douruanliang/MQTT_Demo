@@ -1,4 +1,4 @@
-package io.dourl.mqtt;
+package io.dourl.mqtt.utils;
 import io.dourl.mqtt.manager.LoginManager;
 
 

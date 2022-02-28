@@ -1,4 +1,4 @@
-package io.dourl.mqtt;
+package io.dourl.mqtt.job.core;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -7,6 +7,8 @@ import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
+import io.dourl.mqtt.core.ActionListener;
+import io.dourl.mqtt.manager.MqttManager;
 import io.dourl.mqtt.manager.LoginManager;
 
 /**

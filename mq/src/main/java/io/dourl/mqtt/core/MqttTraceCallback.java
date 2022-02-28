@@ -1,4 +1,4 @@
-package io.dourl.mqtt;
+package io.dourl.mqtt.core;
 
 import android.util.Log;
 

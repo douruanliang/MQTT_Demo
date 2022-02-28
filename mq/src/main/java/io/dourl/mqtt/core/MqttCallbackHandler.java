@@ -10,18 +10,17 @@
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
-package io.dourl.mqtt;
+package io.dourl.mqtt.core;
 
-import android.content.Intent;
 import android.util.Log;
 
 
-import com.being.fame.thread.MessageThreadPool;
+import io.dourl.mqtt.utils.MessageThreadPool;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.BuildConfig;
 import io.dourl.mqtt.event.mqtt.MqttOpFailEvent;
 import io.dourl.mqtt.job.msg.ReceiveMsgJob;
 import io.dourl.mqtt.manager.EventBusManager;

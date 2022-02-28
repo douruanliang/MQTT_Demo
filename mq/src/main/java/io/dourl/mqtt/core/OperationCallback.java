@@ -1,4 +1,4 @@
-package io.dourl.mqtt;
+package io.dourl.mqtt.core;
 
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 

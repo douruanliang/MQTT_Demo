@@ -10,7 +10,7 @@
  * and the Eclipse Distribution License is available at
  * http://www.eclipse.org/org/documents/edl-v10.php.
  */
-package io.dourl.mqtt;
+package io.dourl.mqtt.core;
 
 import android.app.Application;
 import android.content.Context;
@@ -19,6 +19,7 @@ import android.util.Log;
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+
 
 /**
  * This Class handles receiving information from the

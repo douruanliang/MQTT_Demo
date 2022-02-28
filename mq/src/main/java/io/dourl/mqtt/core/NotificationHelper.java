@@ -1,4 +1,4 @@
-package io.dourl.mqtt;
+package io.dourl.mqtt.core;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -9,9 +9,8 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 
-import org.eclipse.paho.android.service.BuildConfig;
-
 import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.core.ActionListener;
 import io.dourl.mqtt.ui.TestActivity;
 
 /**

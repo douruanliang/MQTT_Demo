@@ -1,4 +1,4 @@
-package io.dourl.mqtt;
+package io.dourl.mqtt.manager;
 
 import android.app.Application;
 import android.text.TextUtils;
@@ -12,13 +12,15 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.concurrent.Future;
 
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
+import io.dourl.mqtt.utils.TopicUtils;
 import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.core.ActionListener;
+import io.dourl.mqtt.core.MqttCallbackHandler;
+import io.dourl.mqtt.core.MqttConstant;
+import io.dourl.mqtt.core.MqttTraceCallback;
 import io.dourl.mqtt.job.MsgJobManager;
-import io.dourl.mqtt.manager.LoginManager;
+import io.dourl.mqtt.job.core.MqttConAndSubJob;
+import io.dourl.mqtt.job.core.MqttDestroyJob;
 
 /**
  * Mqtt连接管理类
@@ -145,7 +147,7 @@ public class MqttManager {
 //        return null;
 //    }
 //
-    IMqttToken disconnect() {
+   public IMqttToken disconnect() {
         try {
             if (mqttAndroidClient != null) {
                 return mqttAndroidClient.disconnect();
@@ -158,9 +160,9 @@ public class MqttManager {
 
     public static void connectAndSubinJob() {
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
-                TopicUtils.getImTopic(), 1, false));
+                TopicUtils.getImTopic(), 1, true));
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
-                TopicUtils.getNewsTopic(), 1, false));
+                TopicUtils.getNewsTopic(), 1, true));
     }
 
     public static void wakeMqtt() {
@@ -210,7 +212,7 @@ public class MqttManager {
         return MsgJobManager.getInstance().addJob(new MqttDestroyJob());
     }
 
-    void clear() throws MqttException {
+   public void clear() throws MqttException {
         unRegisterResource();
         mqttAndroidClient = null;
         ourInstance = null;

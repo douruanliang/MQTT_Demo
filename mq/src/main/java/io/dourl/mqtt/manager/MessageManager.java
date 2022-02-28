@@ -1,10 +1,9 @@
 package io.dourl.mqtt.manager;
 
-import com.being.fame.thread.MessageThreadPool;
+import io.dourl.mqtt.utils.MessageThreadPool;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.bean.MessageModel;
