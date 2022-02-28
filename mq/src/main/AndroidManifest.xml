@@ -8,6 +8,11 @@
         <activity
             android:name=".ui.TestActivity"
             android:exported="true" />
-    </application>
+        <!-- mqtt service -->
+        <service
+            android:name="org.eclipse.paho.android.service.MqttService"
+            android:exported="false"/>
 
+    </application>
+  
 </manifest>
