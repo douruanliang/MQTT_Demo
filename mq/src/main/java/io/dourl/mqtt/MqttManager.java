@@ -50,7 +50,7 @@ public class MqttManager {
         }
         String cId = LoginManager.getInstance().getCurrentUserId();
         mqttAndroidClient = new MqttAndroidClient(BaseApp.getApp(),
-                MqttConstant.PAHO_TEST_URI, cId);
+                MqttConstant.URI, cId);
         if (BuildConfig.DEBUG) {
             mqttAndroidClient.setTraceCallback(new MqttTraceCallback());
             mqttAndroidClient.setTraceEnabled(true);

@@ -139,6 +139,6 @@ public class LoginManager {
     }
 
     public static String getCurrentUserId() {
-        return "dou";
+        return "admin";
     }
 }
