@@ -66,7 +66,7 @@ public class MqttManager {
 
     public IMqttToken connect(boolean cleanSession) {
         String userName, password;
-        //NHLog.e("deviceid: " + Constants.DEVICEID);
+        //LoggerUtil.e("deviceid: " + Constants.DEVICEID);
         if (LoginManager.isLogin()) {
             userName = LoginManager.getToken() + "_" +" Constants.DEVICEID";
             //password = "DigestUtils.md5Hex(userName + LoginManager.getSecret())";
@@ -127,7 +127,7 @@ public class MqttManager {
 
     //    public IMqttToken unSubscribe(String topic) {
 //        if (TextUtils.isEmpty(topic)) {
-//            NHLog.e("sub_topic is null");
+//            LoggerUtil.e("sub_topic is null");
 //            return null;
 //        }
 //        try {

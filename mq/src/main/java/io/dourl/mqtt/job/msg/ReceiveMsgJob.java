@@ -37,6 +37,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
 //            return;
 //        }
         String msgString = mqttMessage;
+        //类型分类
         if (mTopic.contains("user")||mTopic.contains("Official")) {
             processImMessage(msgString);
         } else if (TopicUtils.getNewsTopic().equalsIgnoreCase(mTopic)) {

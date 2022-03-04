@@ -1,26 +1,36 @@
 package io.dourl.mqtt.job.msg;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
 
 import java.io.File;
 import java.util.UUID;
 
+import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
+import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
+import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.model.message.chat.AudioBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.HintBody;
 import io.dourl.mqtt.model.message.chat.ImageBody;
 import io.dourl.mqtt.model.message.chat.VideoBody;
+import io.dourl.mqtt.storage.MessageDao;
+import io.dourl.mqtt.storage.SessionDao;
+import io.dourl.mqtt.storage.SessionManager;
+import io.dourl.mqtt.storage.UserDao;
+import io.dourl.mqtt.utils.ImageUtils;
+import io.dourl.mqtt.utils.MediaFilesUtils;
 
 
 /**
  * 消息发送job
- * Created by zhangpeng on 16/1/11.
  */
 public class SendMsgJob extends BaseMessageJob {
 
@@ -55,7 +65,7 @@ public class SendMsgJob extends BaseMessageJob {
 
     private void prepare() throws Exception {
         LoggerUtil.d(TAG, "prepare");
-       /* MessageDao.insertOrUpdate(mMessageModel).await();
+        MessageDao.insertOrUpdate(mMessageModel).await();
         mSession = SessionManager.createChatSession(mMessageModel.getTo(), mMessageModel);
         mSession.setMsgDbId(mMessageModel.getId());
         SessionDao.insertOrUpdate(mSession).await();
@@ -70,7 +80,7 @@ public class SendMsgJob extends BaseMessageJob {
                 break;
         }
         TAG += mMessageModel.getId();
-        NHLog.tag(TAG).d("job add %s", mMessageModel.toString());
+        LoggerUtil.d("job add %s", mMessageModel.toString());
         File file;
         if (mMessageModel.getLocalPath() != null) {
             file = new File(mMessageModel.getLocalPath());
@@ -80,8 +90,8 @@ public class SendMsgJob extends BaseMessageJob {
         }
         switch (mMessageModel.getBodyType()) {
             case TYPE_IMAGE: {//图片需要压缩
-                File imageFile = MediaFilesUtils.getSessionImageFile(AppConstant.getApp(), mMessageModel.getSessionId());
-                mMessageModel.setLocalPath(ImageUtils.scaleImageFile(AppConstant.getApp(), file, imageFile,
+                File imageFile = MediaFilesUtils.getSessionImageFile(BaseApp.getApp(), mMessageModel.getSessionId());
+                mMessageModel.setLocalPath(ImageUtils.scaleImageFile(BaseApp.getApp(), file, imageFile,
                         Constants.IMAGE_SCALE_SIZE, Constants.IMAGE_SCALE_SIZE).getPath());
                 final BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
@@ -103,7 +113,7 @@ public class SendMsgJob extends BaseMessageJob {
                 int r = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION));
                 Bitmap bm = retriever.getFrameAtTime(0);
                 retriever.release();
-                File coverFile = MediaFilesUtils.getSessionImageFile(AppConstant.getApp(), mMessageModel.getSessionId());
+                File coverFile = MediaFilesUtils.getSessionImageFile(BaseApp.getApp(), mMessageModel.getSessionId());
                 ImageUtils.writeBitmapToFile(bm, Bitmap.CompressFormat.JPEG, 80, coverFile);
                 VideoBody videoBody = (VideoBody) mMessageModel.getBody();
                 videoBody.setCoverPath(coverFile.getPath());
@@ -114,8 +124,8 @@ public class SendMsgJob extends BaseMessageJob {
                 videoBody.getContent().setH(bm.getHeight());
                 bm.recycle();
                 notifyNew();
-                NHLog.tag(TAG).d("upload cover %s", coverFile.getName());
-                String coverKey = doFileUpload(coverFile, new UpLoadParam(UploadType.image));
+                LoggerUtil.d(TAG,"upload cover %s", coverFile.getName());
+                String coverKey = "doFileUpload(coverFile, new UpLoadParam(UploadType.image))";
                 videoBody.getContent().setCover_r(coverKey);
                 File f = doTranscode(file);
                 mMessageModel.setLocalPath(f.getPath());
@@ -123,7 +133,7 @@ public class SendMsgJob extends BaseMessageJob {
             }
             default:
                 notifyNew();
-        }*/
+        }
     }
 
     protected boolean needUpload() {
@@ -225,14 +235,14 @@ public class SendMsgJob extends BaseMessageJob {
 
             @Override
             public void onProgress(double p) {
-                NHLog.tag(TAG).d("upload progress %s, %s", file.getName(), String.valueOf(p));
+                LoggerUtil.tag(TAG).d("upload progress %s, %s", file.getName(), String.valueOf(p));
             }
         }).waitForCompletion();*//*
         return result[0];
     }
 
     protected void doSend() throws IOException {
-        NHLog.tag(TAG).d("do Send");
+        LoggerUtil.tag(TAG).d("do Send");
         SendMsgApis sendMsgApis = RetrofitManager.get().create(SendMsgApis.class);
         Response<BaseResponse> response = null;
         switch (mMessageModel.getType()) {
@@ -249,16 +259,16 @@ public class SendMsgJob extends BaseMessageJob {
             if (response.isSuccessful() && response.body() != null) {
                 BaseResponse body = response.body();
                 if (body.isSucceeded()) {
-                    NHLog.tag(TAG).d("send success");
+                    LoggerUtil.tag(TAG).d("send success");
                     mMessageModel.setSendStatus(MessageModel.Status.success);
                     updateMessageAndSession();
                 } else {
-                    NHLog.tag(TAG).d("send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
+                    LoggerUtil.tag(TAG).d("send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
                     processErrorCode(body.getErrorCode());
                     mMessageModel.setSendStatus(MessageModel.Status.fail);
                 }
             } else {
-                NHLog.tag(TAG).d("send fail error: %s", response.message() != null ? response.message() : "");
+                LoggerUtil.tag(TAG).d("send fail error: %s", response.message() != null ? response.message() : "");
                 mMessageModel.setSendStatus(MessageModel.Status.fail);
             }
             updateMessageAndSession();
@@ -278,8 +288,8 @@ public class SendMsgJob extends BaseMessageJob {
 
     protected void dbOp() {
         try {
-            //SessionDao.updateSendStatus(mSession.getSessionID(), mMessageModel.getSendStatus());
-            // MessageDao.insertOrUpdate(mMessageModel).await();
+            SessionDao.updateSendStatus(mSession.getSessionID(), mMessageModel.getSendStatus());
+            MessageDao.insertOrUpdate(mMessageModel).await();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -295,7 +305,7 @@ public class SendMsgJob extends BaseMessageJob {
         int d = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)) / 1000;
         bitrate = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE));
         retriever.release();
-        NHLog.tag(TAG).d("prepare trancode, file size is %s, w: %d, h: %d, bitrate is %d. duration is %d",
+        LoggerUtil.tag(TAG).d("prepare trancode, file size is %s, w: %d, h: %d, bitrate is %d. duration is %d",
                 FileUtils.showFileSize(file.length()), w, h, bitrate, d);
         final File transcodeFile = CacheFileUtils.generateTempVideoFilePath(AppConstant.getApp());
         Future future;
@@ -304,22 +314,22 @@ public class SendMsgJob extends BaseMessageJob {
                     new AndroidBitrateFormatStrategy(bitrate), new MediaTranscoder.Listener() {
                         @Override
                         public void onTranscodeProgress(double progress) {
-                            NHLog.tag(TAG).d("transcode progress %s", String.valueOf(progress));
+                            LoggerUtil.tag(TAG).d("transcode progress %s", String.valueOf(progress));
                         }
 
                         @Override
                         public void onTranscodeCompleted() {
-                            NHLog.tag(TAG).d("video transcode completed, filesize: %skb", String.valueOf(transcodeFile.length() / 1024));
+                            LoggerUtil.tag(TAG).d("video transcode completed, filesize: %skb", String.valueOf(transcodeFile.length() / 1024));
                         }
 
                         @Override
                         public void onTranscodeCanceled() {
-                            NHLog.tag(TAG).d("onTranscodeCanceled");
+                            LoggerUtil.tag(TAG).d("onTranscodeCanceled");
                         }
 
                         @Override
                         public void onTranscodeFailed(Exception exception) {
-                            NHLog.tag(TAG).e("onTranscodeFailed", exception);
+                            LoggerUtil.tag(TAG).e("onTranscodeFailed", exception);
                             BugTagsUtils.sendException(exception);
                         }
                     });
@@ -332,7 +342,7 @@ public class SendMsgJob extends BaseMessageJob {
                     int dh = Integer.parseInt(r.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
                     int dbitrate = Integer.parseInt(r.extractMetadata(MediaMetadataRetriever.METADATA_KEY_BITRATE));
                     r.release();
-                    NHLog.tag(TAG).d("result video w: %d, h: %d, bitrate: %d", dw, dh, dbitrate);
+                    LoggerUtil.tag(TAG).d("result video w: %d, h: %d, bitrate: %d", dw, dh, dbitrate);
                     retriever.release();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -341,7 +351,7 @@ public class SendMsgJob extends BaseMessageJob {
                 resultFile = transcodeFile;
             }
         } catch (Exception e) {
-            NHLog.tag(TAG).d("video transcode fail: %s", e.getMessage());
+            LoggerUtil.tag(TAG).d("video transcode fail: %s", e.getMessage());
             e.printStackTrace();
         }*/
         return resultFile;
