@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_titlebar_height">42dp</dimen>
+    <dimen name="default_titlebar_left_margin">12dp</dimen>
+    <dimen name="default_titlebar_right_margin">12dp</dimen>
+    <dimen name="default_gap">16dip</dimen>
+    <dimen name="titlebar_center_left_margin">120dp</dimen>
+    <dimen name="titlebar_center_right_margin">120dp</dimen>
+    <dimen name="default_title_textsize">16sp</dimen>
+    <dimen name="default_title_btn_textsize">14sp</dimen>
+    <dimen name="default_tab_item_space">20sp</dimen>
+</resources>

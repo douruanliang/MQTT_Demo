@@ -6,6 +6,7 @@ import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 import io.dourl.mqtt.base.BaseApp;
@@ -53,7 +54,7 @@ public class SendMsgJob extends BaseMessageJob {
             EventBusManager.getInstance().post(new SessionEvent(mSession));
             doUpload();
             dbOp();
-            //doSend();
+            doSend();
             updateMessageAndSession();
         } catch (Exception e) {
             e.printStackTrace();
@@ -237,13 +238,13 @@ public class SendMsgJob extends BaseMessageJob {
             public void onProgress(double p) {
                 LoggerUtil.tag(TAG).d("upload progress %s, %s", file.getName(), String.valueOf(p));
             }
-        }).waitForCompletion();*//*
+        }).waitForCompletion();
         return result[0];
-    }
+    }*/
 
     protected void doSend() throws IOException {
-        LoggerUtil.tag(TAG).d("do Send");
-        SendMsgApis sendMsgApis = RetrofitManager.get().create(SendMsgApis.class);
+        LoggerUtil.d(TAG,"do Send");
+        /*SendMsgApis sendMsgApis = RetrofitManager.get().create(SendMsgApis.class);
         Response<BaseResponse> response = null;
         switch (mMessageModel.getType()) {
             case UN_RECOGNIZE:
@@ -272,9 +273,9 @@ public class SendMsgJob extends BaseMessageJob {
                 mMessageModel.setSendStatus(MessageModel.Status.fail);
             }
             updateMessageAndSession();
-        }
+        }*/
 
-    }*/
+    }
 
     protected void notifyNew() {
         //EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));

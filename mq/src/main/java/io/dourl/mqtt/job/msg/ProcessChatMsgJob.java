@@ -47,6 +47,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
             Gson gson = GsonManager.getGson();
             mMessageModel = gson.fromJson(mMsgString, MessageModel.class);
         }
+        //本人
         mMessageModel.setTo(LoginManager.getInstance().getCurrentUser());
         mMessageModel.setToUid(LoginManager.getInstance().getCurrentUserId());
         mMessageModel.setLocalTime(System.currentTimeMillis());

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/titlebar_layout"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_titlebar_height"
+                android:layout_gravity="center_vertical">
+
+    <FrameLayout
+        android:id="@+id/titlebar_left_btn_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="@dimen/default_titlebar_left_margin"
+        android:paddingRight="@dimen/default_titlebar_left_margin">
+
+        <TextView
+            android:id="@+id/titlebar_left_btn"
+            style="@style/TitleBarBtnTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="center_vertical"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/titlebar_left_btn_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|left"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/titlebar_right_btn_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:paddingRight="@dimen/default_titlebar_right_margin">
+
+        <TextView
+            android:id="@+id/titlebar_right_btn"
+            style="@style/TitleBarBtnTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/titlebar_right_btn_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|right"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/titlebar_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/padding_xxlarge"
+        android:paddingRight="@dimen/padding_xxlarge">
+
+        <ImageView
+            android:id="@+id/titlebar_title_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:contentDescription="@null"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:id="@+id/titlebar_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:singleLine="true"
+            android:textColor="#1a1a1a"
+            android:textSize="16sp"
+            android:visibility="gone">
+        </TextView>
+
+        <RadioGroup
+            android:id="@+id/titlebar_tabhost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <RadioButton
+                android:id="@+id/titlebar_tabitem1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:checked="true"
+                android:visibility="gone"/>
+
+            <RadioButton
+                android:id="@+id/titlebar_tabitem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:button="@null"
+                android:visibility="gone"/>
+        </RadioGroup>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/titlebar_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/sepline_color"
+        android:visibility="gone"/>
+
+</RelativeLayout>

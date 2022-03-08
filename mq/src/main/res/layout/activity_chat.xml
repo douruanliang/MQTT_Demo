@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomView"
+        android:layout_below="@+id/titleBar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/message_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f4f4f4"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0px"
+            android:fitsSystemWindows="true"
+            android:overScrollMode="never"
+            android:scrollbars="vertical" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/notice_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/titleBar"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_3d96ff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:text="@string/clan_notice"
+            android:textColor="@color/color_3d96ff"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/notice_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="13dp"
+            android:layout_toLeftOf="@+id/notice_close"
+            android:autoLink="all"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/clan_notice"
+            android:textColor="@color/color_5d6980"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/notice_close"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_close_notice" />
+
+    </RelativeLayout>
+
+    <io.dourl.mqtt.ui.widge.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_titlebar_height"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        app:centralText="chat"
+        app:centralTextColor="@color/black"
+        app:leftBgDrawable="@drawable/button_back"
+        app:rightBgDrawable="@drawable/icon_chat_more" />
+
+    <TextView
+        android:id="@+id/msg_count_hint"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/red_circle_bg"
+        android:gravity="center"
+        android:text="12"
+        android:textColor="@color/white_color"
+        android:textSize="10sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/msg_unread"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:layout_below="@+id/titleBar"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/bg_white_corner_17dp"
+        android:drawableLeft="@drawable/icon_msg_unread"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/color_7ed321"
+        android:textSize="13sp"
+        android:visibility="gone"
+        tools:text="3条新消息" />
+
+    <FrameLayout
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true">
+
+        <LinearLayout
+            android:id="@+id/inputView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <io.dourl.mqtt.ui.widge.MultiLineEditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white_color"
+                    android:gravity="center_vertical|left"
+                    android:hint="@string/chat"
+                    android:imeOptions="actionSend"
+                    android:inputType="textMultiLine"
+                    android:maxLines="4"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="54dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:visibility="visible"
+                    tools:ignore="TextFields" />
+
+                <ImageView
+                    android:id="@+id/btn_send"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="14dp"
+                    android:src="@drawable/icon_btn_send" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+
+                <ImageButton
+                    android:id="@+id/btnAlbum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:src="@drawable/btn_chat_action_pic" />
+
+                <ImageButton
+                    android:id="@+id/btnPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:src="@drawable/btn_chat_action_photo" />
+
+                <ImageButton
+                    android:id="@+id/btnRecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:src="@drawable/btn_chat_action_audio" />
+
+                <ImageButton
+                    android:id="@+id/btnFace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/transparent"
+                    android:src="@drawable/btn_chat_action_emoji" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/emojicon_menu_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <io.dourl.mqtt.ui.widge.RecordView
+            android:id="@+id/recordView"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/view_record_bg"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableStart="@drawable/chat_icon_voice"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/record_state_normal"
+                android:textColor="@color/color_33"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/btnKeyboard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:src="@drawable/chat_icon_keyboard_nor" />
+        </io.dourl.mqtt.ui.widge.RecordView>
+    </FrameLayout>
+
+    <io.dourl.mqtt.ui.widge.RecordStateView
+        android:id="@+id/recordStateView"
+        android:layout_width="162dp"
+        android:layout_height="162dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:background="@color/white_trans_80"
+        android:visibility="gone"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="10dp" />
+</RelativeLayout>

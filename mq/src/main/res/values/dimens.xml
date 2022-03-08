@@ -1,0 +1,113 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="title_login_big">60sp</dimen>
+    <dimen name="title_login_small">40sp</dimen>
+    <dimen name="status_bar_height">27dp</dimen>
+
+    <!--button-->
+    <dimen name="sub_button_width">40dp</dimen>
+    <dimen name="sub_button_height">10.3dp</dimen>
+    <dimen name="buy_button_width">32dp</dimen>
+    <dimen name="buy_button_height">10.7dp</dimen>
+    <dimen name="login_button_width">93.3dp</dimen>
+    <dimen name="login_button_height">14.7dp</dimen>
+    <dimen name="card_button_width">83.3dp</dimen>
+    <dimen name="card_button_height">15.3dp</dimen>
+    <dimen name="scroll_threshold">2dp</dimen>
+    <!-- find more people button-->
+    <dimen name="btn_find_more_margin_bottom">20dp</dimen>
+    <dimen name="btn_find_more_height">44dp</dimen>
+    <dimen name="empty_view_height">84dp</dimen>
+    <dimen name="view_find_more_distance_bottom">190dp</dimen>
+    <dimen name="view_find_more_top_margin">120dp</dimen>
+    <dimen name="item_message_height">84dp</dimen>
+
+    <!-- Recommend User -->
+    <dimen name="album_card_padding">24dp</dimen>
+    <dimen name="album_card_next_show_width">24dp</dimen>
+    <dimen name="item_recommend_user_width">90dp</dimen>
+    <dimen name="navigation_bar_height">42dp</dimen>
+
+    <dimen name="profile_corner_radius">2dp</dimen>
+    <dimen name="texture_port_height">210dp</dimen>
+
+   <!-- 检索首页-专辑列表-RecyclerView的padding -->
+    <dimen name="search_album_recyclerview_padding">9dp</dimen>
+
+    <!--检索首页-专辑列表-RecyclerView item-CardView的阴影大小 -->
+    <dimen name="search_album_card_elevation">4dp</dimen>
+
+    <!--播放器SeekBar, 上下padding -->
+    <dimen name="seekbar_padding_top">3dp</dimen>
+
+   <!-- 支付界面 -->
+    <dimen name="pay_item_margin">5dp</dimen>
+    <dimen name="pay_dialog_width">250dp</dimen>
+    <dimen name="pay_dialog_height">400dp</dimen>
+
+   <!-- 无网络view top-margin 0-->
+    <dimen name="base_no_internet">75dp</dimen>
+    <dimen name="top_margin_no_internet_message_fragment">135dp</dimen>
+    <dimen name="top_margin_no_internet_search_fragment">110dp</dimen>
+
+   <!-- 引导页暂用 -->
+    <dimen name="flash_guide_trans_dp">400dp</dimen>
+    <dimen name="setting_item_height">60dp</dimen>
+
+    <!--找回密码EditText paddingLeft-->
+    <dimen name="find_pwd_paddingleft">15dp</dimen>
+
+    <dimen name="album_input_view_padding_top">12dp</dimen>
+    <dimen name="album_input_view_padding_left">15dp</dimen>
+    <dimen name="album_input_view_padding_bottom">18dp</dimen>
+    <dimen name="album_input_view_des_text_size">12sp</dimen>
+    <dimen name="album_input_view_child_spacing">10dp</dimen>
+    <dimen name="album_input_view_edit_text_size">16sp</dimen>
+
+    <dimen name="empty_view_top_margin">180dp</dimen>
+    <dimen name="empty_view_top_margin_session">70dp</dimen>
+
+    <!--Chat-->
+    <dimen name="chat_item_margin">12dp</dimen>
+    <dimen name="chat_item_text_padding">12dp</dimen>
+    <dimen name="chat_item_image_margin">60dp</dimen>
+    <dimen name="chat_avatarSize">48dp</dimen>
+
+    <!--session-->
+    <dimen name="session_item_footer_height">70dp</dimen>
+    <dimen name="avatarSize">30dp</dimen>
+    <dimen name="coin_item_decoration">10dp</dimen>
+
+    <!--qr activity-->
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_xlarge">24dp</dimen>
+    <dimen name="padding_xxlarge">40dp</dimen>
+    <dimen name="padding_xxxlarge">60dp</dimen>
+    <dimen name="padding_small">5dp</dimen>
+    <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_13">13dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="tv_small">12sp</dimen>
+    <dimen name="tv_normal">14sp</dimen>
+    <dimen name="tv_large">18sp</dimen>
+    <dimen name="app_shadow_radius">6dp</dimen>
+    <dimen name="scroll_item_radius">2dp</dimen>
+
+    <dimen name="dot_padding">3dp</dimen>
+    <dimen name="dot_width">6dp</dimen>
+    <dimen name="game_padding">8dp</dimen>
+
+    <dimen name="clan_item_height">70dp</dimen>
+    <dimen name="vote_sign_up_margin">15dp</dimen>
+    <dimen name="gPlayBannerHeight">150dp</dimen>
+
+    <dimen name="default_title_textsize">16sp</dimen>
+    <dimen name="default_titlebar_height">42dp</dimen>
+    <dimen name="default_titlebar_left_margin">12dp</dimen>
+    <dimen name="default_titlebar_right_margin">12dp</dimen>
+</resources>

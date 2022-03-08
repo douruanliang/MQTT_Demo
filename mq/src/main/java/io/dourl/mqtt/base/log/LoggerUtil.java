@@ -39,6 +39,10 @@ public class LoggerUtil {
         if (debugFlag)
             Log.e(key, msg, t);
     }
+    public static void e(String msg, Object... args) {
+        if (debugFlag)
+            Log.e(LOGTAG, String.format(msg, args));
+    }
 
     public static void d(String msg) {
         if (debugFlag)

@@ -10,8 +10,7 @@ import android.content.Intent;
 import androidx.core.app.NotificationCompat;
 
 import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.core.ActionListener;
-import io.dourl.mqtt.ui.TestActivity;
+import io.dourl.mqtt.ui.BaseActivity;
 
 /**
  * Created by zhangpeng on 2018/2/2.
@@ -24,7 +23,7 @@ class NotificationHelper {
     static final int REQUEST_CODE_TESTACTIVITY = 100;
     static void showNoti(ActionListener.Action action, boolean state, String message) {
         //if (BuildConfig.RELEASE) return;
-        Intent intent = new Intent(BaseApp.getApp(), TestActivity.class);
+        Intent intent = new Intent(BaseApp.getApp(), BaseActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(BaseApp.getApp(), REQUEST_CODE_TESTACTIVITY, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationManager manager = (NotificationManager) BaseApp.getApp()
