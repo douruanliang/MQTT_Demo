@@ -68,7 +68,7 @@ public class MqttManager {
         String userName, password;
         //LoggerUtil.e("deviceid: " + Constants.DEVICEID);
         if (LoginManager.isLogin()) {
-            userName = LoginManager.getToken() + "_" +" Constants.DEVICEID";
+            userName = LoginManager.getToken() + "_2" +" Constants.DEVICEID";
             //password = "DigestUtils.md5Hex(userName + LoginManager.getSecret())";
             password = LoginManager.getSecret();
         } else {

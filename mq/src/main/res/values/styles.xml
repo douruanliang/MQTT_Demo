@@ -96,9 +96,4 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="TitleBarBtnTextStyle">
-        <item name="android:textColor">#3d96ff</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-
 </resources>

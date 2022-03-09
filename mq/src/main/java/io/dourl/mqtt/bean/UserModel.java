@@ -327,14 +327,6 @@ public class UserModel implements BaseObject, Parcelable {
         this.max_exp = max_exp;
     }
 
-    public int getid_change_times() {
-        return this.id_change_times;
-    }
-
-    public void setid_change_times(int id_change_times) {
-        this.id_change_times = id_change_times;
-    }
-
     public int getFrom_third() {
         return this.from_third;
     }
