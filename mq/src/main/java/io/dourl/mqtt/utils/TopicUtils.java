@@ -15,5 +15,7 @@ public class TopicUtils {
         return "news";
     }
 
-
+    public static String getDefaultClanTopic() {
+        return "Official";
+    }
 }

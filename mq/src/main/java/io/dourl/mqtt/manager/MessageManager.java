@@ -50,6 +50,26 @@ public class MessageManager {
         return messageModel;
     }*/
 
+    /**
+     * 测试用
+     * @param to
+     * @param from
+     * @param content
+     * @return
+     */
+    public MessageModel sendTextMessage(UserModel to, UserModel from, String content) {
+        MessageModel textMessage = new MessageModel();
+        textMessage.setTo(to);
+        textMessage.setFrom(from);
+        TextBody body = new TextBody();
+        List<TextBody.TextEntity> textEntities = IMTextBodyUtils.createTextBody(content);
+        body.setContent(textEntities);
+        body.createSpan(BaseApp.getApp());
+        setupNormalProperty(textMessage, body);
+        sendMessage(textMessage);
+        return textMessage;
+    }
+
     public MessageModel sendTextMessage(UserModel baseUser, String content) {
         MessageModel textMessage = new MessageModel();
         textMessage.setTo(baseUser);

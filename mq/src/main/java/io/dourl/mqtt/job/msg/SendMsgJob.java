@@ -9,6 +9,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import io.dourl.http.api.SendMsgApis;
+import io.dourl.http.model.BaseResponse;
+import io.dourl.http.retrofit.RetrofitManager;
 import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
@@ -28,6 +31,7 @@ import io.dourl.mqtt.storage.SessionManager;
 import io.dourl.mqtt.storage.UserDao;
 import io.dourl.mqtt.utils.ImageUtils;
 import io.dourl.mqtt.utils.MediaFilesUtils;
+import retrofit2.Response;
 
 
 /**
@@ -244,7 +248,7 @@ public class SendMsgJob extends BaseMessageJob {
 
     protected void doSend() throws IOException {
         LoggerUtil.d(TAG,"do Send");
-        /*SendMsgApis sendMsgApis = RetrofitManager.get().create(SendMsgApis.class);
+        SendMsgApis sendMsgApis = RetrofitManager.get().create(SendMsgApis.class);
         Response<BaseResponse> response = null;
         switch (mMessageModel.getType()) {
             case UN_RECOGNIZE:
@@ -253,27 +257,27 @@ public class SendMsgJob extends BaseMessageJob {
                 response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getEntityBody()).execute();
                 break;
             case CHAT_GROUP:
-                response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getEntityBody(), "").execute();
+               // response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getEntityBody(), "").execute();
                 break;
         }
         if (response != null) {
             if (response.isSuccessful() && response.body() != null) {
                 BaseResponse body = response.body();
                 if (body.isSucceeded()) {
-                    LoggerUtil.tag(TAG).d("send success");
+                    LoggerUtil.d("send success");
                     mMessageModel.setSendStatus(MessageModel.Status.success);
                     updateMessageAndSession();
                 } else {
-                    LoggerUtil.tag(TAG).d("send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
+                    LoggerUtil.d("send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
                     processErrorCode(body.getErrorCode());
                     mMessageModel.setSendStatus(MessageModel.Status.fail);
                 }
             } else {
-                LoggerUtil.tag(TAG).d("send fail error: %s", response.message() != null ? response.message() : "");
+                LoggerUtil.d("send fail error: %s", response.message() != null ? response.message() : "");
                 mMessageModel.setSendStatus(MessageModel.Status.fail);
             }
             updateMessageAndSession();
-        }*/
+        }
 
     }
 
