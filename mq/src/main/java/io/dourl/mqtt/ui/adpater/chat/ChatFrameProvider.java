@@ -221,14 +221,16 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
     static class FrameHolder extends RecyclerView.ViewHolder {
         private Context mContext;
         private RecyclerView.ViewHolder contentHolder;
-
         TextView tvTime;
         LinearLayout mNickNameLayout;
         TextView tvNickName;
         ImageView mLevelLogo;
         TextView tvHint;
+
         RelativeLayout mContentLayout;
+
         ImageView leftAvatar;
+
         ImageView rightAvatar;
         FrameLayout container;
         View statusView;
@@ -237,7 +239,6 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
         ImageView ivFail;
         public FrameHolder(View itemView, RecyclerView.ViewHolder viewHolder) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
             container.addView(viewHolder.itemView);
             this.contentHolder = viewHolder;
