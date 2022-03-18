@@ -20,12 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
 
-import butterknife.ButterKnife;
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.constants.Constants;
-import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.customenum.ManagerType;
 import io.dourl.mqtt.model.message.chat.AudioBody;
@@ -237,6 +235,7 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
         ProgressBar progressBar;
 
         ImageView ivFail;
+
         public FrameHolder(View itemView, RecyclerView.ViewHolder viewHolder) {
             super(itemView);
             mContext = itemView.getContext();
@@ -249,7 +248,7 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
             if (messageModel.isShowTime()) {
                 tvTime.setVisibility(View.VISIBLE);
                 //TODO
-               // tvTime.setText(MessageTimeUtils.formatDateTime(mContext, messageModel.getTime()));
+                // tvTime.setText(MessageTimeUtils.formatDateTime(mContext, messageModel.getTime()));
             } else {
                 tvTime.setVisibility(View.GONE);
             }
@@ -302,11 +301,11 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
                             }
                         } else {
                             mLevelLogo.setVisibility(View.GONE);
-                           // leftAvatar.setOnClickListener(v -> ProfileInfoActivity.intentTo(mContext, messageModel.getFromUser().getUid()));
+                            // leftAvatar.setOnClickListener(v -> ProfileInfoActivity.intentTo(mContext, messageModel.getFromUser().getUid()));
                         }
                     } else {
                         mNickNameLayout.setVisibility(View.GONE);
-                       // leftAvatar.setOnClickListener(v -> ProfileInfoActivity.intentTo(mContext, messageModel.getFromUid()));
+                        // leftAvatar.setOnClickListener(v -> ProfileInfoActivity.intentTo(mContext, messageModel.getFromUid()));
                     }
 
                     containerParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
@@ -341,7 +340,7 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
                     }
                 });
 //TODO
-              //  rightAvatar.setOnClickListener(v -> ProfileInfoActivity.intentTo(mContext, messageModel.isMine() ? LoginManager.getInstance().getCurrentUserId() : messageModel.getFromUid()));
+                //  rightAvatar.setOnClickListener(v -> ProfileInfoActivity.intentTo(mContext, messageModel.isMine() ? LoginManager.getInstance().getCurrentUserId() : messageModel.getFromUid()));
             }
 
         }
