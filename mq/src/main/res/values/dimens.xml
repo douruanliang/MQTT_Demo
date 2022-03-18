@@ -72,10 +72,10 @@
     <dimen name="empty_view_top_margin_session">70dp</dimen>
 
     <!--Chat-->
-<!--    <dimen name="chat_item_margin">12dp</dimen>
+   <dimen name="chat_item_margin">12dp</dimen>
     <dimen name="chat_item_text_padding">12dp</dimen>
     <dimen name="chat_item_image_margin">60dp</dimen>
-    <dimen name="chat_avatarSize">48dp</dimen>-->
+    <dimen name="chat_avatarSize">48dp</dimen>
 
     <!--session-->
     <dimen name="session_item_footer_height">70dp</dimen>
@@ -105,5 +105,7 @@
     <dimen name="clan_item_height">70dp</dimen>
     <dimen name="vote_sign_up_margin">15dp</dimen>
     <dimen name="gPlayBannerHeight">150dp</dimen>
+
+
 
 </resources>
