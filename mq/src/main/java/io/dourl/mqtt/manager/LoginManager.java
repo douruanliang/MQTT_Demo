@@ -135,10 +135,12 @@ public class LoginManager {
 
 
     public UserModel getCurrentUser() {
-        return null;
+        UserModel  mFromUser = new UserModel();
+        mFromUser.setUid(LoginManager.getCurrentUserId());
+        return mFromUser;
     }
 
     public static String getCurrentUserId() {
-        return "admin";
+        return "boss";
     }
 }

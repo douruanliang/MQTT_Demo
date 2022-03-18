@@ -70,7 +70,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
     }
 
     private void processNewsMessage(String msgString) {
-      //  MsgJobManager.getInstance().addJob(new ProcessNewsMsgJob(msgString));
+       // MsgJobManager.getInstance().addJob(new ProcessNewsMsgJob(msgString));
     }
 
 }

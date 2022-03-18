@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="6dp"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:scaleType="centerCrop"
+        android:background="@drawable/ic_colorball_ball_0"
+        android:src="@drawable/ic_colorball_smile_0"
+        >
+    </ImageView>
+</RelativeLayout>

@@ -2,6 +2,7 @@ package io.dourl.mqtt;
 
 import android.app.Application;
 
+import io.dourl.http.HttpApiBase;
 import io.dourl.mqtt.base.BaseApp;
 
 /**
@@ -15,5 +16,6 @@ public class MQTTApp extends Application {
     public void onCreate() {
         super.onCreate();
         BaseApp.init(this);
+        HttpApiBase.init(this);
     }
 }

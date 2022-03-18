@@ -72,7 +72,7 @@
     <dimen name="empty_view_top_margin_session">70dp</dimen>
 
     <!--Chat-->
-    <dimen name="chat_item_margin">12dp</dimen>
+   <dimen name="chat_item_margin">12dp</dimen>
     <dimen name="chat_item_text_padding">12dp</dimen>
     <dimen name="chat_item_image_margin">60dp</dimen>
     <dimen name="chat_avatarSize">48dp</dimen>
@@ -106,8 +106,6 @@
     <dimen name="vote_sign_up_margin">15dp</dimen>
     <dimen name="gPlayBannerHeight">150dp</dimen>
 
-    <dimen name="default_title_textsize">16sp</dimen>
-    <dimen name="default_titlebar_height">42dp</dimen>
-    <dimen name="default_titlebar_left_margin">12dp</dimen>
-    <dimen name="default_titlebar_right_margin">12dp</dimen>
+
+
 </resources>
