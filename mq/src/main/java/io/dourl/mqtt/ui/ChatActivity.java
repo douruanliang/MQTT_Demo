@@ -27,31 +27,18 @@ public class ChatActivity extends BaseActivity {
     TextView noticeContent;
     ImageView noticeClose;
     RelativeLayout noticeLayout;
-
     TitleBar titleBar;
-
     TextView msgCountHint;
-
     TextView msgUnread;
-
     MultiLineEditText editText;
-
     ImageView btnSend;
-
     ImageButton btnAlbum;
-
     ImageButton btnPhoto;
-
     ImageButton btnRecord;
-
     ImageButton btnFace;
-
     FrameLayout emojiconMenuContainer;
-
     LinearLayout inputView;
-
     ImageView btnKeyboard;
-
     RecordView recordView;
 
     FrameLayout bottomView;
