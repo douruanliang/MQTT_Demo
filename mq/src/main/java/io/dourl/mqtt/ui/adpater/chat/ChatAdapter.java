@@ -1,7 +1,6 @@
 package io.dourl.mqtt.ui.adpater.chat;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.customenum.ManagerType;
 import io.dourl.mqtt.model.message.chat.AudioBody;
-import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.ImageBody;
 import me.drakeet.multitype.MultiTypeAdapter;
