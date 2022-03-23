@@ -11,6 +11,7 @@
             android:name="org.eclipse.paho.android.service.MqttService"
             android:exported="false"/>
 
+        <activity android:name=".ui.ChatActivity"/>
     </application>
   
 </manifest>

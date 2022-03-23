@@ -17,6 +17,7 @@ import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.constants.Constants;
+import io.dourl.mqtt.event.MsgStatusUpdateEvent;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.LoginManager;
@@ -264,16 +265,16 @@ public class SendMsgJob extends BaseMessageJob {
             if (response.isSuccessful() && response.body() != null) {
                 BaseResponse body = response.body();
                 if (body.isSucceeded()) {
-                    LoggerUtil.d("send success");
+                    LoggerUtil.d(TAG,"send success");
                     mMessageModel.setSendStatus(MessageModel.Status.success);
                     updateMessageAndSession();
                 } else {
-                    LoggerUtil.d("send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
+                    LoggerUtil.d(TAG,"send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
                     processErrorCode(body.getErrorCode());
                     mMessageModel.setSendStatus(MessageModel.Status.fail);
                 }
             } else {
-                LoggerUtil.d("send fail error: %s", response.message() != null ? response.message() : "");
+                LoggerUtil.d(TAG,"send fail error: %s", response.message() != null ? response.message() : "");
                 mMessageModel.setSendStatus(MessageModel.Status.fail);
             }
             updateMessageAndSession();
@@ -287,8 +288,8 @@ public class SendMsgJob extends BaseMessageJob {
 
     protected void updateMessageAndSession() {
         dbOp();
-        //EventBusManager.getInstance().post(new MsgStatusUpdateEvent(mMessageModel));
-        //EventBusManager.getInstance().post(new SessionEvent(mSession));
+        EventBusManager.getInstance().post(new MsgStatusUpdateEvent(mMessageModel));
+        EventBusManager.getInstance().post(new SessionEvent(mSession));
     }
 
     protected void dbOp() {

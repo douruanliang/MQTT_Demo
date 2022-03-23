@@ -2,15 +2,20 @@ package io.dourl.mqtt.ui.adpater.chat;
 
 
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
+import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.customenum.ManagerType;
 import io.dourl.mqtt.model.message.chat.AudioBody;
+import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.ImageBody;
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -24,6 +29,7 @@ public class ChatAdapter extends MultiTypeAdapter {
      * 消息间隔时间为 60 秒
      */
     private static final int INTERVAL_TIME = 60 * 1000;
+    private static final String TAG = "ChatAdapter";
     private List<MessageModel> mDataList;
 
     public OnItemActionListener mOnItemActionListener;
@@ -33,6 +39,12 @@ public class ChatAdapter extends MultiTypeAdapter {
     public ChatAdapter(List<MessageModel> list) {
         super(list);
         mDataList = list;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        checkIsShowTime(position);
+        super.onBindViewHolder(holder, position);
     }
 
     /**
@@ -71,6 +83,18 @@ public class ChatAdapter extends MultiTypeAdapter {
         mMyManagrType = myManagrType;
     }
 
+
+    @NonNull
+    @Override
+    public Class onFlattenClass(@NonNull Object item) {
+        BaseMsgBody body = ((MessageModel) item).getBody();
+        if (body == null) {
+            //BugTagsUtils.sendException(new IllegalStateException(GsonManager.getGson().toJson(item)));
+            return BaseMsgBody.class;
+        } else {
+            return body.getClass();
+        }
+    }
 
     public void setData(List<MessageModel> messages) {
         if (messages != null && !messages.isEmpty()) {
@@ -111,7 +135,7 @@ public class ChatAdapter extends MultiTypeAdapter {
                     m.setBody(message.getBody());
                 }
                 notifyItemChanged(i);
-                LoggerUtil.d("update msg at: " + i);
+                LoggerUtil.d(TAG,"update msg at: " + i);
                 return;
             }
         }

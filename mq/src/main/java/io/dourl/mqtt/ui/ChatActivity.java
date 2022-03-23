@@ -1,8 +1,17 @@
 package io.dourl.mqtt.ui;
 
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -10,17 +19,27 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
 import io.dourl.mqtt.R;
+import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
+import io.dourl.mqtt.bean.MessagePaging;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.bean.UserModel;
+import io.dourl.mqtt.event.MsgStatusUpdateEvent;
+import io.dourl.mqtt.manager.EventBusManager;
+import io.dourl.mqtt.manager.MessageManager;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.storage.DbCallback;
+import io.dourl.mqtt.storage.MessageDao;
 import io.dourl.mqtt.storage.SessionDao;
 import io.dourl.mqtt.storage.SessionManager;
 import io.dourl.mqtt.ui.adpater.chat.ChatAdapter;
@@ -29,7 +48,9 @@ import io.dourl.mqtt.ui.widge.MultiLineEditText;
 import io.dourl.mqtt.ui.widge.RecordStateView;
 import io.dourl.mqtt.ui.widge.RecordView;
 import io.dourl.mqtt.ui.widge.TitleBar;
-import me.drakeet.multitype.MultiTypeAdapter;
+import io.dourl.mqtt.utils.AppContextUtil;
+import io.reactivex.functions.Consumer;
+
 
 /**
  * File description.
@@ -37,7 +58,8 @@ import me.drakeet.multitype.MultiTypeAdapter;
  * @author dourl
  * @date 2022/3/8
  */
-public class ChatActivity extends BaseActivity {
+public class ChatActivity extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = "ChatActivity";
     RecyclerView mRecyclerView;
     TextView noticeContent;
     ImageView noticeClose;
@@ -45,33 +67,56 @@ public class ChatActivity extends BaseActivity {
     TitleBar mTitleBar;
     TextView msgCountHint;
     TextView msgUnread;
-    MultiLineEditText editText;
-    ImageView btnSend;
+    MultiLineEditText mEditText;
+    ImageView mBtnSend;
     ImageButton btnAlbum;
     ImageButton btnPhoto;
     ImageButton btnRecord;
     ImageButton btnFace;
-    FrameLayout emojiconMenuContainer;
+    FrameLayout mEmojiMenuContainer;
     LinearLayout inputView;
     ImageView btnKeyboard;
     RecordView recordView;
 
     FrameLayout bottomView;
     RecordStateView recordStateView;
-    RelativeLayout rootView;
+    RelativeLayout mMainLayout;
 
     protected String mSessionID = null;
     private UserModel mBaseUser;
-    private MultiTypeAdapter mAdapter;
+    private ChatAdapter mAdapter;
     protected int mUnreadCount = 15;
+    private long mLastMsgId;
     protected TextView mMsgUnread;
-    @Override
+    protected boolean ctrlPress = false;
+    private boolean rightShown = false;
 
+    public static void intentTo(Context context, String sessionId) {
+        Intent intent = new Intent(context, ChatActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("session_id", sessionId);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+    public static void intentTo(Context context, String sessionId, UserModel user) {
+        Intent intent = new Intent(context, ChatActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("session_id", sessionId);
+        bundle.putParcelable("user", user);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        EventBusManager.getInstance().register(this);
         initView();
         init();
+
         mTitleBar.showLine();
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -84,6 +129,150 @@ public class ChatActivity extends BaseActivity {
         mAdapter.register(TextBody.class, new ChatTextProvider());
         mRecyclerView.setAdapter(mAdapter);
         setupMessageList();
+        setupInputBar();
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.getItemCount() - 1) {
+                    LoggerUtil.d(TAG,"reach top");
+//                    mPtrLayout.autoRefresh(true, 200);
+                    getMsgsByPage(0);
+                }
+                if (mMsgUnread.isShown() && linearLayoutManager.findLastCompletelyVisibleItemPosition() == mUnreadCount - 1) {
+                    mMsgUnread.setVisibility(View.GONE);
+                }
+            }
+        });
+        mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom < oldBottom - 300) {
+                    LoggerUtil.d(TAG,"LayoutChange oldBottom");
+                    mRecyclerView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollToBottom();
+                        }
+                    }, 100);
+                }
+            }
+        });
+
+    }
+
+    private void setupInputBar() {
+        mEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                // test on Mac virtual machine: ctrl map to KEYCODE_UNKNOWN
+                if (keyCode == KeyEvent.KEYCODE_UNKNOWN) {
+                    if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                        ctrlPress = true;
+                    } else if (event.getAction() == KeyEvent.ACTION_UP) {
+                        ctrlPress = false;
+                    }
+                }
+                return false;
+            }
+        });
+
+        mEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND || actionId == EditorInfo.IME_ACTION_DONE ||
+                        (event.getKeyCode() == KeyEvent.KEYCODE_ENTER &&
+                                event.getAction() == KeyEvent.ACTION_DOWN &&
+                                ctrlPress == true)) {
+                    sendTxtMessage();
+                    return true;
+                }
+
+                return false;
+            }
+        });
+        mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    toggleEditMode();
+                }
+            }
+        });
+
+        mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    hideKeyboard();
+                    if (rightShown)
+                        toggleRightLayout();
+                }
+                return false;
+            }
+        });
+    }
+
+    protected void toggleRightLayout() {
+        ObjectAnimator animator = null;
+        if (rightShown) {
+            animator = ObjectAnimator.ofFloat(mMainLayout, "translationX", -AppContextUtil.dip2px(240), 0f);
+        } else {
+            animator = ObjectAnimator.ofFloat(mMainLayout, "translationX", 0f, -AppContextUtil.dip2px(240));
+        }
+        animator.setDuration(500);
+        animator.setInterpolator(new AccelerateDecelerateInterpolator());
+        animator.start();
+        rightShown = !rightShown;
+        hideKeyboard();
+    }
+
+
+    protected void hideKeyboard() {
+        final View focusView = getCurrentFocus();
+        if (focusView != null) {
+            InputMethodManager imm = (InputMethodManager) focusView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(focusView.getWindowToken(), 0);
+            focusView.clearFocus();
+        }
+    }
+
+    private void toggleEditMode() {
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mEmojiMenuContainer.setVisibility(View.GONE);
+            }
+        }, 50);
+    }
+
+    private void sendTxtMessage() {
+        String text = mEditText.getText().toString();
+        if (text != null && text.length() > 0) {
+            MessageManager.getInstance().sendTextMessage(mBaseUser, text);
+            mEditText.setText("");
+            scrollToBottom();
+        } else {
+            // sendEmptyTxtMessage();
+        }
+        if (!mBaseUser.isFriend()) {
+            /*HINT_LIMIT--;
+            if (HINT_LIMIT == -1) {
+                new ChatHintDialog(this, mMainLayout, new ChatHintDialog.OnFunClickListener() {
+                    @Override
+                    public void onFunClick() {
+                        showLoadingProgress();
+                        doContactsAction();
+                    }
+                }).show();
+            }*/
+        }
+    }
+
+    private void scrollToBottom() {
+        mRecyclerView.scrollToPosition(0);
     }
 
     private void setupMessageList() {
@@ -98,9 +287,9 @@ public class ChatActivity extends BaseActivity {
                             mMsgUnread.setVisibility(View.VISIBLE);
                             mMsgUnread.setText(getString(R.string.hint_chat_unread_msg, mUnreadCount));
                         }
-                      //  mEditText.setText(model.getDraft());
+                          mEditText.setText(model.getDraft());
                     }
-                    //getMsgsByPage(mUnreadCount);
+                    getMsgsByPage(mUnreadCount);
                     SessionManager.getInstance().resetUnreadCount(mSessionID);
                 });
 
@@ -114,16 +303,41 @@ public class ChatActivity extends BaseActivity {
         });
 
     }
+    public static final int PRE_PAGE_COUNT = 10; //最少10
+    @SuppressLint("CheckResult")
+    private void getMsgsByPage(int unread) {
+        MessageDao.getMsgsBySessionIdObservable(mSessionID, mLastMsgId, PRE_PAGE_COUNT + unread).subscribe(new Consumer<MessagePaging>() {
+            @Override
+            public void accept(@NonNull MessagePaging messagePaging) throws Exception {
+                if (messagePaging == null) return;
+                if (0 == mLastMsgId) {
+                    mAdapter.setData(messagePaging.list);
+                    scrollToBottom();
+//                    mRecyclerView.scrollToPosition(messagePaging.list.size() - 1);
+                } else {
+                    mAdapter.addPreviousPage(messagePaging.list);
+                }
+                mLastMsgId = messagePaging.lastMsgDbId;
+                //mPtrLayout.setPullToRefresh(messagePaging.hasMore);
+            }
+
+        });
+    }
 
     protected void initView() {
         mTitleBar = findViewById(R.id.titleBar);
         mRecyclerView = findViewById(R.id.message_list);
         mMsgUnread = findViewById(R.id.msg_unread);
+
+        mEditText = findViewById(R.id.editText);
+        mEmojiMenuContainer = findViewById(R.id.emojicon_menu_container);
+        mMainLayout = findViewById(R.id.rootView);
+        mBtnSend = findViewById(R.id.btn_send);
+        mBtnSend.setOnClickListener(this);
     }
 
     protected void init() {
         Intent intent = getIntent();
-        String mSessionID;
         if (intent != null) {
             mSessionID = intent.getExtras().getString("session_id");
             mBaseUser = intent.getExtras().getParcelable("user");
@@ -137,5 +351,27 @@ public class ChatActivity extends BaseActivity {
     }
 
     private void getChatUserInfo() {
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_send) {
+            sendTxtMessage();
+        }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(MsgStatusUpdateEvent event) {
+        LoggerUtil.d(TAG, "MsgStatusUpdateEvent: %s", event);
+        if (event.getMessage().getSessionId().equalsIgnoreCase(String.valueOf(mSessionID))) {
+            mAdapter.updateData(event.getMessage());
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBusManager.getInstance().unRegister(this);
     }
 }

@@ -86,13 +86,13 @@ public class ChatTextProvider extends ChatFrameProvider<TextBody, ChatTextProvid
             mTextView.setMaxWidth(textWidth);
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mTextView.getLayoutParams();
             if (isMine) {
-                //mTextView.setBackgroundResource(R.drawable.round_corner_rect_green);
+                mTextView.setBackgroundResource(R.drawable.round_corner_rect_green);
                 mTextView.setTextColor(mContext.getResources().getColor(R.color.white));
                 lp.leftMargin = 0;
                 lp.rightMargin = imageMargin;
                 mTextView.setPadding(textPadding, textPadding, textPadding, textPadding);
             } else {
-               // mTextView.setBackgroundResource(R.drawable.round_corner_rect_white);
+                mTextView.setBackgroundResource(R.drawable.round_corner_rect_white);
                 mTextView.setTextColor(mContext.getResources().getColor(R.color.color_5d697f));
                 lp.leftMargin = imageMargin;
                 lp.rightMargin = 0;
