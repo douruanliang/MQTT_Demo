@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -27,6 +29,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.base.log.LoggerUtil;
@@ -38,17 +41,23 @@ import io.dourl.mqtt.event.MsgStatusUpdateEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.MessageManager;
 import io.dourl.mqtt.model.message.chat.TextBody;
+import io.dourl.mqtt.model.message.emoji.DefaultEmojiconDatas;
+import io.dourl.mqtt.model.message.emoji.Emojicon;
+import io.dourl.mqtt.model.message.emoji.EmojiconGroupEntity;
 import io.dourl.mqtt.storage.DbCallback;
 import io.dourl.mqtt.storage.MessageDao;
 import io.dourl.mqtt.storage.SessionDao;
 import io.dourl.mqtt.storage.SessionManager;
 import io.dourl.mqtt.ui.adpater.chat.ChatAdapter;
 import io.dourl.mqtt.ui.adpater.chat.ChatTextProvider;
+import io.dourl.mqtt.ui.widge.EmojiconMenu;
+import io.dourl.mqtt.ui.widge.EmojiconMenuBase;
 import io.dourl.mqtt.ui.widge.MultiLineEditText;
 import io.dourl.mqtt.ui.widge.RecordStateView;
 import io.dourl.mqtt.ui.widge.RecordView;
 import io.dourl.mqtt.ui.widge.TitleBar;
 import io.dourl.mqtt.utils.AppContextUtil;
+import io.dourl.mqtt.utils.ImSmileUtils;
 import io.reactivex.functions.Consumer;
 
 
@@ -72,7 +81,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     ImageButton btnAlbum;
     ImageButton btnPhoto;
     ImageButton btnRecord;
-    ImageButton btnFace;
+    ImageButton mBtnFace;
     FrameLayout mEmojiMenuContainer;
     LinearLayout inputView;
     ImageView btnKeyboard;
@@ -158,9 +167,63 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
                 }
             }
         });
+        initEmoji();
 
     }
+    protected EmojiconMenuBase emojiconMenu;
 
+    private void initEmoji() {
+        if (emojiconMenu == null) {
+            emojiconMenu = (EmojiconMenu) LayoutInflater.from(this).inflate(R.layout.im_layout_emojicon_menu, null);
+            ArrayList<EmojiconGroupEntity> emojiconGroupList = new ArrayList<EmojiconGroupEntity>();
+            emojiconGroupList.add(new EmojiconGroupEntity(R.drawable.ee_1, Arrays.asList(DefaultEmojiconDatas.getData())));
+            ((EmojiconMenu) emojiconMenu).init(emojiconGroupList);
+        }
+        mEmojiMenuContainer.addView(emojiconMenu);
+
+        // emojicon menu
+        emojiconMenu.setEmojiconMenuListener(new EmojiconMenuBase.EmojiconMenuListener() {
+
+            @Override
+            public void onExpressionClicked(Emojicon emojicon) {
+                if (emojicon.getType() != Emojicon.Type.BIG_EXPRESSION) {
+                    if (emojicon.getEmojiText() != null) {
+                        mEditText.append(ImSmileUtils.getSmiledText(ChatActivity.this, emojicon.getEmojiText()));
+                    }
+                } else {
+//                    sendBigExpressionMessage(emojicon.getName(), emojicon.getIdentityCode());
+                }
+            }
+
+            @Override
+            public void onDeleteImageClicked() {
+                if (!TextUtils.isEmpty(mEditText.getText())) {
+                    KeyEvent event = new KeyEvent(0, 0, 0, KeyEvent.KEYCODE_DEL, 0, 0, 0, 0, KeyEvent.KEYCODE_ENDCALL);
+                    dispatchKeyEvent(event);
+                }
+            }
+
+            @Override
+            public void onSendClicked() {
+                sendTxtMessage();
+            }
+        });
+    }
+
+    protected void toggleEmojicon() {
+        if (mEmojiMenuContainer.getVisibility() == View.VISIBLE) {
+            mEmojiMenuContainer.setVisibility(View.GONE);
+        } else {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mEmojiMenuContainer.setVisibility(View.VISIBLE);
+                }
+            }, 50);
+            hideKeyboard();
+        }
+
+    }
     private void setupInputBar() {
         mEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -334,6 +397,8 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         mMainLayout = findViewById(R.id.rootView);
         mBtnSend = findViewById(R.id.btn_send);
         mBtnSend.setOnClickListener(this);
+        mBtnFace = findViewById(R.id.btnFace);
+        mBtnFace.setOnClickListener(this);
     }
 
     protected void init() {
@@ -357,6 +422,8 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.btn_send) {
             sendTxtMessage();
+        }else if (v.getId() == R.id.btnFace){
+            toggleEmojicon();
         }
 
     }

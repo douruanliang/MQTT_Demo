@@ -1,0 +1,134 @@
+<resources>
+    <declare-styleable name="TagGroup">
+        <!-- Whether the tag group is in append mode. -->
+        <attr name="atg_isAppendMode" format="boolean"/>
+        <!-- If the tag group is in append mode, what the hint of input tag. -->
+        <attr name="atg_inputHint" format="string"/>
+
+        <!-- The tag view outline border color. -->
+        <attr name="atg_borderColor" format="color"/>
+        <!-- The tag view text color. -->
+        <attr name="atg_textColor" format="color"/>
+        <!-- The tag view background color. -->
+        <attr name="atg_backgroundColor" format="color"/>
+
+        <!-- The dash outline border color, when in append mode. -->
+        <attr name="atg_dashBorderColor" format="color"/>
+        <!-- The input tag hint text color, when in append mode. -->
+        <attr name="atg_inputHintColor" format="color"/>
+        <!-- The input tag type text color, when in append mode. -->
+        <attr name="atg_inputTextColor" format="color"/>
+
+        <!-- The checked tag view outline border color. -->
+        <attr name="atg_checkedBorderColor" format="color"/>
+        <!-- The checked text color. -->
+        <attr name="atg_checkedTextColor" format="color"/>
+        <!-- The checked marker color. -->
+        <attr name="atg_checkedMarkerColor" format="color"/>
+        <!-- The checked tag view background color. -->
+        <attr name="atg_checkedBackgroundColor" format="color"/>
+
+        <!-- Whether the tag group is in selected mode. -->
+        <attr name="atg_isSelectedMode" format="boolean"/>
+        <!-- The selected text color. -->
+        <attr name="atg_selectedTextColor" format="color"/>
+        <!-- The selected tag view background color. -->
+        <attr name="atg_selectedBackgroundColor" format="color"/>
+        <!-- The unEnable text color. -->
+        <attr name="atg_unableTextColor" format="color"/>
+        <!-- Allows select the max value. -->
+        <attr name="atg_selectedMaxCount" format="integer"/>
+
+        <!-- The tag view background color, when the tag view is being pressed. -->
+        <attr name="atg_pressedBackgroundColor" format="color"/>
+
+        <!-- The tag view outline border stroke width. -->
+        <attr name="atg_borderStrokeWidth" format="dimension"/>
+        <!-- The tag view text size. -->
+        <attr name="atg_textSize" format="dimension"/>
+
+        <attr name="atg_horizontalSpacing" format="dimension"/>
+        <attr name="atg_verticalSpacing" format="dimension"/>
+        <attr name="atg_horizontalPadding" format="dimension"/>
+        <attr name="atg_verticalPadding" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="Themes">
+        <attr name="tagGroupStyle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="EmojiconMenu">
+        <attr name="bigEmojiconRows" format="integer"/>
+        <attr name="emojiconColumns" format="integer"/>
+    </declare-styleable>
+
+    <!--自定义贝塞尔曲线相关属性-->
+    <declare-styleable name="ArcView">
+        <attr name="arcHeight" format="dimension"/>
+        <attr name="bgColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="GameScrollView">
+        <attr name="itemWidth" format="integer"/>
+        <attr name="itemGamePadding" format="integer"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="EmptyView">
+        <attr name="imageRes" format="reference"/>
+        <attr name="stringRes" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="StarRewardView">
+        <attr name="isSelf" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="GRewardView">
+        <attr name="bgSelectorRes" format="reference"/>
+        <attr name="rewardRes" format="reference"/>
+        <attr name="pendingDescString" format="string"/>
+        <attr name="pendingDescColor" format="color"/>
+        <attr name="miningDescString" format="string"/>
+        <attr name="miningDescColor" format="color"/>
+        <attr name="rewardDescString" format="string"/>
+        <attr name="rewardDescColor" format="color"/>
+        <attr name="bgWidth" format="dimension"/>
+        <attr name="bgHeight" format="dimension"/>
+        <attr name="rewardWidth" format="dimension"/>
+        <attr name="rewardHeight" format="dimension"/>
+        <attr name="rewardBottomMargin" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="NHBanner">
+        <attr name="indicatorGravity" format="integer">
+            <flag name="leftBottom" value="1"/>
+            <flag name="rightBottom" value="2"/>
+            <flag name="centerBottom" value="3"/>
+        </attr>
+        <attr name="IndicatorMargin" format="dimension"/>
+        <attr name="delayTime" format="integer"/>
+        <attr name="expectHeight" format="dimension"/>
+        <attr name="indicatorWidth" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="AutoFitTextView">
+        <!-- Minimum size of the text. -->
+        <attr name="minTextSize" format="dimension" />
+        <!-- Amount of precision used to calculate the correct text size to fit within its
+        bounds. Lower precision is more precise and takes more time. -->
+        <attr name="precision" format="float" />
+        <!-- Defines whether to automatically resize text to fit to the view's bounds. -->
+        <attr name="sizeToFit" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CaptchaEditText">
+        <attr name="childWidth" format="dimension"/>
+        <attr name="childSize" format="integer"/>
+        <attr name="itemBackground" format="reference"/>
+        <attr name="itemSpace" format="dimension"/>
+        <attr name="childTextSize" format="dimension"/>
+        <attr name="childTextColor" format="color"/>
+    </declare-styleable>
+
+</resources>
