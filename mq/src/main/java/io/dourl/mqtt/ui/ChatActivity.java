@@ -37,9 +37,11 @@ import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.MessagePaging;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.bean.UserModel;
+import io.dourl.mqtt.event.ChatMsgEvent;
 import io.dourl.mqtt.event.MsgStatusUpdateEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.MessageManager;
+import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.message.emoji.DefaultEmojiconDatas;
 import io.dourl.mqtt.model.message.emoji.Emojicon;
@@ -434,6 +436,37 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         if (event.getMessage().getSessionId().equalsIgnoreCase(String.valueOf(mSessionID))) {
             mAdapter.updateData(event.getMessage());
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(ChatMsgEvent event) {
+        LoggerUtil.d(TAG,"ChatMsgEvent: %s", event);
+        if (event.getSessionId().equalsIgnoreCase(String.valueOf(mSessionID))) {
+            if (event.getMessage().getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
+                try {
+                   // showCountHint(Integer.parseInt(event.getMessage().getContentDesc().toString()));
+                } catch (Exception e) {
+                }
+            } else {
+                if (mAdapter.getDataList().contains(event.getMessage())) {
+                    mAdapter.updateData(event.getMessage());
+                } else {
+                    mAdapter.addData(event.getMessage());
+                    if (event.getMessage().isMine() || isBottom()) {
+                        scrollToBottom();
+                    }
+                }
+            }
+
+        }
+    }
+
+    protected boolean isBottom() {
+        if (mRecyclerView == null) return false;
+        if (mRecyclerView.computeVerticalScrollExtent() + mRecyclerView.computeVerticalScrollOffset()
+                >= mRecyclerView.computeVerticalScrollRange())
+            return true;
+        return false;
     }
 
     @Override

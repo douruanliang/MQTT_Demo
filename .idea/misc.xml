@@ -20,6 +20,13 @@
         <entry key="mq/src/main/res/layout/activity_chat.xml" value="0.25" />
         <entry key="mq/src/main/res/layout/activity_test.xml" value="0.32708333333333334" />
         <entry key="mq/src/main/res/layout/dialog_chat_record.xml" value="0.32708333333333334" />
+        <entry key="mq/src/main/res/layout/im_expression_gridview.xml" value="0.25833333333333336" />
+        <entry key="mq/src/main/res/layout/im_layout_emojicon_menu.xml" value="0.25833333333333336" />
+        <entry key="mq/src/main/res/layout/im_row_big_expression.xml" value="0.25833333333333336" />
+        <entry key="mq/src/main/res/layout/im_row_expression.xml" value="0.25833333333333336" />
+        <entry key="mq/src/main/res/layout/im_scroll_tab_item.xml" value="0.25833333333333336" />
+        <entry key="mq/src/main/res/layout/im_widget_emojicon.xml" value="0.25833333333333336" />
+        <entry key="mq/src/main/res/layout/im_widget_emojicon_tab_bar.xml" value="0.25833333333333336" />
         <entry key="mq/src/main/res/layout/item_chat_audio.xml" value="0.2421875" />
         <entry key="mq/src/main/res/layout/item_chat_empty_emoji.xml" value="0.2421875" />
         <entry key="mq/src/main/res/layout/item_chat_frame.xml" value="0.2421875" />

@@ -10,6 +10,9 @@ import java.io.File;
 import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
+import io.dourl.mqtt.event.ChatMsgEvent;
+import io.dourl.mqtt.event.SessionEvent;
+import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.model.message.chat.AImageBody;
@@ -21,6 +24,11 @@ import io.dourl.mqtt.model.message.chat.RedPacketBody;
 import io.dourl.mqtt.model.message.chat.RedPacketOpenBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.message.chat.VideoBody;
+import io.dourl.mqtt.storage.DbCallback;
+import io.dourl.mqtt.storage.MessageDao;
+import io.dourl.mqtt.storage.SessionDao;
+import io.dourl.mqtt.storage.SessionManager;
+import io.dourl.mqtt.storage.UserDao;
 
 /**
  * 处理聊天消息
@@ -47,10 +55,6 @@ public class ProcessChatMsgJob extends BaseMessageJob {
             Gson gson = GsonManager.getGson();
             mMessageModel = gson.fromJson(mMsgString, MessageModel.class);
         }
-        //本人
-        mMessageModel.setTo(LoginManager.getInstance().getCurrentUser());
-        mMessageModel.setToUid(LoginManager.getInstance().getCurrentUserId());
-        mMessageModel.setLocalTime(System.currentTimeMillis());
         if (mMessageModel != null) {
             makeReceivedMessage(mMessageModel);
         } else {
@@ -102,12 +106,12 @@ public class ProcessChatMsgJob extends BaseMessageJob {
      * @return
      */
     protected MessageModel makeReceivedMessage(MessageModel msg) {
-        if (msg.getBodyType() == BodyType.TYPE_RED_PACKET_COLLECT) {
+        /*if (msg.getBodyType() == BodyType.TYPE_RED_PACKET_COLLECT) {
             RedPacketOpenBody.ContentEntity contentEntity = ((RedPacketOpenBody) msg.getBody()).getContent().get(0);
             msg.setFromUid(contentEntity.getFrom_uid());
         } else {
             msg.setFromUid(msg.getFromUser().getUid());
-        }
+        }*/
         msg.setSendStatus(MessageModel.Status.success);
         msg.setTo(LoginManager.getInstance().getCurrentUser());
         msg.setToUid(LoginManager.getInstance().getCurrentUserId());
@@ -127,7 +131,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
 
     protected void saveMsgAndPostEvent(MessageModel msg) throws InterruptedException {
 
-        /*if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
+        if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
             EventBusManager.getInstance().post(new ChatMsgEvent(msg.getSessionId(), msg));
             return;
         }
@@ -179,7 +183,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
             public void onFail(Throwable e) {
 
             }
-        }).await();*/
+        }).await();
 
 
     }

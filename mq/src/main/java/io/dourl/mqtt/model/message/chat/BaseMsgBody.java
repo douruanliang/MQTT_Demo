@@ -64,10 +64,12 @@ public class BaseMsgBody implements BaseObject {
         this.extra = extra;
     }
 
+
     @Override
     public String toString() {
         return "BaseMsgBody{" +
                 "type=" + type +
+                ", extra=" + extra +
                 ", localPath='" + localPath + '\'' +
                 '}';
     }

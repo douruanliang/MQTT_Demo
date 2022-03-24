@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
        // message.setSessionId("u" + message.getTo().getUid());
         mBtnSend = findViewById(R.id.btn_send);
+        mBtnSend.setText(LoginManager.getCurrentUserId());
         mBtnSend.setOnClickListener(  v -> {
            // MessageManager.getInstance().sendTextMessage(mBaseUser,"hello");
             ChatActivity.intentTo(this,"u" + mToUser.getUid(), mToUser);
