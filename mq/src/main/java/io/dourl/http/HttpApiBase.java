@@ -45,7 +45,7 @@ public class HttpApiBase implements CommandInterface {
 
     public static String getSecureBaseUrl() {
        // return HOST == 0 ? "https://" + IPS[HOST] : "http://" + IPS[HOST];
-        return "http://192.168.126.88:9090";
+        return "http://"+BuildConfig.API_HOST+":9090";
     }
 
     public static final int DEFAULT_MAX_CONNECTIONS = 5;

@@ -17,6 +17,7 @@ import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.constants.Constants;
+import io.dourl.mqtt.event.ChatMsgEvent;
 import io.dourl.mqtt.event.MsgStatusUpdateEvent;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
@@ -71,8 +72,11 @@ public class SendMsgJob extends BaseMessageJob {
 
     private void prepare() throws Exception {
         LoggerUtil.d(TAG, "prepare");
+        //插入消息数据表
         MessageDao.insertOrUpdate(mMessageModel).await();
+        //创建会话 - 谁有一条带有信息的会话
         mSession = SessionManager.createChatSession(mMessageModel.getTo(), mMessageModel);
+        //
         mSession.setMsgDbId(mMessageModel.getId());
         SessionDao.insertOrUpdate(mSession).await();
 
@@ -283,7 +287,7 @@ public class SendMsgJob extends BaseMessageJob {
     }
 
     protected void notifyNew() {
-        //EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));
+        EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));
     }
 
     protected void updateMessageAndSession() {

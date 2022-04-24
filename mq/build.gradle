@@ -21,10 +21,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String","MQTT_HOST","\"iot.eclipse.org\"")
+            buildConfigField("String","MQTT_HOST","\"192.168.125.103\"")
+            buildConfigField("String","API_HOST","\"192.168.125.103\"")
         }
         debug {
-            buildConfigField("String","MQTT_HOST","\"iot.eclipse.org\"")
+            buildConfigField("String","MQTT_HOST","\"192.168.125.253\"")
+            buildConfigField("String","API_HOST","\"192.168.125.253\"")
         }
     }
     compileOptions {
