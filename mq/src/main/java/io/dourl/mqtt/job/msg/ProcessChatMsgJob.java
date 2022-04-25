@@ -4,23 +4,28 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
-
-import java.io.File;
+import java.util.UUID;
 
 import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
+import io.dourl.mqtt.bean.UserModel;
+import io.dourl.mqtt.event.ChatMsgEvent;
+import io.dourl.mqtt.event.SessionEvent;
+import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
-import io.dourl.mqtt.model.message.chat.AImageBody;
-import io.dourl.mqtt.model.message.chat.AudioBody;
 import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.MessageType;
 import io.dourl.mqtt.model.message.chat.RedPacketBody;
-import io.dourl.mqtt.model.message.chat.RedPacketOpenBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
-import io.dourl.mqtt.model.message.chat.VideoBody;
+import io.dourl.mqtt.storage.DbCallback;
+import io.dourl.mqtt.storage.MessageDao;
+import io.dourl.mqtt.storage.SessionDao;
+import io.dourl.mqtt.storage.SessionManager;
+import io.dourl.mqtt.storage.UserDao;
 
 /**
  * 处理聊天消息
@@ -36,9 +41,6 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         this.mMsgString = msg;
     }
 
-    public ProcessChatMsgJob(MessageModel model) {
-        this.mMessageModel = model;
-    }
 
     @Override
     public void run() {
@@ -47,10 +49,6 @@ public class ProcessChatMsgJob extends BaseMessageJob {
             Gson gson = GsonManager.getGson();
             mMessageModel = gson.fromJson(mMsgString, MessageModel.class);
         }
-        //本人
-        mMessageModel.setTo(LoginManager.getInstance().getCurrentUser());
-        mMessageModel.setToUid(LoginManager.getInstance().getCurrentUserId());
-        mMessageModel.setLocalTime(System.currentTimeMillis());
         if (mMessageModel != null) {
             makeReceivedMessage(mMessageModel);
         } else {
@@ -82,7 +80,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
                         }
                     });*/
         } else if (mMessageModel.getBodyType() == BodyType.TYPE_VIDEO) {
-           // FrescoHelper.prefetchToDiskCache(((VideoBody) mMessageModel.getBody()).getContent().getCover_r());
+            // FrescoHelper.prefetchToDiskCache(((VideoBody) mMessageModel.getBody()).getContent().getCover_r());
         } else if (mMessageModel.getBodyType() == BodyType.TYPE_A_IMAGE) {
             //FrescoHelper.prefetchToDiskCache(((AImageBody) mMessageModel.getBody()).getContent().getItem_url());
         }
@@ -102,12 +100,12 @@ public class ProcessChatMsgJob extends BaseMessageJob {
      * @return
      */
     protected MessageModel makeReceivedMessage(MessageModel msg) {
-        if (msg.getBodyType() == BodyType.TYPE_RED_PACKET_COLLECT) {
+        /*if (msg.getBodyType() == BodyType.TYPE_RED_PACKET_COLLECT) {
             RedPacketOpenBody.ContentEntity contentEntity = ((RedPacketOpenBody) msg.getBody()).getContent().get(0);
             msg.setFromUid(contentEntity.getFrom_uid());
         } else {
             msg.setFromUid(msg.getFromUser().getUid());
-        }
+        }*/
         msg.setSendStatus(MessageModel.Status.success);
         msg.setTo(LoginManager.getInstance().getCurrentUser());
         msg.setToUid(LoginManager.getInstance().getCurrentUserId());
@@ -116,9 +114,21 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         } else {
             msg.setIsMine(false);
         }
+        msg.setMsgId(UUID.randomUUID().toString());
         msg.setLocalTime(System.currentTimeMillis());
         if (msg.getType().value() == MessageType.CHAT_NORMAL.value()) {
-            msg.setSessionId("u" + msg.getFromUser().getUid());
+            if (msg.getFromUser() == null || TextUtils.isEmpty(msg.getFromUser().getUid())) {
+                BaseMsgBody baseMsgBody = msg.getBody(); //扩展里
+                /*UserModel from =new UserModel();
+                from.setUid(baseMsgBody.fromUserUid());
+                from.setUsername(baseMsgBody.getFormUser().name);
+                msg.setFrom(from);*/
+                msg.setFromUid(baseMsgBody.fromUserUid());
+                msg.setSessionId("u" + baseMsgBody.fromUserUid());
+            } else {
+                msg.setSessionId("u" + msg.getFromUser().getUid());
+            }
+
         } else {
             msg.setSessionId(msg.getClan().id);
         }
@@ -127,7 +137,8 @@ public class ProcessChatMsgJob extends BaseMessageJob {
 
     protected void saveMsgAndPostEvent(MessageModel msg) throws InterruptedException {
 
-        /*if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
+        LoggerUtil.d("pro",GsonManager.getGson().toJson(msg));
+        if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
             EventBusManager.getInstance().post(new ChatMsgEvent(msg.getSessionId(), msg));
             return;
         }
@@ -179,7 +190,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
             public void onFail(Throwable e) {
 
             }
-        }).await();*/
+        }).await();
 
 
     }

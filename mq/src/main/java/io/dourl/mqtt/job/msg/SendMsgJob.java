@@ -17,6 +17,8 @@ import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.constants.Constants;
+import io.dourl.mqtt.event.ChatMsgEvent;
+import io.dourl.mqtt.event.MsgStatusUpdateEvent;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.LoginManager;
@@ -70,8 +72,11 @@ public class SendMsgJob extends BaseMessageJob {
 
     private void prepare() throws Exception {
         LoggerUtil.d(TAG, "prepare");
+        //插入消息数据表
         MessageDao.insertOrUpdate(mMessageModel).await();
+        //创建会话 - 谁有一条带有信息的会话
         mSession = SessionManager.createChatSession(mMessageModel.getTo(), mMessageModel);
+        //
         mSession.setMsgDbId(mMessageModel.getId());
         SessionDao.insertOrUpdate(mSession).await();
 
@@ -254,7 +259,7 @@ public class SendMsgJob extends BaseMessageJob {
             case UN_RECOGNIZE:
                 break;
             case CHAT_NORMAL:
-                response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getEntityBody()).execute();
+                response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
                 break;
             case CHAT_GROUP:
                // response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getEntityBody(), "").execute();
@@ -264,16 +269,16 @@ public class SendMsgJob extends BaseMessageJob {
             if (response.isSuccessful() && response.body() != null) {
                 BaseResponse body = response.body();
                 if (body.isSucceeded()) {
-                    LoggerUtil.d("send success");
+                    LoggerUtil.d(TAG,"send success");
                     mMessageModel.setSendStatus(MessageModel.Status.success);
                     updateMessageAndSession();
                 } else {
-                    LoggerUtil.d("send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
+                    LoggerUtil.d(TAG,"send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
                     processErrorCode(body.getErrorCode());
                     mMessageModel.setSendStatus(MessageModel.Status.fail);
                 }
             } else {
-                LoggerUtil.d("send fail error: %s", response.message() != null ? response.message() : "");
+                LoggerUtil.d(TAG,"send fail error: %s", response.message() != null ? response.message() : "");
                 mMessageModel.setSendStatus(MessageModel.Status.fail);
             }
             updateMessageAndSession();
@@ -282,13 +287,13 @@ public class SendMsgJob extends BaseMessageJob {
     }
 
     protected void notifyNew() {
-        //EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));
+        EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));
     }
 
     protected void updateMessageAndSession() {
         dbOp();
-        //EventBusManager.getInstance().post(new MsgStatusUpdateEvent(mMessageModel));
-        //EventBusManager.getInstance().post(new SessionEvent(mSession));
+        EventBusManager.getInstance().post(new MsgStatusUpdateEvent(mMessageModel));
+        EventBusManager.getInstance().post(new SessionEvent(mSession));
     }
 
     protected void dbOp() {

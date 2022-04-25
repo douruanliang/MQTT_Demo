@@ -19,7 +19,6 @@ import io.dourl.mqtt.thread.DaoHandlerThread;
 
 /**
  * 聊天Session管理类
- * Created by zhangpeng on 16/1/11.
  */
 public class SessionManager {
     private static SessionManager ourInstance = new SessionManager();

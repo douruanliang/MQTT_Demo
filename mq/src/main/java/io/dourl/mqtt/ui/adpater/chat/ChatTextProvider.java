@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
@@ -22,6 +23,7 @@ import java.util.List;
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.utils.chat.TextBodyContentUtils;
+
 
 
 /**
@@ -40,6 +42,7 @@ public class ChatTextProvider extends ChatFrameProvider<TextBody, ChatTextProvid
     void onBindContentViewHolder(ViewHolder holder, TextBody textBody, boolean isMine) {
         holder.bindData(textBody, isMine);
     }
+
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private Context mContext;
@@ -83,13 +86,13 @@ public class ChatTextProvider extends ChatFrameProvider<TextBody, ChatTextProvid
             mTextView.setMaxWidth(textWidth);
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mTextView.getLayoutParams();
             if (isMine) {
-                //mTextView.setBackgroundResource(R.drawable.round_corner_rect_green);
+                mTextView.setBackgroundResource(R.drawable.round_corner_rect_green);
                 mTextView.setTextColor(mContext.getResources().getColor(R.color.white));
                 lp.leftMargin = 0;
                 lp.rightMargin = imageMargin;
                 mTextView.setPadding(textPadding, textPadding, textPadding, textPadding);
             } else {
-               // mTextView.setBackgroundResource(R.drawable.round_corner_rect_white);
+                mTextView.setBackgroundResource(R.drawable.round_corner_rect_white);
                 mTextView.setTextColor(mContext.getResources().getColor(R.color.color_5d697f));
                 lp.leftMargin = imageMargin;
                 lp.rightMargin = 0;

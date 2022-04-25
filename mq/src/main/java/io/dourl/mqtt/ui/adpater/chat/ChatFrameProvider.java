@@ -33,7 +33,7 @@ import io.dourl.mqtt.model.message.chat.ImageBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.message.chat.VideoBody;
 import io.dourl.mqtt.utils.IMTextBodyUtils;
-import me.drakeet.multitype.ItemViewBinder;
+import me.drakeet.multitype.ItemViewProvider;
 
 
 /**
@@ -41,7 +41,7 @@ import me.drakeet.multitype.ItemViewBinder;
  */
 
 public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHolder extends RecyclerView.ViewHolder>
-        extends ItemViewBinder<MessageModel, ChatFrameProvider.FrameHolder> {
+        extends ItemViewProvider<MessageModel, ChatFrameProvider.FrameHolder> {
     protected static int textPadding;
     protected static int avatarSize;
     protected static int imageMargin;
@@ -224,30 +224,41 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
         TextView tvNickName;
         ImageView mLevelLogo;
         TextView tvHint;
-
         RelativeLayout mContentLayout;
-
         ImageView leftAvatar;
-
         ImageView rightAvatar;
         FrameLayout container;
         View statusView;
         ProgressBar progressBar;
-
         ImageView ivFail;
 
         public FrameHolder(View itemView, RecyclerView.ViewHolder viewHolder) {
             super(itemView);
             mContext = itemView.getContext();
+            tvTime = itemView.findViewById(R.id.tvTime);
+            mNickNameLayout = itemView.findViewById(R.id.nickname_layout);
+            tvNickName  = itemView.findViewById(R.id.nickname);
+            mLevelLogo = itemView.findViewById(R.id.level_logo);
+            tvHint = itemView.findViewById(R.id.tvHint);
+            mContentLayout = itemView.findViewById(R.id.content_layout);
+
+            leftAvatar = itemView.findViewById(R.id.left_avatar);
+            rightAvatar = itemView.findViewById(R.id.right_avatar);
+            container = itemView.findViewById(R.id.container);
+            statusView = itemView.findViewById(R.id.statusView);
+            progressBar = itemView.findViewById(R.id.progressBar);
+            ivFail = itemView.findViewById(R.id.ivFail);
+
             container.addView(viewHolder.itemView);
             this.contentHolder = viewHolder;
+
         }
 
         public void bindData(final MessageModel messageModel, HashMap<String, BaseUser> members, ManagerType type) {
             // 设置时间
             if (messageModel.isShowTime()) {
                 tvTime.setVisibility(View.VISIBLE);
-                //TODO
+                //TODO 时间格式
                 // tvTime.setText(MessageTimeUtils.formatDateTime(mContext, messageModel.getTime()));
             } else {
                 tvTime.setVisibility(View.GONE);

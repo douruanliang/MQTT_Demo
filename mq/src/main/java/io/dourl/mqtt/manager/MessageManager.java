@@ -254,10 +254,12 @@ public class MessageManager {
             message.setToUid(message.getClan().id);
         }
         message.setMsgId(getMsgUUID());
-
-        message.setFromUid(LoginManager.getInstance().getCurrentUserId());
-        message.setFrom(LoginManager.getInstance().getCurrentUser());
-
+        UserModel currentUser = LoginManager.getInstance().getCurrentUser();
+        message.setFromUid(currentUser.getUid());
+        message.setFrom(currentUser);
+        BaseMsgBody.ExtraEntity extraEntity = new BaseMsgBody.ExtraEntity();
+        extraEntity.fromUser = new BaseMsgBody.UserEntity(currentUser.getUid(),currentUser.getName());
+        body.setExtra(extraEntity);
         message.setBody(body);
         message.setIsMine(true);
         message.setIsRead(true);
