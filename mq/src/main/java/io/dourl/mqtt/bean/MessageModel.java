@@ -193,6 +193,13 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         return "";
     }
 
+    public String getPublicBody() {
+        if (body != null) {
+            return GSON.toJson(new PublicMessage(type,body));
+        }
+        return "";
+    }
+
     public boolean isRead() {
         return isRead;
     }

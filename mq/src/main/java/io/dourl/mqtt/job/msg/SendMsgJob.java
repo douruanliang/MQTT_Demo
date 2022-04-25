@@ -259,7 +259,7 @@ public class SendMsgJob extends BaseMessageJob {
             case UN_RECOGNIZE:
                 break;
             case CHAT_NORMAL:
-                response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getEntityBody()).execute();
+                response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
                 break;
             case CHAT_GROUP:
                // response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getEntityBody(), "").execute();

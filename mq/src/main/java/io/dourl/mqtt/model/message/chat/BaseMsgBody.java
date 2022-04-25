@@ -13,6 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.dourl.mqtt.base.BaseObject;
@@ -110,7 +111,6 @@ public class BaseMsgBody implements BaseObject {
         Gson gson = gsonBuilder.create();
         BaseMsgBody baseMsgBody = null;
         if (databaseValue != null) {
-            Log.d("",databaseValue);
             try {
                 baseMsgBody = gson.fromJson(databaseValue, BaseMsgBody.class);
             } catch (JsonSyntaxException e) {
@@ -239,15 +239,13 @@ public class BaseMsgBody implements BaseObject {
     }
 
     public static class ExtraEntity implements BaseObject {
-        public List<UserEntity> uids;
+        public List<UserEntity> uids ; //
+        public UserEntity fromUser; //单个的就够了
     }
 
     public static class UserEntity implements BaseObject {
         public String uid;
         public String name;
-
-        public UserEntity() {
-        }
 
         public UserEntity(String uid, String name) {
             this.uid = uid;
@@ -255,4 +253,17 @@ public class BaseMsgBody implements BaseObject {
         }
     }
 
+    /**
+     * 后期统一
+     * @return
+     */
+    public String fromUserUid (){
+         if ((getExtra() !=null) && (getExtra().fromUser !=null)) {
+            return getExtra().fromUser.uid;
+         }
+        return "";
+    }
+    public UserEntity getFormUser(){
+        return getExtra().fromUser;
+    }
 }

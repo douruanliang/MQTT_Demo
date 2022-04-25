@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         mFromUser.setAge(10);
         // to
         mToUser = new UserModel();
-        mToUser.setUid("admin");
+        mToUser.setUid("xiaomi");
         mToUser.setAge(9);
 
        // message.setSessionId("u" + message.getTo().getUid());

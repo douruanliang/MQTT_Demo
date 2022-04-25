@@ -6,6 +6,7 @@ import io.dourl.mqtt.base.BaseObject;
 import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.MessageType;
+import io.dourl.mqtt.model.typeadapter.BodyTypeAdapter;
 
 /**
  * 用来解析基本消息类型
@@ -26,6 +27,7 @@ public class ReceiveMessage implements BaseObject {
      * intro : hello
      */
 
+    @JsonAdapter(BodyTypeAdapter.class)
     protected BaseMsgBody body;
 
     public MessageType getType() {
@@ -38,5 +40,6 @@ public class ReceiveMessage implements BaseObject {
         }
         return BodyType.UN_RECOGNIZE;
     }
+
 
 }

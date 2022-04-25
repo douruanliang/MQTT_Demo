@@ -5,6 +5,7 @@ package io.dourl.mqtt.job.msg;
 import android.util.Log;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import io.dourl.mqtt.utils.MessageThreadPool;
 import io.dourl.mqtt.utils.TopicUtils;
 import io.dourl.mqtt.job.MsgJobManager;
 import io.dourl.mqtt.manager.GsonManager;
