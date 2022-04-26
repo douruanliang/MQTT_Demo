@@ -1,3 +1,3 @@
-rootProject.name = "MQ_Demo"
+rootProject.name = "MD"
 include ':app'
 include ':mq'
