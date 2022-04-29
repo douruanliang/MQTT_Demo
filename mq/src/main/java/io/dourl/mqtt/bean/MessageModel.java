@@ -58,8 +58,6 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         }
     }).create();
 
-    public void setClan(ClanModel clanModel) {
-    }
 
     public enum Status {
         sending, fail, success
@@ -490,6 +488,9 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         isShowTime = showTime;
     }
 
+    public void setClan(ClanModel clan) {
+        this.clan = clan;
+    }
 
     @Override
     public String toString() {

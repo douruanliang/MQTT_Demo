@@ -1,16 +1,15 @@
 package io.dourl.mqtt.job.msg;
 
 
-
 import android.util.Log;
+
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import io.dourl.mqtt.utils.MessageThreadPool;
-import io.dourl.mqtt.utils.TopicUtils;
 import io.dourl.mqtt.job.MsgJobManager;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.model.message.ReceiveMessage;
+import io.dourl.mqtt.utils.TopicUtils;
 
 /**
  * 用来处理Mqtt原始内容解析
@@ -30,7 +29,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
     @Override
     public void run() {
         if (!LoginManager.getInstance().isLogin()) {
-            Log.d(TAG,"not login! do nothing when receive msg");
+            Log.d(TAG, "not login! do nothing when receive msg");
             return;
         }
 //        if (!MqttManager.getInstance().containTopic(mTopic)) {
@@ -39,7 +38,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
 //        }
         String msgString = mqttMessage;
         //类型分类
-        if (mTopic.contains("user")||mTopic.contains("Official")) {
+        if (mTopic.contains("user") || mTopic.contains("Official") || mTopic.startsWith("g") ) {
             processImMessage(msgString);
         } else if (TopicUtils.getNewsTopic().equalsIgnoreCase(mTopic)) {
             processNewsMessage(msgString);
@@ -71,7 +70,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
     }
 
     private void processNewsMessage(String msgString) {
-       // MsgJobManager.getInstance().addJob(new ProcessNewsMsgJob(msgString));
+        // MsgJobManager.getInstance().addJob(new ProcessNewsMsgJob(msgString));
     }
 
 }

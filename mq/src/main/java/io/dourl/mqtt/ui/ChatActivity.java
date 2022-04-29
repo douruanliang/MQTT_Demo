@@ -95,7 +95,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
 
     protected String mSessionID = null;
     private UserModel mBaseUser;
-    private ChatAdapter mAdapter;
+    protected ChatAdapter mAdapter;
     protected int mUnreadCount = 15;
     private long mLastMsgId;
     protected TextView mMsgUnread;
@@ -313,7 +313,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
         }, 50);
     }
 
-    private void sendTxtMessage() {
+    protected void sendTxtMessage() {
         String text = mEditText.getText().toString();
         if (text != null && text.length() > 0) {
             MessageManager.getInstance().sendTextMessage(mBaseUser, text);
@@ -336,7 +336,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
         }
     }
 
-    private void scrollToBottom() {
+    protected void scrollToBottom() {
         mRecyclerView.scrollToPosition(0);
     }
 

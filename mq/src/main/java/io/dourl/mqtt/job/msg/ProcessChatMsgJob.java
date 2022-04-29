@@ -130,7 +130,8 @@ public class ProcessChatMsgJob extends BaseMessageJob {
             }
 
         } else {
-            msg.setSessionId(msg.getClan().id);
+            BaseMsgBody baseMsgBody = msg.getBody();
+            msg.setSessionId(baseMsgBody.clanId());
         }
         return msg;
     }

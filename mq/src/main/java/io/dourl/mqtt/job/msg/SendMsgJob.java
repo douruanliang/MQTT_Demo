@@ -262,7 +262,7 @@ public class SendMsgJob extends BaseMessageJob {
                 response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
                 break;
             case CHAT_GROUP:
-               // response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getEntityBody(), "").execute();
+                response = sendMsgApis.sendMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
                 break;
         }
         if (response != null) {

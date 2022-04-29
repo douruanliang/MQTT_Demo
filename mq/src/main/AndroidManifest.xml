@@ -14,7 +14,10 @@
             android:name="org.eclipse.paho.android.service.MqttService"
             android:exported="false"/>
 
-        <activity android:name=".ui.ChatActivity"/>
+        <activity android:name=".ui.ChatActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".ui.GroupChatActivity"
+            android:exported="true"/>
     </application>
   
 </manifest>
