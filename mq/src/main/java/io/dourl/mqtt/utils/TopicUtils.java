@@ -12,7 +12,7 @@ public class TopicUtils {
     }
 
     public static String getGimTopic(String topic) {
-        return "g/" + topic;
+        return "group/" + topic;
     }
 
     public static String getNewsTopic() {

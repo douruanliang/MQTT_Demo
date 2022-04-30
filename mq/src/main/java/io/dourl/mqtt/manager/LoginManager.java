@@ -141,6 +141,6 @@ public class LoginManager {
     }
 
     public static String getCurrentUserId() {
-        return "boss"; //小米
+        return "boss";
     }
 }

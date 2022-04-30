@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mGroupSend = findViewById(R.id.btn_send_group);
 
         ClanModel clanModel = new ClanModel();
-        clanModel.id = "jiji";
+        clanModel.id = "project";
         clanModel.leader = 120;
 
         mGroupSend.setOnClickListener(  v -> {
@@ -60,4 +60,9 @@ public class MainActivity extends AppCompatActivity {
         MqttManager.wakeMqtt();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+       // MqttManager.getInstance().destroy();
+    }
 }

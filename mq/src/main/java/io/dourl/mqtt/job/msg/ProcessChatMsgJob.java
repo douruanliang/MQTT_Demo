@@ -10,7 +10,6 @@ import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
-import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.event.ChatMsgEvent;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
@@ -51,6 +50,13 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         }
         if (mMessageModel != null) {
             makeReceivedMessage(mMessageModel);
+            //群消息
+            if (mMessageModel.getType().value() == MessageType.CHAT_GROUP.value()) {
+                BaseMsgBody baseMsgBody = mMessageModel.getBody();
+                if (!baseMsgBody.fromUserUid().isEmpty() && (baseMsgBody.fromUserUid().equals(LoginManager.getCurrentUserId()))) {
+                    return;
+                }
+            }
         } else {
             return;
         }
@@ -131,14 +137,19 @@ public class ProcessChatMsgJob extends BaseMessageJob {
 
         } else {
             BaseMsgBody baseMsgBody = msg.getBody();
-            msg.setSessionId(baseMsgBody.clanId());
+            if (baseMsgBody != null) {
+                msg.setSessionId(baseMsgBody.clanId());
+            } else {
+                msg.setSessionId(msg.getClan().id);
+            }
+
         }
         return msg;
     }
 
     protected void saveMsgAndPostEvent(MessageModel msg) throws InterruptedException {
 
-        LoggerUtil.d("pro",GsonManager.getGson().toJson(msg));
+        LoggerUtil.d("pro", GsonManager.getGson().toJson(msg));
         if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
             EventBusManager.getInstance().post(new ChatMsgEvent(msg.getSessionId(), msg));
             return;
@@ -166,7 +177,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
                 sessionModel.setCreateTime(msg.getLocalTime());
 
                 //@提示
-                if (msg.getType().value() == MessageType.CHAT_GROUP.value()) {
+           /*     if (msg.getType().value() == MessageType.CHAT_GROUP.value()) {
                     msg.getClan().hasAt = sessionModel.getClan().hasAt;
                     sessionModel.setClan(msg.getClan());
                     if (msg.getBody().getExtra() != null && msg.getBody().getExtra().uids != null)
@@ -175,7 +186,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
                                 sessionModel.getClan().hasAt = true;
                             }
                         }
-                }
+                }*/
 
                 try {
                     SessionDao.insertOrUpdate(sessionModel).await();

@@ -244,6 +244,7 @@ public class MessageManager {
     }
 
     private void setupNormalProperty(MessageModel message, BaseMsgBody body) {
+        String cId = "";
         if (message.getClan() == null) {
             message.setType(MessageType.CHAT_NORMAL);
             message.setSessionId("u" + message.getTo().getUid());
@@ -252,14 +253,25 @@ public class MessageManager {
             message.setType(MessageType.CHAT_GROUP);
             message.setSessionId(message.getClan().id);
             message.setToUid(message.getClan().id);
+            cId = message.getClan().id;
         }
         message.setMsgId(getMsgUUID());
         UserModel currentUser = LoginManager.getInstance().getCurrentUser();
         message.setFromUid(currentUser.getUid());
         message.setFrom(currentUser);
-        BaseMsgBody.ExtraEntity extraEntity = new BaseMsgBody.ExtraEntity();
-        extraEntity.fromUser = new BaseMsgBody.UserEntity(currentUser.getUid(),currentUser.getName());
-        body.setExtra(extraEntity);
+        //公共的 可能会被覆盖
+        if (body.getExtra()==null){
+            BaseMsgBody.ExtraEntity extraEntity = new BaseMsgBody.ExtraEntity();
+            extraEntity.fromUser = new BaseMsgBody.UserEntity(currentUser.getUid(),currentUser.getName());
+            extraEntity.clanId = cId;
+            body.setExtra(extraEntity);
+        }else{
+            BaseMsgBody.ExtraEntity extraEntity = body.getExtra();
+            extraEntity.fromUser = new BaseMsgBody.UserEntity(currentUser.getUid(),currentUser.getName());
+            extraEntity.clanId = cId;
+            body.setExtra(extraEntity);
+        }
+
         message.setBody(body);
         message.setIsMine(true);
         message.setIsRead(true);

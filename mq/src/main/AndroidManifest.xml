@@ -17,6 +17,7 @@
         <activity android:name=".ui.ChatActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".ui.GroupChatActivity"
+            android:launchMode="singleTask"
             android:exported="true"/>
     </application>
   
