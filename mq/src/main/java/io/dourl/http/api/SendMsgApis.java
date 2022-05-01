@@ -16,4 +16,9 @@ public interface SendMsgApis {
     @FormUrlEncoded
     @POST(CommandInterface.IM_MESSAGE)
     CallAdapterFactory.ImCall<BaseResponse> sendMsg(@Field("uid") String uid, @Field("type") int type, @Field("body") String body);
+
+
+    @FormUrlEncoded
+    @POST(CommandInterface.IM_GROUP_MESSAGE)
+    CallAdapterFactory.ImCall<BaseResponse> sendGroupMsg(@Field("gid") String uid, @Field("type") int type, @Field("body") String body);
 }

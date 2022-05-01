@@ -12,6 +12,8 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.concurrent.Future;
 
+import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.core.OperationCallback;
 import io.dourl.mqtt.utils.TopicUtils;
 import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.core.ActionListener;
@@ -69,9 +71,9 @@ public class MqttManager {
         //LoggerUtil.e("deviceid: " + Constants.DEVICEID);
         if (LoginManager.isLogin()) {
             //userName = LoginManager.getToken() + "_2" +" Constants.DEVICEID";
-            userName = LoginManager.getToken();
+            userName = LoginManager.getCurrentUserId();
             //password = "DigestUtils.md5Hex(userName + LoginManager.getSecret())";
-            password = LoginManager.getSecret();
+            password = LoginManager.getSecret()+LoginManager.getCurrentUserId();
         } else {
             return null;
         }
@@ -125,8 +127,8 @@ public class MqttManager {
 //        }
 //        return null;
 //    }
-
-    //    public IMqttToken unSubscribe(String topic) {
+//
+//        public IMqttToken unSubscribe(String topic) {
 //        if (TextUtils.isEmpty(topic)) {
 //            LoggerUtil.e("sub_topic is null");
 //            return null;
@@ -147,7 +149,7 @@ public class MqttManager {
 //        }
 //        return null;
 //    }
-//
+
    public IMqttToken disconnect() {
         try {
             if (mqttAndroidClient != null) {

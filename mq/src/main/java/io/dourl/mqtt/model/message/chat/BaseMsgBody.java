@@ -239,8 +239,10 @@ public class BaseMsgBody implements BaseObject {
     }
 
     public static class ExtraEntity implements BaseObject {
-        public List<UserEntity> uids ; //
+        public List<UserEntity> uids ; //@
         public UserEntity fromUser; //单个的就够了
+        public String clanId;
+
     }
 
     public static class UserEntity implements BaseObject {
@@ -261,6 +263,13 @@ public class BaseMsgBody implements BaseObject {
          if ((getExtra() !=null) && (getExtra().fromUser !=null)) {
             return getExtra().fromUser.uid;
          }
+        return "";
+    }
+
+    public String clanId (){
+        if ((getExtra() !=null)) {
+            return getExtra().clanId;
+        }
         return "";
     }
     public UserEntity getFormUser(){

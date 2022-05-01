@@ -12,7 +12,6 @@ import io.dourl.mqtt.manager.MqttManager;
 /**
  * Mqtt取消订阅job
  * 最多重试两次
- * reated by zhangpeng on 15/12/18.
  */
 public class MqttUnSubJob implements Runnable {
 

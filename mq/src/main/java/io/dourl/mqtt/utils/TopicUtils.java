@@ -11,6 +11,10 @@ public class TopicUtils {
         return "user/" + LoginManager.getInstance().getCurrentUserId();
     }
 
+    public static String getGimTopic(String topic) {
+        return "group/" + topic;
+    }
+
     public static String getNewsTopic() {
         return "news";
     }

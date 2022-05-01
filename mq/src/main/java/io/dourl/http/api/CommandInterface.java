@@ -8,4 +8,5 @@ package io.dourl.http.api;
  */
 public interface CommandInterface {
     String IM_MESSAGE = "/sendMessage";
+    String IM_GROUP_MESSAGE = "/sendGroupMessage";
 }

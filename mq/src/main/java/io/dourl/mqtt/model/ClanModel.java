@@ -22,9 +22,8 @@ public class ClanModel extends BaseClanModel implements BaseObject, Parcelable {
     public String avatar;
     public int member_cnt;
     public List<String> game_icons;
-    //@JsonAdapter(BooleanJsonAdapter.class)
     public boolean msg_receive;
-    //@JsonAdapter(BooleanJsonAdapter.class)
+   // @JsonAdapter(BooleanJsonAdapter.class)
     public boolean msg_top;
     public boolean hasAt = false;
 

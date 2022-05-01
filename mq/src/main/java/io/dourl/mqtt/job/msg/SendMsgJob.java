@@ -33,6 +33,7 @@ import io.dourl.mqtt.storage.SessionManager;
 import io.dourl.mqtt.storage.UserDao;
 import io.dourl.mqtt.utils.ImageUtils;
 import io.dourl.mqtt.utils.MediaFilesUtils;
+import okhttp3.internal.http2.ErrorCode;
 import retrofit2.Response;
 
 
@@ -86,11 +87,12 @@ public class SendMsgJob extends BaseMessageJob {
                 UserDao.insertOrUpdate(mMessageModel.getTo()).await();
                 break;
             case CHAT_GROUP:
-
+               // UserDao.insertOrUpdate(LoginManager.getInstance().getCurrentUser()).await();
+                //UserDao.insertOrUpdate(mMessageModel.getTo()).await();
                 break;
         }
         TAG += mMessageModel.getId();
-        LoggerUtil.d("job add %s", mMessageModel.toString());
+        LoggerUtil.d(TAG,"job add %s"+ mMessageModel.toString());
         File file;
         if (mMessageModel.getLocalPath() != null) {
             file = new File(mMessageModel.getLocalPath());
@@ -262,7 +264,7 @@ public class SendMsgJob extends BaseMessageJob {
                 response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
                 break;
             case CHAT_GROUP:
-               // response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getEntityBody(), "").execute();
+                response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
                 break;
         }
         if (response != null) {
@@ -368,11 +370,11 @@ public class SendMsgJob extends BaseMessageJob {
     }
 
     protected void processErrorCode(int errorCode) {
-        /*switch (ErrorCode.valueOf(errorCode)) {
-            case CodeMsgBlocked:
+        switch (ErrorCode.valueOf(String.valueOf(errorCode))) {
+            default:
                 addErrorMessage();
                 break;
-        }*/
+        }
     }
 
     protected void addErrorMessage() {

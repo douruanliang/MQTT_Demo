@@ -5,13 +5,20 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application>
         <!-- mqtt service -->
         <service
             android:name="org.eclipse.paho.android.service.MqttService"
             android:exported="false"/>
 
-        <activity android:name=".ui.ChatActivity"/>
+        <activity android:name=".ui.ChatActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".ui.GroupChatActivity"
+            android:launchMode="singleTask"
+            android:exported="true"/>
     </application>
   
 </manifest>

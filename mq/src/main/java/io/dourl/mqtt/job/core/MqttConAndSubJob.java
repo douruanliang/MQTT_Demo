@@ -14,7 +14,6 @@ import io.dourl.mqtt.manager.LoginManager;
 /**
  * Mqtt连接并订阅job
  * 最多重试五次
- * reated by zhangpeng on 15/12/18.
  */
 public class MqttConAndSubJob implements Runnable {
 

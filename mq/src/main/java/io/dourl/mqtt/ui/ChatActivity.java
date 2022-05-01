@@ -69,7 +69,7 @@ import io.reactivex.functions.Consumer;
  * @author dourl
  * @date 2022/3/8
  */
-public class ChatActivity extends BaseActivity implements View.OnClickListener {
+public class ChatActivity extends BaseActivity implements View.OnClickListener,RecordView.AudioRecordListener {
     private static final String TAG = "ChatActivity";
     RecyclerView mRecyclerView;
     TextView noticeContent;
@@ -95,7 +95,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
 
     protected String mSessionID = null;
     private UserModel mBaseUser;
-    private ChatAdapter mAdapter;
+    protected ChatAdapter mAdapter;
     protected int mUnreadCount = 15;
     private long mLastMsgId;
     protected TextView mMsgUnread;
@@ -125,8 +125,8 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         EventBusManager.getInstance().register(this);
-        initView();
         init();
+        initView();
 
         mTitleBar.showLine();
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -313,7 +313,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         }, 50);
     }
 
-    private void sendTxtMessage() {
+    protected void sendTxtMessage() {
         String text = mEditText.getText().toString();
         if (text != null && text.length() > 0) {
             MessageManager.getInstance().sendTextMessage(mBaseUser, text);
@@ -336,7 +336,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
-    private void scrollToBottom() {
+    protected void scrollToBottom() {
         mRecyclerView.scrollToPosition(0);
     }
 
@@ -401,6 +401,19 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         mBtnSend.setOnClickListener(this);
         mBtnFace = findViewById(R.id.btnFace);
         mBtnFace.setOnClickListener(this);
+
+
+        inputView = findViewById(R.id.inputView);
+
+        btnRecord = findViewById(R.id.btnRecord);
+        btnRecord.setOnClickListener(this);
+        recordStateView = findViewById(R.id.recordStateView);
+        recordView = findViewById(R.id.recordView);
+        recordView.setSessionId(mSessionID);
+        recordView.setRecordStateView(recordStateView);
+        recordView.setAudioRecordListener(this);
+
+        btnKeyboard = findViewById(R.id.btnKeyboard);
     }
 
     protected void init() {
@@ -413,8 +426,6 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
             finish();
             return;
         }
-        mTitleBar.setTitle(mBaseUser.getName());
-        getChatUserInfo();
     }
 
     private void getChatUserInfo() {
@@ -422,10 +433,17 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_send) {
+        int id  = v.getId();
+        if (id == R.id.btn_send) {
             sendTxtMessage();
-        }else if (v.getId() == R.id.btnFace){
+        }else if (id == R.id.btnFace){
             toggleEmojicon();
+        }else if (id == R.id.btnRecord){
+            checkPermission();
+            showRecordButton(true);
+            hideKeyboard();
+        }else if (id == R.id.btnKeyboard){
+            showRecordButton(false);
         }
 
     }
@@ -469,9 +487,19 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
         return false;
     }
 
+    private void showRecordButton(boolean isShow) {
+        recordView.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        inputView.setVisibility(isShow ? View.GONE : View.VISIBLE);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBusManager.getInstance().unRegister(this);
+    }
+
+    @Override
+    public void recordFinished(String path, int time) {
+        MessageManager.getInstance().sendAudioMessage(mBaseUser, path, time);
     }
 }
