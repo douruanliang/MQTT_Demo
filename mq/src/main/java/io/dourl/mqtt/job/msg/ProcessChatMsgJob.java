@@ -10,6 +10,7 @@ import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
+import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.event.ChatMsgEvent;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
@@ -125,10 +126,10 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         if (msg.getType().value() == MessageType.CHAT_NORMAL.value()) {
             if (msg.getFromUser() == null || TextUtils.isEmpty(msg.getFromUser().getUid())) {
                 BaseMsgBody baseMsgBody = msg.getBody(); //扩展里
-                /*UserModel from =new UserModel();
+                UserModel from =new UserModel();
                 from.setUid(baseMsgBody.fromUserUid());
                 from.setUsername(baseMsgBody.getFormUser().name);
-                msg.setFrom(from);*/
+                msg.setFrom(from);
                 msg.setFromUid(baseMsgBody.fromUserUid());
                 msg.setSessionId("u" + baseMsgBody.fromUserUid());
             } else {
@@ -137,6 +138,12 @@ public class ProcessChatMsgJob extends BaseMessageJob {
 
         } else {
             BaseMsgBody baseMsgBody = msg.getBody();
+            if (msg.getFromUser() == null && baseMsgBody != null){
+                UserModel from =new UserModel();
+                from.setUid(baseMsgBody.fromUserUid());
+                from.setUsername(baseMsgBody.getFormUser().name);
+                msg.setFrom(from);
+            }
             if (baseMsgBody != null) {
                 msg.setSessionId(baseMsgBody.clanId());
             } else {
