@@ -15,6 +15,10 @@ android {
 
     }
 
+    buildFeatures {
+        compose true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -37,5 +41,18 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    implementation 'androidx.ui:ui-tooling:0.1.0-dev02'
+    implementation 'androidx.ui:ui-layout:0.1.0-dev02'
+    implementation 'androidx.ui:ui-material:0.1.0-dev02'
+
 
 }
+
+
+
+gradle.getTaskGraph().addTaskExecutionGraphListener(new TaskExecutionGraphListener() {
+    @Override
+    void graphPopulated(TaskExecutionGraph taskExecutionGraph) {
+        println("app{}"+taskExecutionGraph.allTasks)
+    }
+})
