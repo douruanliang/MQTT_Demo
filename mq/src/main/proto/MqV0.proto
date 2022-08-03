@@ -1,0 +1,9 @@
+syntax = "proto3";
+package io.dourl.mqtt.bean;
+
+enum MessageVersion {
+
+  MESSAGE_NONE = 0;
+  // 如通讯协议的数据转换不能兼容上一个版本，则加1
+  MESSAGE_VERSION = 1;
+}

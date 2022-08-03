@@ -3,10 +3,7 @@ package io.dourl.mqtt;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.job.MsgJobManager;
 import io.dourl.mqtt.job.core.MqttConAndSubJob;
