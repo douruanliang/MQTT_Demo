@@ -1,8 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android-extensions'
 }
-//apply plugin: 'io.dourl.lib_plugin'
+
 android {
     compileSdk 31
 
@@ -18,7 +19,8 @@ android {
     }
 
     buildFeatures {
-        compose true
+       // compose true
+        dataBinding  true
     }
 
     buildTypes {

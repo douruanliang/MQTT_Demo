@@ -108,8 +108,6 @@ public class Constants{
 
     public static String FILE_PROVIDER;
 
-    public static String SCHEME_HOST = "https://im.game.com?";
-    public static String HOST = "im.game.com";
 
     public static final String SCHEME_TYPE_USER = "0";//用户
     public static final String SCHEME_TYPE_TRIBE = "1";//部落
@@ -123,12 +121,7 @@ public class Constants{
      */
     public static boolean NEED_TIP_GOOGLE_BIND = false;
 
-    /**
-     * 乐乐小游戏App更新官网
-     */
-    public static final String GAME_WEBSITE = "https://im.game.com";
 
-    public static final String CAPTCHAID = "a5756ebabe664dd0aa0a52647a6bbb46";
 
     /**
      * 是否可以强制更新
