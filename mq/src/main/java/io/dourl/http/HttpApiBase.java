@@ -27,10 +27,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Http管理类
- */
-public class HttpApiBase implements CommandInterface {
+public class HttpApiBase {
     protected static final int LIMIT = 20;
     /**
      * 0为正式线上环境，1为开发环境

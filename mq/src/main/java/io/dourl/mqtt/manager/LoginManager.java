@@ -144,6 +144,6 @@ public class LoginManager {
     }
 
     public  String getCurrentUserId() {
-        return "boss";
+        return "lenovo";
     }
 }

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
-
 import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.job.MsgJobManager;
 import io.dourl.mqtt.job.core.MqttConAndSubJob;
@@ -26,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         // to
         mToUser = new UserModel();
-        mToUser.setUid("xiaomi");
+        mToUser.setUid("boss");
         mToUser.setUsername("xiaomiName");
         mToUser.setAge(9);
 

@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
+//apply plugin: 'io.dourl.lib_plugin'
 android {
     compileSdk 31
 
@@ -13,6 +15,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+    }
+
+    buildFeatures {
+        compose true
     }
 
     buildTypes {
@@ -33,9 +39,102 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation project(path: ':mq')
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+
+    implementation 'androidx.ui:ui-tooling:0.1.0-dev02'
+    implementation 'androidx.ui:ui-layout:0.1.0-dev02'
+    implementation 'androidx.ui:ui-material:0.1.0-dev02'
+
+
+}
+
+
+gradle.getTaskGraph().addTaskExecutionGraphListener(new TaskExecutionGraphListener() {
+    @Override
+    void graphPopulated(TaskExecutionGraph taskExecutionGraph) {
+        println("app{}" + taskExecutionGraph.allTasks)
+    }
+})
+
+def getApkFullPath() {
+     return project.android.applicationVariants[0].outputs.first().outputFile
+    //return rootDir.getAbsolutePath() + "/app/build/outputs/apk/debug/" + getApkName()
+}
+
+def getApkName() {
+    return "v${android.defaultConfig.versionName}-${releaseTime()}.apk"
+}
+
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+static def getUpdateDescription() {
+    return '1.修复一些bug；\n2.提升用户体验！'
+}
+
+def readProperties(key) {
+    File file = rootProject.file('local.properties')
+    if (file.exists()) {
+        InputStream inputStream = rootProject.file('local.properties').newDataInputStream()
+        Properties properties = new Properties()
+        properties.load(inputStream)
+        if (properties.containsKey(key)) {
+            return properties.getProperty(key)
+        }
+    }
+}
+
+task getCosToken() {
+    dependsOn 'assembleDebug'
+    doLast {
+        def command = "curl  -F \"_api_key=${readProperties('pgyer.apiKey')}\" -F \"buildType=android\"  https://www.pgyer.com/apiv2/app/getCOSToken"
+        println "-------command----" + command
+        def tokenStream = new ByteArrayOutputStream()
+        try {
+            exec {
+                ExecSpec execSpec ->
+                    executable 'bash'
+                    args '-c', command
+                    standardOutput = tokenStream
+            }
+            println "-------token ----" + tokenStream.toString()
+            def tokenJson = new groovy.json.JsonSlurper().parseText(tokenStream.toString())
+            Map<String, String> params = tokenJson.data.params
+            /*params.each {
+                println it
+            }*/
+            def endpoint = tokenJson.data.endpoint
+            def x_cos_security_token = params.get("x-cos-security-token")
+            def signature = params.get("signature")
+            def key = params.get("key")
+
+            println "{-------endpoint ----" + endpoint
+            println "-------x_cos_security_token ----" + x_cos_security_token
+            println "-------signature ----" + signature
+            println "-------key ----" + key+"}"
+            uploadApk(key,signature,x_cos_security_token,endpoint)
+        } catch (Exception e) {
+            e.printStackTrace()
+        }
+    }
+}
+
+def uploadApk(key,signature,x_cos_security_token,endpoint) {
+    def command = "curl  -D - --form-string \"key=${key}\" " +
+            " --form-string \"signature=${signature}\" " +
+            " --form-string \"x_cos_security_token=${x_cos_security_token}\" " +
+            "-F \"file=@${getApkFullPath()}\" ${endpoint}"
+    println "command:" + command
+    try {
+        exec {
+            ExecSpec execSpec ->
+                executable 'bash'
+                args '-c', command
+        }
+        println "uploadApk success~"
+    } catch (Exception e) {
+        e.printStackTrace()
+    }
 
 }
