@@ -7,7 +7,7 @@ import javax.net.ssl.X509TrustManager;
 
 /**
  * ssl校验管理
- * Created by zhangpeng on 16/1/4.
+ * Created by dourl on 16/1/4.
  */
 public class MqttX509TrustManager implements X509TrustManager{
     @Override

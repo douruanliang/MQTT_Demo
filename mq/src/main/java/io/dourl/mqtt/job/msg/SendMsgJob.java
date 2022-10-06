@@ -62,9 +62,9 @@ public class SendMsgJob extends BaseMessageJob {
             doUpload();
             dbOp();
             doSend();
-            updateMessageAndSession();
         } catch (Exception e) {
             e.printStackTrace();
+            LoggerUtil.e(TAG,e.getMessage());
             mMessageModel.setSendStatus(MessageModel.Status.fail);
             updateMessageAndSession();
         }
@@ -77,8 +77,6 @@ public class SendMsgJob extends BaseMessageJob {
         MessageDao.insertOrUpdate(mMessageModel).await();
         //创建会话 - 谁有一条带有信息的会话
         mSession = SessionManager.createChatSession(mMessageModel.getTo(), mMessageModel);
-        //
-        mSession.setMsgDbId(mMessageModel.getId());
         SessionDao.insertOrUpdate(mSession).await();
 
         switch (mMessageModel.getType()) {
@@ -92,7 +90,7 @@ public class SendMsgJob extends BaseMessageJob {
                 break;
         }
         TAG += mMessageModel.getId();
-        LoggerUtil.d(TAG,"job add %s"+ mMessageModel.toString());
+        LoggerUtil.d(TAG,"---job add %s"+ mMessageModel.toString());
         File file;
         if (mMessageModel.getLocalPath() != null) {
             file = new File(mMessageModel.getLocalPath());
@@ -261,10 +259,10 @@ public class SendMsgJob extends BaseMessageJob {
             case UN_RECOGNIZE:
                 break;
             case CHAT_NORMAL:
-                response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
+                response = sendMsgApis.sendMsg(mMessageModel.getToUid(), mMessageModel.getType().value(), mMessageModel.getPushBody()).execute();
                 break;
             case CHAT_GROUP:
-                response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getPublicBody()).execute();
+                response = sendMsgApis.sendGroupMsg(mMessageModel.getClan().id, mMessageModel.getType().value(), mMessageModel.getGPushBody()).execute();
                 break;
         }
         if (response != null) {
@@ -273,7 +271,6 @@ public class SendMsgJob extends BaseMessageJob {
                 if (body.isSucceeded()) {
                     LoggerUtil.d(TAG,"send success");
                     mMessageModel.setSendStatus(MessageModel.Status.success);
-                    updateMessageAndSession();
                 } else {
                     LoggerUtil.d(TAG,"send fail error: %s", body.getErrorMessage() != null ? body.getErrorMessage() : "");
                     processErrorCode(body.getErrorCode());

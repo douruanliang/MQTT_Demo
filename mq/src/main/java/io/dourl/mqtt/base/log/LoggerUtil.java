@@ -54,6 +54,11 @@ public class LoggerUtil {
             Log.d(LOGTAG, String.format(msg, args));
     }
 
+    public static void d(String key,String msg, Object... args) {
+        if (debugFlag)
+            Log.d(key, String.format(msg, args));
+    }
+
     public static void d(String key, String msg) {
         if (debugFlag)
             Log.d(key, msg);

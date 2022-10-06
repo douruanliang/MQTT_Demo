@@ -17,7 +17,7 @@ import io.dourl.mqtt.thread.DaoHandlerThread;
 
 /**
  * SessionDao管理类
- * Created by zhangpeng on 16/1/7.
+ * Created by dourl on 16/1/7.
  */
 public class SessionDao {
 

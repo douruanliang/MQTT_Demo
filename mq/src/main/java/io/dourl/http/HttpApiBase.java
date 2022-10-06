@@ -4,18 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import io.dourl.http.api.CommandInterface;
 import io.dourl.http.callback.CallAdapterFactory;
 import io.dourl.http.retrofit.RetrofitManager;
 import io.dourl.mqtt.BuildConfig;
-import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.utils.StorageUtils;
@@ -32,20 +29,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Http管理类
- * Created by zhangpeng on 16/1/5.
  */
 public class HttpApiBase implements CommandInterface {
     protected static final int LIMIT = 20;
     /**
      * 0为正式线上环境，1为开发环境
      */
-   // static int HOST = BuildConfig.HOST;
+    // static int HOST = BuildConfig.HOST;
     private static SharedPreferences sp;
-   // private final static String[] IPS = {BuildConfig.API_HOST, BuildConfig.DEBUG_API_HOST};
+    // private final static String[] IPS = {BuildConfig.API_HOST, BuildConfig.DEBUG_API_HOST};
 
     public static String getSecureBaseUrl() {
-       // return HOST == 0 ? "https://" + IPS[HOST] : "http://" + IPS[HOST];
-        return "http://"+BuildConfig.API_HOST+":9090";
+        // return HOST == 0 ? "https://" + IPS[HOST] : "http://" + IPS[HOST];
+        return "http://" + BuildConfig.API_HOST + ":9090";
     }
 
     public static final int DEFAULT_MAX_CONNECTIONS = 5;
@@ -69,12 +65,12 @@ public class HttpApiBase implements CommandInterface {
                 .dispatcher(dispatcher)
                 .dns(Dns.SYSTEM)
                 .cache(cache);
-                //.addInterceptor(new RequestInterceptor());
+        //.addInterceptor(new RequestInterceptor());
         if (BuildConfig.DEBUG) {
             //builder.addInterceptor(HttpLogInterceptorCreator.create());
             builder.addNetworkInterceptor(new DebugNetworkInterceptor());
-           // builder.addNetworkInterceptor(DebugToolsKt.getStethoIntercepter());
-           // builder.addInterceptor(DebugToolsKt.getPandoraInterceptor());
+            // builder.addNetworkInterceptor(DebugToolsKt.getStethoIntercepter());
+            // builder.addInterceptor(DebugToolsKt.getPandoraInterceptor());
         }
 //        builder.hostnameVerifier(new ReleaseHostnameVerifier());
 
@@ -112,15 +108,15 @@ public class HttpApiBase implements CommandInterface {
     }
 
 
-
     private static void initHost(Context context) {
         if (BuildConfig.DEBUG) {
             if (sp == null) {
                 sp = context.getSharedPreferences("host", Context.MODE_PRIVATE);
             }
-           // HOST = sp.getInt(PrefConstants.PREF_HOST, BuildConfig.HOST);
+            // HOST = sp.getInt(PrefConstants.PREF_HOST, BuildConfig.HOST);
         }
     }
+
     private static class DebugNetworkInterceptor implements Interceptor {
 
         @Override
@@ -138,9 +134,9 @@ public class HttpApiBase implements CommandInterface {
             return null;
         }
         HttpUrl.Builder urlBuilder = httpUrl.newBuilder();
-        urlBuilder.addQueryParameter("nbid", Constants.DEVICEID + "@");
-       // urlBuilder.addQueryParameter("lang", LocaleHelper.getLanguage());
-       // urlBuilder.addQueryParameter("app_id", HttpApiBase.HOST != 1 ? BuildConfig.APP_ID : BuildConfig.DEBUG_APP_ID);
+        urlBuilder.addQueryParameter("device_id", Constants.DEVICEID + "@");
+        // urlBuilder.addQueryParameter("lang", LocaleHelper.getLanguage());
+        // urlBuilder.addQueryParameter("app_id", HttpApiBase.HOST != 1 ? BuildConfig.APP_ID : BuildConfig.DEBUG_APP_ID);
         urlBuilder.addQueryParameter("app_version", Constants.VERSION_NAME);
         urlBuilder.addQueryParameter("app_version_code", String.valueOf(Constants.VERSION_CODE));
         urlBuilder.addQueryParameter("app_channel", Constants.CHANNEL);

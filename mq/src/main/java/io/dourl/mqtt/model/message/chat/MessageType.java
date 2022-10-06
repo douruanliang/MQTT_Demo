@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * 消息类型
- * Created by zhangpeng on 16/2/29.
  */
 public enum MessageType {
     @SerializedName("0")

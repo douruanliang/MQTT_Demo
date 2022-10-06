@@ -32,9 +32,10 @@ public class BodyTypeAdapter implements JsonDeserializer<BaseMsgBody> ,JsonSeria
         BaseMsgBody body;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
+        String s = "{\"body\":\"{\\\"content\\\":[{\\\"c\\\":\\\"rrr\\\",\\\"t\\\":\\\"txt\\\"}],\\\"type\\\":\\\"1\\\"}\",\"type\":1}"
         String json = "{\"body\":{\"type\":1,\"content\" : [{\"t\":\"txt\",\"c\":\"en\"}]}}";
         Test test = new Gson().fromJson(json, Test.class);
         System.out.println(test.body.toString());
-    }
+    }*/
 }

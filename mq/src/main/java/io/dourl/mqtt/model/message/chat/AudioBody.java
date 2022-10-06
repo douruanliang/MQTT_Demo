@@ -2,7 +2,7 @@ package io.dourl.mqtt.model.message.chat;
 import io.dourl.mqtt.base.BaseObject;
 
 /**
- * Created by zhangpeng on 16/1/21.
+ * Created by dourl on 16/1/21.
  */
 public class AudioBody extends BaseMsgBody {
     public AudioBody() {

@@ -3,6 +3,7 @@ package io.dourl.mqtt.manager;
 import android.text.TextUtils;
 
 import io.dourl.mqtt.bean.UserModel;
+import io.dourl.mqtt.model.BaseUser;
 
 /**
  * 已登录用户管理类
@@ -13,7 +14,7 @@ import io.dourl.mqtt.bean.UserModel;
 public class LoginManager {
 
     private static LoginManager mInstance;
-
+    private BaseUser mCurrentUser;
 
     private static class Holder {
         private static LoginManager INSTANCE = new LoginManager();
@@ -136,11 +137,13 @@ public class LoginManager {
 
     public UserModel getCurrentUser() {
         UserModel  mFromUser = new UserModel();
-        mFromUser.setUid(LoginManager.getCurrentUserId());
+        mFromUser.setUid(getCurrentUserId());
+        mFromUser.setAge(30);
+        mFromUser.setFullname("战boss千年-boss");
         return mFromUser;
     }
 
-    public static String getCurrentUserId() {
+    public  String getCurrentUserId() {
         return "boss";
     }
 }

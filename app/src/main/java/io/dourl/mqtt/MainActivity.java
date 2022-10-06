@@ -17,23 +17,22 @@ import io.dourl.mqtt.utils.TopicUtils;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mBtnSend ,mGroupSend;
-    private UserModel mToUser,mFromUser;
+    private UserModel mToUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mFromUser = new UserModel();
-        mFromUser.setUid(LoginManager.getCurrentUserId());
-        mFromUser.setAge(10);
+
         // to
         mToUser = new UserModel();
         mToUser.setUid("xiaomi");
+        mToUser.setUsername("xiaomiName");
         mToUser.setAge(9);
 
        // message.setSessionId("u" + message.getTo().getUid());
         mBtnSend = findViewById(R.id.btn_send);
-        mBtnSend.setText(LoginManager.getCurrentUserId());
+        mBtnSend.setText(LoginManager.getInstance().getCurrentUserId());
         mBtnSend.setOnClickListener(  v -> {
 
             ChatActivity.intentTo(this,"u" + mToUser.getUid(), mToUser);

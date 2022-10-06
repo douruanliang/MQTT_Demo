@@ -20,12 +20,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String","MQTT_HOST","\"192.168.125.103\"")
-            buildConfigField("String","API_HOST","\"192.168.125.103\"")
+            buildConfigField("String","MQTT_HOST","\"192.168.3.2\"")
+            buildConfigField("String","API_HOST","\"192.168.3.2\"")
         }
         debug {
-            buildConfigField("String","MQTT_HOST","\"192.168.125.253\"")
-            buildConfigField("String","API_HOST","\"192.168.125.253\"")
+            buildConfigField("String","MQTT_HOST","\"192.168.3.2\"")
+            buildConfigField("String","API_HOST","\"192.168.3.2\"")
         }
     }
     compileOptions {
@@ -51,7 +51,8 @@ dependencies {
 
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.4'
-    implementation "androidx.core:core-ktx:+"
+
+   // implementation "androidx.core:core-ktx:1.7.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation 'com.google.code.gson:gson:2.9.0'

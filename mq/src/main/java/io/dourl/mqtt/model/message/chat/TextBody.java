@@ -9,7 +9,7 @@ import io.dourl.mqtt.base.BaseObject;
 
 /**
  * 文本消息体
- * Created by zhangpeng on 16/1/6.
+ * Created by dourl on 16/1/6.
  */
 public class TextBody extends BaseMsgBody {
 

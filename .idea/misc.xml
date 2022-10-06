@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="mq/src/main/res/drawable/audio_play_out.xml" value="0.1855" />
         <entry key="mq/src/main/res/drawable/bg_white_corner_17dp.xml" value="0.1485" />
@@ -17,7 +18,7 @@
         <entry key="mq/src/main/res/drawable/titlebar_center_text_color_sel.xml" value="0.1485" />
         <entry key="mq/src/main/res/drawable/titlebar_right_text_color_sel.xml" value="0.1485" />
         <entry key="mq/src/main/res/drawable/view_record_bg.xml" value="0.147" />
-        <entry key="mq/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="mq/src/main/res/layout/activity_chat.xml" value="0.1" />
         <entry key="mq/src/main/res/layout/activity_test.xml" value="0.32708333333333334" />
         <entry key="mq/src/main/res/layout/dialog_chat_record.xml" value="0.32708333333333334" />
         <entry key="mq/src/main/res/layout/im_expression_gridview.xml" value="0.25833333333333336" />

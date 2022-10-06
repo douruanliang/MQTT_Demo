@@ -4,7 +4,7 @@ import android.graphics.Color;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by zhangpeng on 2017/3/12.
+ * Created by dourl on 2017/3/12.
  */
 
 public enum MarkType {
