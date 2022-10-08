@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment HomeFragment.
          */
-        val TO_HOME: Int = 0 // 首页
+        val index: Int = 0 // 首页
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =

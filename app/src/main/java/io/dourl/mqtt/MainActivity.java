@@ -1,9 +1,6 @@
 package io.dourl.mqtt;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,12 +9,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.util.logging.Logger;
-
 import io.dourl.mqtt.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
 
 
     public static final int TO_POST = 4; // 发帖
@@ -52,25 +46,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 binding.mainTabTv3,
         };
 
-        initPage(HomeFragment.Companion.getTO_HOME());
-
-
         binding.mainTabTv0.setOnClickListener(this);
         binding.mainTabTv1.setOnClickListener(this);
         binding.mainTabTv2.setOnClickListener(this);
         binding.mainTabTv3.setOnClickListener(this);
+        // 默认选中
+        initPage(HomeFragment.Companion.getIndex());
     }
 
 
     private void initPage(int startPage) {
-       /* if (currentItem == startPage) { // 刷新等
-            *//*if (currentItem == TO_CIRCLE)
+        /* if (currentItem == startPage) { // 刷新等
+         *//*if (currentItem == TO_CIRCLE)
                // simpleClickDetect(viewBinding.mainTabTv1);
             else if (currentItem == TO_FIRST)
                 //simpleClickDetect(viewBinding.mainTabTv0);
             return;*//*
         }*/
-        if (startPage == HomeFragment.Companion.getTO_HOME()) {
+        if (startPage == HomeFragment.Companion.getIndex()) {
             if (mHomeFragment == null)
                 mHomeFragment = HomeFragment.newInstance();
             switchContent(mHomeFragment);
@@ -155,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(mIntent);
                 return;
             }*/
-           // Logger.log("切换到我的页面2", Log.INFO, "fkj");
+            // Logger.log("切换到我的页面2", Log.INFO, "fkj");
             initPage(MyFragment.Companion.getTO_ME());
         } else if (id == R.id.main_post_iv) {
            /* if (TextUtils.isEmpty(GlobalConstants.getUserId())) {
