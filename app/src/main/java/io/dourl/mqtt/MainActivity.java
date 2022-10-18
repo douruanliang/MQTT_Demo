@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import io.dourl.mqtt.databinding.ActivityMainBinding;
+import io.dourl.mqtt.ui.AddressFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.main_tab_tv_0) {
-            initPage(HomeFragment.Companion.getTO_HOME());
+            initPage(HomeFragment.Companion.getIndex());
         } else if (id == R.id.main_tab_tv_1) {
             initPage(SocialFragment.Companion.getTO_CIRCLE());
         } else if (id == R.id.main_tab_tv_2) {
