@@ -14,7 +14,7 @@ import java.util.concurrent.Executor;
 import io.dourl.http.exception.BeingApiException;
 import io.dourl.http.model.IResponse;
 import io.dourl.mqtt.BuildConfig;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
 import retrofit2.Callback;

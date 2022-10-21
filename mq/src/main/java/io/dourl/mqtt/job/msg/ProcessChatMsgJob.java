@@ -1,13 +1,13 @@
 package io.dourl.mqtt.job.msg;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
 import java.util.UUID;
 
 import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.bean.UserModel;
@@ -156,7 +156,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
 
     protected void saveMsgAndPostEvent(MessageModel msg) throws InterruptedException {
 
-        LoggerUtil.d("pro", GsonManager.getGson().toJson(msg));
+        Log.d("pro", GsonManager.getGson().toJson(msg));
         if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
             EventBusManager.getInstance().post(new ChatMsgEvent(msg.getSessionId(), msg));
             return;

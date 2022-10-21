@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.MessagePaging;
 import io.dourl.mqtt.bean.SessionModel;

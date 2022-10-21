@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.database.Database;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.DaoMaster;
 import io.dourl.mqtt.bean.MessageModelDao;
 import io.dourl.mqtt.bean.SessionModelDao;

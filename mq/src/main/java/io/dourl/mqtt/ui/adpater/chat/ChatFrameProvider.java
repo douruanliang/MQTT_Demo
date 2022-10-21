@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.HashMap;
 
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.model.BaseUser;

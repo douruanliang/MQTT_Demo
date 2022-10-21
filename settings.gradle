@@ -71,3 +71,4 @@ gradle.buildFinished {
             (System.currentTimeMillis() - beginOfProjectExcute) + 'ms'
 }*/
 //include ':app:lib-plugin-JG'
+include ':base'

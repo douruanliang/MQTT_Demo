@@ -8,7 +8,7 @@ import org.greenrobot.greendao.query.QueryBuilder;
 
 import io.dourl.mqtt.BuildConfig;
 import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.DaoMaster;
 import io.dourl.mqtt.bean.DaoSession;
 import io.dourl.mqtt.bean.MessageModelDao;

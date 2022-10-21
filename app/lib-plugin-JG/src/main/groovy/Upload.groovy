@@ -1,3 +1,0 @@
-class Upload {
-    String name;
-}

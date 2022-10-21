@@ -22,18 +22,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 
-import android.content.ContentResolver;
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
-import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff.Mode;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 
 /**

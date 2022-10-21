@@ -3,7 +3,7 @@ package io.dourl.mqtt.manager;
 import org.eclipse.paho.android.service.BuildConfig;
 import org.greenrobot.eventbus.EventBus;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 /**
  * @author: dou

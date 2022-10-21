@@ -1,7 +1,8 @@
 package io.dourl.http.retrofit;
 
+import android.util.Log;
+
 import io.dourl.http.callback.CallAdapterFactory;
-import io.dourl.mqtt.base.log.LoggerUtil;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -54,8 +55,8 @@ public class RetrofitManager {
         if (Debug) {
             long start = System.nanoTime();
             T t =  mRetrofit.create(service);
-            LoggerUtil.d("create %s cost: %sms", service.getSimpleName(),
-                    String.valueOf((System.nanoTime() - start)/ 1000000.0));
+            Log.d("http",String.format("create %s cost: %sms" ,service.getSimpleName(),
+                    String.valueOf((System.nanoTime() - start)/ 1000000.0)));
             return t;
         } else {
             return mRetrofit.create(service);
@@ -67,8 +68,8 @@ public class RetrofitManager {
             if (Debug) {
                 long start = System.nanoTime();
                 mRetrofit.create(service);
-                LoggerUtil.d("create %s cost: %sms", service.getSimpleName(),
-                        String.valueOf((System.nanoTime() - start)/ 1000000.0));
+                Log.d("http",String.format("create %s cost: %sms", service.getSimpleName(),
+                        String.valueOf((System.nanoTime() - start)/ 1000000.0)));
             } else {
                 mRetrofit.create(service);
             }

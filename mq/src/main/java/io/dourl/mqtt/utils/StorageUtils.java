@@ -8,7 +8,7 @@ import android.text.TextUtils;
 import java.io.File;
 import java.io.IOException;
 import static android.os.Environment.MEDIA_MOUNTED;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 /**
  * File description.

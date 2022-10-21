@@ -37,26 +37,27 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+   /* implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'*/
+
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["material"]
+
+
+    //TinyPinyin 汉字转拼音
+    def tinyPinyin = '2.0.3'
+    implementation "com.github.promeg:tinypinyin:$tinyPinyin"
+    implementation "com.github.promeg:tinypinyin-lexicons-android-cncity:$tinyPinyin"
+
     implementation project(path: ':mq')
-
-
-    implementation 'androidx.ui:ui-tooling:0.1.0-dev02'
-    implementation 'androidx.ui:ui-layout:0.1.0-dev02'
-    implementation 'androidx.ui:ui-material:0.1.0-dev02'
+    implementation project(path: ':base')
 
 
 }
 
 
-gradle.getTaskGraph().addTaskExecutionGraphListener(new TaskExecutionGraphListener() {
-    @Override
-    void graphPopulated(TaskExecutionGraph taskExecutionGraph) {
-        println("app{}" + taskExecutionGraph.allTasks)
-    }
-})
 
 def getApkFullPath() {
      return project.android.applicationVariants[0].outputs.first().outputFile
@@ -87,7 +88,7 @@ def readProperties(key) {
     }
 }
 
-task getCosToken() {
+/*task getCosToken() {
     dependsOn 'assembleDebug'
     doLast {
         def command = "curl  -F \"_api_key=${readProperties('pgyer.apiKey')}\" -F \"buildType=android\"  https://www.pgyer.com/apiv2/app/getCOSToken"
@@ -103,9 +104,9 @@ task getCosToken() {
             println "-------token ----" + tokenStream.toString()
             def tokenJson = new groovy.json.JsonSlurper().parseText(tokenStream.toString())
             Map<String, String> params = tokenJson.data.params
-            /*params.each {
+            *//*params.each {
                 println it
-            }*/
+            }*//*
             def endpoint = tokenJson.data.endpoint
             def x_cos_security_token = params.get("x-cos-security-token")
             def signature = params.get("signature")
@@ -120,8 +121,9 @@ task getCosToken() {
             e.printStackTrace()
         }
     }
-}
+}*/
 
+/*
 def uploadApk(key,signature,x_cos_security_token,endpoint) {
     def command = "curl  -D - --form-string \"key=${key}\" " +
             " --form-string \"signature=${signature}\" " +
@@ -138,5 +140,4 @@ def uploadApk(key,signature,x_cos_security_token,endpoint) {
     } catch (Exception e) {
         e.printStackTrace()
     }
-
-}
+}*/

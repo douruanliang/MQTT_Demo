@@ -1,4 +1,4 @@
-package io.dourl.mqtt.base.log;
+package io.dourl.mqtt.utils.log;
 
 import android.util.Log;
 
@@ -13,7 +13,7 @@ import io.dourl.mqtt.BuildConfig;
  */
 public class LoggerUtil {
     public static boolean debugFlag = BuildConfig.DEBUG;
-    private static final String LOGTAG = "dourl";
+    private static final String LOGTAG = "BUG";
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
     public static void setDebugFlag(boolean debug) {

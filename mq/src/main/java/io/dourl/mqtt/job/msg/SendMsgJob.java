@@ -13,7 +13,7 @@ import io.dourl.http.api.SendMsgApis;
 import io.dourl.http.model.BaseResponse;
 import io.dourl.http.retrofit.RetrofitManager;
 import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.constants.Constants;

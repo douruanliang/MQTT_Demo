@@ -9,14 +9,16 @@ import android.util.TypedValue
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.dourl.mqtt.bean.BaseIndexPinyinBean
+import io.dourl.mqtt.helper.IIndexBarDataHelper
 
 /**
  * File description.
- * 暂停-ItemDecoration
+ * 首字母分类-ItemDecoration
  * @author dourl
  * @date 2022/10/8
  */
-class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
+class LetterCategoryDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
     val COLOR_TITLE_BG = Color.parseColor("#FFDFDFDF")
     val COLOR_TITLE_FONT = Color.parseColor("#FF999999")
@@ -31,12 +33,12 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
     init {
         mTitleHeight = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            30.0f,
+            24.0f,
             context.resources.displayMetrics
         )
         mTitleFontSize = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
-            16f,
+            14f,
             context.resources.displayMetrics
         )
 
@@ -44,19 +46,15 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
         mPaint.isAntiAlias = true
     }
 
-    var mData = arrayListOf<ILetterCategoryInterface?>()
-
-
-
-
+    var mData : ArrayList<out ILetterCategoryInterface> = ArrayList()
     /**
      * 该方法是 绘制 每一个item的内容
      */
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
-        var left = parent.paddingLeft
-        var right = parent.width - parent.paddingRight
-        var childCount = parent.childCount
+        val left = parent.paddingLeft
+        val right = parent.width - parent.paddingRight
+        val childCount = parent.childCount
 
         for (i in 0 until childCount) {
             val child = parent.getChildAt(i)
@@ -67,7 +65,7 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
             if (mData.isEmpty() ||
                 position > (mData.size.minus(1))
                 || position < 0
-                || mData[position]?.isShowLetterItem() == true
+                || mData[position].isShowLetterItem() != true
             ) {
                 continue  //跳过
             }
@@ -76,9 +74,8 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
                 if (position == 0) { //等于0肯定要有title的
                     drawItemLetterArea(c, left, right, child, params, position)
                 } else { //其他的通过判断
-                    if (mData[position]?.getLetter()?.isNotEmpty() == true
-                        && !(mData[position]?.getLetter()
-                            .equals(mData.get(position - 1)?.getLetter()))
+                    if (mData[position].getLetter().isNotEmpty() == true
+                        && !(mData[position].getLetter().equals(mData.get(position - 1).getLetter()))
                     ) {
                         //不为空 且跟前一个tag不一样了，说明是新的分类，也要title
                         drawItemLetterArea(c, left, right, child, params, position)
@@ -101,11 +98,9 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
             right.toFloat(), (child.top - params.topMargin).toFloat(), mPaint
         )
         mPaint.setColor(COLOR_TITLE_FONT)
-        var itemLetter: String? = mData[position]?.getLetter()
-        if (itemLetter != null) {
-            mPaint.getTextBounds(itemLetter,0,itemLetter.length,mBounds)
-            c.drawText(itemLetter,child.paddingStart.toFloat(),child.top -params.topMargin - (mTitleHeight - mBounds.height())/2,mPaint)
-        }
+        val itemLetter: String = mData[position].getLetter()
+        mPaint.getTextBounds(itemLetter,0,itemLetter.length,mBounds)
+        c.drawText(itemLetter,child.paddingStart.toFloat(),child.top -params.topMargin - (mTitleHeight - mBounds.height())/2,mPaint)
     }
 
     override fun getItemOffsets(
@@ -125,13 +120,13 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
         }
         if (position >-1){
             val letterCategoryInterface = mData[position]
-            if (letterCategoryInterface?.isShowLetterItem() != true){
+            if (letterCategoryInterface.isShowLetterItem() && !letterCategoryInterface.getLetter().isEmpty()){
                 if (position == 0){ //第一种情况
                     outRect.set(0, mTitleHeight.toInt(),0,0)
                 }else{
-                    letterCategoryInterface?.getLetter()?.isEmpty() != true
-                            &&  !letterCategoryInterface?.getLetter().equals(mData[position-1]?.getLetter())
-                    outRect.set(0, mTitleHeight.toInt(),0,0)
+                    if (!letterCategoryInterface.getLetter().equals(mData[position-1].getLetter())){
+                        outRect.set(0, mTitleHeight.toInt(),0,0)
+                    }
                 }
             }
 
@@ -167,7 +162,7 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
         )
 
         val letterCategoryInterface = mData[position]
-        val letter = letterCategoryInterface?.getLetter()
+        val letter = letterCategoryInterface.getLetter()
 
         mPaint.setColor(COLOR_TITLE_FONT);
         mPaint.getTextBounds(letter, 0, letter!!.length, mBounds);
@@ -180,10 +175,4 @@ class SuspensionDecoration(context: Context) : RecyclerView.ItemDecoration() {
 }
 
 
-/**
- * 分类悬停接口
- */
-interface ILetterCategoryInterface {
-    fun isShowLetterItem(): Boolean
-    fun getLetter(): String
-}
+

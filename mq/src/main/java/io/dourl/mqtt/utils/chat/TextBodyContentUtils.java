@@ -6,7 +6,6 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -14,8 +13,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
-import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.utils.ImSmileUtils;
 

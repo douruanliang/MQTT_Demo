@@ -11,11 +11,9 @@ import androidx.annotation.Nullable;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import io.dourl.http.api.CommandInterface;
 import io.dourl.http.callback.CallAdapterFactory;
 import io.dourl.http.retrofit.RetrofitManager;
 import io.dourl.mqtt.BuildConfig;
-import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.utils.StorageUtils;
