@@ -62,10 +62,11 @@ class LetterCategoryDecoration(context: Context) : RecyclerView.ItemDecoration()
             var position = params.viewLayoutPosition
             position -= mHeaderViewCount
             //pos为1，size为1，1>0? true
-            if (mData.isEmpty() ||
-                position > (mData.size.minus(1))
+            if (mData.isEmpty()
+                || position > (mData.size.minus(1))
                 || position < 0
                 || mData[position].isShowLetterItem() != true
+                || mData[position].getLetter().isEmpty()
             ) {
                 continue  //跳过
             }
