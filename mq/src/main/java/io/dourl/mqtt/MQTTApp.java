@@ -24,7 +24,6 @@ public class MQTTApp extends Application {
         super.onCreate();
         BaseApp.init(this);
         HttpApiBase.init(this);
-        //TODO
         Constants.SCREENWIDTH = DeviceInfoUtils.getScreenWidth(this);
 
 

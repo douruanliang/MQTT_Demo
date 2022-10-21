@@ -1,5 +1,6 @@
 package io.dourl.mqtt.manager;
 
+import io.dourl.mqtt.storage.SessionManager;
 import io.dourl.mqtt.utils.MessageThreadPool;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,6 @@ import io.dourl.mqtt.utils.IMTextBodyUtils;
 
 /**
  * 消息管理类
- * Created by zhangpeng on 16/1/11.
  */
 @SuppressWarnings("UnusedReturnValue")
 public class MessageManager {
@@ -36,11 +36,11 @@ public class MessageManager {
 
     public static MessageManager getInstance() {
         if (ourInstance == null) {
-           /* synchronized (SessionManager.class) {
+            synchronized (SessionManager.class) {
                 if (ourInstance == null) {
                     ourInstance = new MessageManager();
                 }
-            }*/
+            }
         }
         return ourInstance;
     }
@@ -51,25 +51,11 @@ public class MessageManager {
     }*/
 
     /**
-     * 测试用
-     * @param to
-     * @param from
+     *
+     * @param baseUser 给谁发
      * @param content
      * @return
      */
-    public MessageModel sendTextMessage(UserModel to, UserModel from, String content) {
-        MessageModel textMessage = new MessageModel();
-        textMessage.setTo(to);
-        textMessage.setFrom(from);
-        TextBody body = new TextBody();
-        List<TextBody.TextEntity> textEntities = IMTextBodyUtils.createTextBody(content);
-        body.setContent(textEntities);
-        body.createSpan(BaseApp.getApp());
-        setupNormalProperty(textMessage, body);
-        sendMessage(textMessage);
-        return textMessage;
-    }
-
     public MessageModel sendTextMessage(UserModel baseUser, String content) {
         MessageModel textMessage = new MessageModel();
         textMessage.setTo(baseUser);
@@ -244,7 +230,6 @@ public class MessageManager {
     }
 
     private void setupNormalProperty(MessageModel message, BaseMsgBody body) {
-        String cId = "";
         if (message.getClan() == null) {
             message.setType(MessageType.CHAT_NORMAL);
             message.setSessionId("u" + message.getTo().getUid());
@@ -253,25 +238,10 @@ public class MessageManager {
             message.setType(MessageType.CHAT_GROUP);
             message.setSessionId(message.getClan().id);
             message.setToUid(message.getClan().id);
-            cId = message.getClan().id;
         }
         message.setMsgId(getMsgUUID());
-        UserModel currentUser = LoginManager.getInstance().getCurrentUser();
-        message.setFromUid(currentUser.getUid());
-        message.setFrom(currentUser);
-        //公共的 可能会被覆盖
-        if (body.getExtra()==null){
-            BaseMsgBody.ExtraEntity extraEntity = new BaseMsgBody.ExtraEntity();
-            extraEntity.fromUser = new BaseMsgBody.UserEntity(currentUser.getUid(),currentUser.getName());
-            extraEntity.clanId = cId;
-            body.setExtra(extraEntity);
-        }else{
-            BaseMsgBody.ExtraEntity extraEntity = body.getExtra();
-            extraEntity.fromUser = new BaseMsgBody.UserEntity(currentUser.getUid(),currentUser.getName());
-            extraEntity.clanId = cId;
-            body.setExtra(extraEntity);
-        }
-
+        message.setFromUid(LoginManager.getInstance().getCurrentUserId());
+        message.setFrom(LoginManager.getInstance().getCurrentUser());
         message.setBody(body);
         message.setIsMine(true);
         message.setIsRead(true);
@@ -279,7 +249,7 @@ public class MessageManager {
         message.setSendStatus(MessageModel.Status.sending);
     }
 
-    private String getMsgUUID() {
+    public String getMsgUUID() {
         return UUID.randomUUID().toString();
     }
 

@@ -3,7 +3,7 @@ package io.dourl.http.exception;
 
 /**
  * 包含常见错误
- * Created by zhangpeng on 17/2/21.
+ * Created by dourl on 17/2/21.
  */
 public class BeingApiException extends ApiException {
 

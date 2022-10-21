@@ -18,7 +18,7 @@ import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.utils.ImSmileUtils;
 
 /**
- * Created by zhangheng on 2018/4/18.
+ *
  */
 
 public class TextBodyContentUtils {

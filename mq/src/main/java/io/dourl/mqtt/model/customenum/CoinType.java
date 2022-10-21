@@ -5,7 +5,7 @@ import androidx.annotation.NonNull;
 import io.dourl.mqtt.base.BaseObject;
 
 /**
- * Created by zhangpeng on 2017/11/1.
+ * Created by dourl on 2017/11/1.
  */
 
 public interface CoinType extends BaseObject {

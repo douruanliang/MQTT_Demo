@@ -18,7 +18,6 @@ public class ReceiveMsgJob extends BaseMessageJob {
 
     private static final String TAG = "ReceiveMsgJob";
     private String mTopic;
-
     private String mqttMessage;
 
     public ReceiveMsgJob(String topic, MqttMessage mqttMessage) {
@@ -38,7 +37,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
 //        }
         String msgString = mqttMessage;
         //类型分类
-        if (mTopic.contains("user") || mTopic.contains("group") ) {
+        if (mTopic.contains("user") || mTopic.contains("group")) {
             processImMessage(msgString);
         } else if (TopicUtils.getNewsTopic().equalsIgnoreCase(mTopic)) {
             processNewsMessage(msgString);
@@ -54,6 +53,8 @@ public class ReceiveMsgJob extends BaseMessageJob {
                 MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
                 break;
             case CHAT_GROUP:
+                if (parsedMsg.getFromUid().equals(LoginManager.getInstance().getCurrentUserId()))
+                    break;
                 MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
                 break;
 //            case TRANSACTION:

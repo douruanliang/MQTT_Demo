@@ -5,7 +5,7 @@ import io.dourl.mqtt.utils.DeviceInfoUtils;
 
 /**
  * 包含各种常量的类
- * Created by zhangpeng on 16/1/5.
+ * Created by dourl on 16/1/5.
  */
 public class Constants{
 

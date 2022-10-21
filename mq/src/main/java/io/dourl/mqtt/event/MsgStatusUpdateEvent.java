@@ -4,7 +4,7 @@ package io.dourl.mqtt.event;
 import io.dourl.mqtt.bean.MessageModel;
 
 /**
- * Created by zhangpeng on 16/1/11.
+ * Created by dourl on 16/1/11.
  */
 public class MsgStatusUpdateEvent {
 

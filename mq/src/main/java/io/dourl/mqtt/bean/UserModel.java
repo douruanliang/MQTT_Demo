@@ -15,7 +15,7 @@ import io.dourl.mqtt.base.BaseObject;
 
 /**
  * 基础User类
- * Created by zhangpeng on 16/1/6.
+ * Created by dourl on 16/1/6.
  */
 @Entity
 public class UserModel implements BaseObject, Parcelable {

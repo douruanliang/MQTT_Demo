@@ -8,7 +8,7 @@ import java.io.File;
 
 /**
  * 处理所有的媒体文件存储
- * Created by zhangpeng on 17/1/20.
+ * Created by dourl on 17/1/20.
  */
 @SuppressWarnings("ResultOfMethodCallIgnored")
 public class MediaFilesUtils {

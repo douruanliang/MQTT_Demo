@@ -18,7 +18,7 @@ import io.dourl.mqtt.bean.UserModelDao;
 
 /**
  * 数据库迁移帮助类
- * Created by zhangpeng on 15/12/31.
+ * Created by dourl on 15/12/31.
  */
 class MigrationHelper {
 

@@ -15,7 +15,7 @@ import io.dourl.mqtt.model.customenum.ManagerType;
 
 /**
  * 基础User类
- * Created by zhangpeng on 16/1/6.
+ * Created by dourl on 16/1/6.
  */
 public class BaseUser extends UserModel implements BaseObject {
 

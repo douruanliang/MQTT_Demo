@@ -25,6 +25,7 @@ import io.dourl.mqtt.R;
 import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.base.BaseObject;
 import io.dourl.mqtt.model.ClanModel;
+import io.dourl.mqtt.model.message.ReceiveMessage;
 import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.HintBody;
@@ -113,6 +114,11 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     @Convert(converter = ClanConverter.class, columnType = String.class)
     protected ClanModel clan;
+
+    /**
+     群id
+     */
+    protected String clan_id;
     /**
      * type : 1
      * content : [{"t":"txt","c":"en"}]
@@ -155,7 +161,6 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
     public MessageModel() {
     }
 
-
     public long getTime() {
         return time;
     }
@@ -191,9 +196,25 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         return "";
     }
 
-    public String getPublicBody() {
+    /**
+     * 1v1
+     * @return
+     */
+    public String getPushBody() {
         if (body != null) {
-            return GSON.toJson(new PublicMessage(type,body));
+            return GSON.toJson(new ReceiveMessage(type,body,fromUid,clan_id));
+        }
+        return "";
+    }
+
+
+    /**
+     * 群发
+     * @return
+     */
+    public String getGPushBody() {
+        if (body != null) {
+            return GSON.toJson(new ReceiveMessage(type,body,from,clan));
         }
         return "";
     }
@@ -363,30 +384,25 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         }
     }
 
-    /**
-     * To-one relationship, resolved on first access.
-     */
-/*    @Generated()
-    @Keep
-    @WorkerThread
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1297302993)
     public UserModel getFrom() {
-        if (from == null) {
-            String __key = this.fromUid;
-            if (from__resolvedKey == null || from__resolvedKey != __key) {
-                final DaoSession daoSession = this.daoSession;
-                if (daoSession == null) {
-                    throw new DaoException("Entity is detached from DAO context");
-                }
-                UserModelDao targetDao = daoSession.getUserModelDao();
-                UserModel fromNew = targetDao.load(__key);
-                synchronized (this) {
-                    from = fromNew;
-                    from__resolvedKey = __key;
-                }
+        String __key = this.fromUid;
+        if (from__resolvedKey == null || from__resolvedKey != __key) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            UserModelDao targetDao = daoSession.getUserModelDao();
+            UserModel fromNew = targetDao.load(__key);
+            synchronized (this) {
+                from = fromNew;
+                from__resolvedKey = __key;
             }
         }
         return from;
-    }*/
+    }
+
     public UserModel getFromUser() {
         return from;
     }
@@ -490,6 +506,16 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
 
     public void setClan(ClanModel clan) {
         this.clan = clan;
+        //设置群ID
+        setClan_id(clan.id);
+    }
+
+    public String getClan_id() {
+        return clan_id;
+    }
+
+    public void setClan_id(String clan_id) {
+        this.clan_id = clan_id;
     }
 
     @Override
@@ -597,27 +623,6 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         dest.writeSerializable(this.body);
     }
 
-
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 1297302993)
-    public UserModel getFrom() {
-        String __key = this.fromUid;
-        if (from__resolvedKey == null || from__resolvedKey != __key) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            UserModelDao targetDao = daoSession.getUserModelDao();
-            UserModel fromNew = targetDao.load(__key);
-            synchronized (this) {
-                from = fromNew;
-                from__resolvedKey = __key;
-            }
-        }
-        return from;
-    }
-
-
     /** To-one relationship, resolved on first access. */
     @Generated(hash = 677666723)
     public UserModel getTo() {
@@ -706,15 +711,16 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
     }
 
 
-    @Generated(hash = 152672021)
-    public MessageModel(Long id, String msgid, MessageType type, @NotNull String fromUid, @NotNull String toUid, ClanModel clan, long time, long localTime, boolean isRead, String sessionId,
-            boolean isMine, Status sendStatus, boolean downloading, BaseMsgBody body) {
+    @Generated(hash = 115542965)
+    public MessageModel(Long id, String msgid, MessageType type, @NotNull String fromUid, @NotNull String toUid, ClanModel clan, String clan_id, long time, long localTime, boolean isRead,
+            String sessionId, boolean isMine, Status sendStatus, boolean downloading, BaseMsgBody body) {
         this.id = id;
         this.msgid = msgid;
         this.type = type;
         this.fromUid = fromUid;
         this.toUid = toUid;
         this.clan = clan;
+        this.clan_id = clan_id;
         this.time = time;
         this.localTime = localTime;
         this.isRead = isRead;

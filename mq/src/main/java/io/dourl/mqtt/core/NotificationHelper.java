@@ -13,7 +13,7 @@ import io.dourl.mqtt.base.BaseApp;
 import io.dourl.mqtt.ui.BaseActivity;
 
 /**
- * Created by zhangpeng on 2018/2/2.
+ * Created by dourl on 2018/2/2.
  */
 
 class NotificationHelper {

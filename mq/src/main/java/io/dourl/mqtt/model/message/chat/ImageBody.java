@@ -5,7 +5,6 @@ import io.dourl.mqtt.base.BaseObject;
 
 /**
  * 图像消息体
- * Created by zhangpeng on 16/1/6.
  */
 public class ImageBody extends BaseMsgBody {
 

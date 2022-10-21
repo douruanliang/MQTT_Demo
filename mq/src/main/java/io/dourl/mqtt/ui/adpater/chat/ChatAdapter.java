@@ -114,6 +114,8 @@ public class ChatAdapter extends MultiTypeAdapter {
     public void addData(MessageModel message) {
         mDataList.add(0, message);
         notifyItemInserted(0);
+        LoggerUtil.d(TAG,"add msg at: 0 Status: %s", message.getSendStatus());
+
     }
 
     public void removeData(MessageModel message) {
@@ -134,7 +136,8 @@ public class ChatAdapter extends MultiTypeAdapter {
                     m.setBody(message.getBody());
                 }
                 notifyItemChanged(i);
-                LoggerUtil.d(TAG,"update msg at: " + i);
+                LoggerUtil.d(TAG, "update msg at: %1$s  Status: %2$s", i, message.getSendStatus());
+
                 return;
             }
         }

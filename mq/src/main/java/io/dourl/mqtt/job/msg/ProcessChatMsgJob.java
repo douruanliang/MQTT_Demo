@@ -1,13 +1,13 @@
 package io.dourl.mqtt.job.msg;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
 import java.util.UUID;
 
 import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.bean.UserModel;
@@ -16,6 +16,7 @@ import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
+import io.dourl.mqtt.manager.MessageManager;
 import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.MessageType;
@@ -32,7 +33,7 @@ import io.dourl.mqtt.storage.UserDao;
  */
 public class ProcessChatMsgJob extends BaseMessageJob {
 
-    private static final String GROUP_ID = "ProcessChatMsgJob";
+    private static final String TAG = "ProcessChatMsgJob";
 
     private String mMsgString;
     protected MessageModel mMessageModel;
@@ -51,13 +52,6 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         }
         if (mMessageModel != null) {
             makeReceivedMessage(mMessageModel);
-            //群消息
-            if (mMessageModel.getType().value() == MessageType.CHAT_GROUP.value()) {
-                BaseMsgBody baseMsgBody = mMessageModel.getBody();
-                if (!baseMsgBody.fromUserUid().isEmpty() && (baseMsgBody.fromUserUid().equals(LoginManager.getCurrentUserId()))) {
-                    return;
-                }
-            }
         } else {
             return;
         }
@@ -116,47 +110,25 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         msg.setSendStatus(MessageModel.Status.success);
         msg.setTo(LoginManager.getInstance().getCurrentUser());
         msg.setToUid(LoginManager.getInstance().getCurrentUserId());
+        msg.setLocalTime(System.currentTimeMillis());
+        msg.setMsgId(MessageManager.getInstance().getMsgUUID());
         if (!TextUtils.isEmpty(msg.getFromUid()) && msg.getFromUid().equals(msg.getToUid())) {
             msg.setIsMine(true);
         } else {
             msg.setIsMine(false);
         }
-        msg.setMsgId(UUID.randomUUID().toString());
-        msg.setLocalTime(System.currentTimeMillis());
+
         if (msg.getType().value() == MessageType.CHAT_NORMAL.value()) {
-            if (msg.getFromUser() == null || TextUtils.isEmpty(msg.getFromUser().getUid())) {
-                BaseMsgBody baseMsgBody = msg.getBody(); //扩展里
-                UserModel from =new UserModel();
-                from.setUid(baseMsgBody.fromUserUid());
-                from.setUsername(baseMsgBody.getFormUser().name);
-                msg.setFrom(from);
-                msg.setFromUid(baseMsgBody.fromUserUid());
-                msg.setSessionId("u" + baseMsgBody.fromUserUid());
-            } else {
-                msg.setSessionId("u" + msg.getFromUser().getUid());
-            }
-
+            msg.setSessionId("u" + msg.getFromUid());
         } else {
-            BaseMsgBody baseMsgBody = msg.getBody();
-            if (msg.getFromUser() == null && baseMsgBody != null){
-                UserModel from =new UserModel();
-                from.setUid(baseMsgBody.fromUserUid());
-                from.setUsername(baseMsgBody.getFormUser().name);
-                msg.setFrom(from);
-            }
-            if (baseMsgBody != null) {
-                msg.setSessionId(baseMsgBody.clanId());
-            } else {
-                msg.setSessionId(msg.getClan().id);
-            }
-
+            msg.setSessionId(msg.getClan_id());
         }
         return msg;
     }
 
     protected void saveMsgAndPostEvent(MessageModel msg) throws InterruptedException {
 
-        Log.d("pro", GsonManager.getGson().toJson(msg));
+        LoggerUtil.d(TAG, GsonManager.getGson().toJson(msg));
         if (msg.getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
             EventBusManager.getInstance().post(new ChatMsgEvent(msg.getSessionId(), msg));
             return;

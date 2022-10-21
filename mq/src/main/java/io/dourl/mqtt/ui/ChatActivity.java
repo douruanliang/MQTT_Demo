@@ -129,6 +129,12 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
         initView();
 
         mTitleBar.showLine();
+        mTitleBar.setLeftBtnListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         linearLayoutManager.setAutoMeasureEnabled(true);

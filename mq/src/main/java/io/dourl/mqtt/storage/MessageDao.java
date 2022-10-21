@@ -19,7 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * 用来处理消息的CRUD操作
- * Created by zhangpeng on 16/1/7.
+ * Created by dourl on 16/1/7.
  */
 public class MessageDao {
 

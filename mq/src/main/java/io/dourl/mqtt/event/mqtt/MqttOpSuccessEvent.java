@@ -6,7 +6,7 @@ import io.dourl.mqtt.core.ActionListener;
 /**
  * Mqtt操作成功事件
  * 包括连接，订阅，取消订阅，发布
- * Created by zhangpeng on 15/12/18.
+ * Created by dourl on 15/12/18.
  */
 public class MqttOpSuccessEvent {
 

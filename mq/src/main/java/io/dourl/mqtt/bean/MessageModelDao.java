@@ -40,14 +40,15 @@ public class MessageModelDao extends AbstractDao<MessageModel, Long> {
         public final static Property FromUid = new Property(3, String.class, "fromUid", false, "FROM_UID");
         public final static Property ToUid = new Property(4, String.class, "toUid", false, "TO_UID");
         public final static Property Clan = new Property(5, String.class, "clan", false, "CLAN");
-        public final static Property Time = new Property(6, long.class, "time", false, "TIME");
-        public final static Property LocalTime = new Property(7, long.class, "localTime", false, "LOCAL_TIME");
-        public final static Property IsRead = new Property(8, boolean.class, "isRead", false, "IS_READ");
-        public final static Property SessionId = new Property(9, String.class, "sessionId", false, "SESSION_ID");
-        public final static Property IsMine = new Property(10, boolean.class, "isMine", false, "IS_MINE");
-        public final static Property SendStatus = new Property(11, String.class, "sendStatus", false, "SEND_STATUS");
-        public final static Property Downloading = new Property(12, boolean.class, "downloading", false, "DOWNLOADING");
-        public final static Property Body = new Property(13, String.class, "body", false, "BODY");
+        public final static Property Clan_id = new Property(6, String.class, "clan_id", false, "CLAN_ID");
+        public final static Property Time = new Property(7, long.class, "time", false, "TIME");
+        public final static Property LocalTime = new Property(8, long.class, "localTime", false, "LOCAL_TIME");
+        public final static Property IsRead = new Property(9, boolean.class, "isRead", false, "IS_READ");
+        public final static Property SessionId = new Property(10, String.class, "sessionId", false, "SESSION_ID");
+        public final static Property IsMine = new Property(11, boolean.class, "isMine", false, "IS_MINE");
+        public final static Property SendStatus = new Property(12, String.class, "sendStatus", false, "SEND_STATUS");
+        public final static Property Downloading = new Property(13, boolean.class, "downloading", false, "DOWNLOADING");
+        public final static Property Body = new Property(14, String.class, "body", false, "BODY");
     }
 
     private DaoSession daoSession;
@@ -76,14 +77,15 @@ public class MessageModelDao extends AbstractDao<MessageModel, Long> {
                 "\"FROM_UID\" TEXT NOT NULL ," + // 3: fromUid
                 "\"TO_UID\" TEXT NOT NULL ," + // 4: toUid
                 "\"CLAN\" TEXT," + // 5: clan
-                "\"TIME\" INTEGER NOT NULL ," + // 6: time
-                "\"LOCAL_TIME\" INTEGER NOT NULL ," + // 7: localTime
-                "\"IS_READ\" INTEGER NOT NULL ," + // 8: isRead
-                "\"SESSION_ID\" TEXT," + // 9: sessionId
-                "\"IS_MINE\" INTEGER NOT NULL ," + // 10: isMine
-                "\"SEND_STATUS\" TEXT," + // 11: sendStatus
-                "\"DOWNLOADING\" INTEGER NOT NULL ," + // 12: downloading
-                "\"BODY\" TEXT);"); // 13: body
+                "\"CLAN_ID\" TEXT," + // 6: clan_id
+                "\"TIME\" INTEGER NOT NULL ," + // 7: time
+                "\"LOCAL_TIME\" INTEGER NOT NULL ," + // 8: localTime
+                "\"IS_READ\" INTEGER NOT NULL ," + // 9: isRead
+                "\"SESSION_ID\" TEXT," + // 10: sessionId
+                "\"IS_MINE\" INTEGER NOT NULL ," + // 11: isMine
+                "\"SEND_STATUS\" TEXT," + // 12: sendStatus
+                "\"DOWNLOADING\" INTEGER NOT NULL ," + // 13: downloading
+                "\"BODY\" TEXT);"); // 14: body
     }
 
     /** Drops the underlying database table. */
@@ -117,25 +119,30 @@ public class MessageModelDao extends AbstractDao<MessageModel, Long> {
         if (clan != null) {
             stmt.bindString(6, clanConverter.convertToDatabaseValue(clan));
         }
-        stmt.bindLong(7, entity.getTime());
-        stmt.bindLong(8, entity.getLocalTime());
-        stmt.bindLong(9, entity.getIsRead() ? 1L: 0L);
+ 
+        String clan_id = entity.getClan_id();
+        if (clan_id != null) {
+            stmt.bindString(7, clan_id);
+        }
+        stmt.bindLong(8, entity.getTime());
+        stmt.bindLong(9, entity.getLocalTime());
+        stmt.bindLong(10, entity.getIsRead() ? 1L: 0L);
  
         String sessionId = entity.getSessionId();
         if (sessionId != null) {
-            stmt.bindString(10, sessionId);
+            stmt.bindString(11, sessionId);
         }
-        stmt.bindLong(11, entity.getIsMine() ? 1L: 0L);
+        stmt.bindLong(12, entity.getIsMine() ? 1L: 0L);
  
         Status sendStatus = entity.getSendStatus();
         if (sendStatus != null) {
-            stmt.bindString(12, sendStatusConverter.convertToDatabaseValue(sendStatus));
+            stmt.bindString(13, sendStatusConverter.convertToDatabaseValue(sendStatus));
         }
-        stmt.bindLong(13, entity.getDownloading() ? 1L: 0L);
+        stmt.bindLong(14, entity.getDownloading() ? 1L: 0L);
  
         BaseMsgBody body = entity.getBody();
         if (body != null) {
-            stmt.bindString(14, bodyConverter.convertToDatabaseValue(body));
+            stmt.bindString(15, bodyConverter.convertToDatabaseValue(body));
         }
     }
 
@@ -164,25 +171,30 @@ public class MessageModelDao extends AbstractDao<MessageModel, Long> {
         if (clan != null) {
             stmt.bindString(6, clanConverter.convertToDatabaseValue(clan));
         }
-        stmt.bindLong(7, entity.getTime());
-        stmt.bindLong(8, entity.getLocalTime());
-        stmt.bindLong(9, entity.getIsRead() ? 1L: 0L);
+ 
+        String clan_id = entity.getClan_id();
+        if (clan_id != null) {
+            stmt.bindString(7, clan_id);
+        }
+        stmt.bindLong(8, entity.getTime());
+        stmt.bindLong(9, entity.getLocalTime());
+        stmt.bindLong(10, entity.getIsRead() ? 1L: 0L);
  
         String sessionId = entity.getSessionId();
         if (sessionId != null) {
-            stmt.bindString(10, sessionId);
+            stmt.bindString(11, sessionId);
         }
-        stmt.bindLong(11, entity.getIsMine() ? 1L: 0L);
+        stmt.bindLong(12, entity.getIsMine() ? 1L: 0L);
  
         Status sendStatus = entity.getSendStatus();
         if (sendStatus != null) {
-            stmt.bindString(12, sendStatusConverter.convertToDatabaseValue(sendStatus));
+            stmt.bindString(13, sendStatusConverter.convertToDatabaseValue(sendStatus));
         }
-        stmt.bindLong(13, entity.getDownloading() ? 1L: 0L);
+        stmt.bindLong(14, entity.getDownloading() ? 1L: 0L);
  
         BaseMsgBody body = entity.getBody();
         if (body != null) {
-            stmt.bindString(14, bodyConverter.convertToDatabaseValue(body));
+            stmt.bindString(15, bodyConverter.convertToDatabaseValue(body));
         }
     }
 
@@ -206,14 +218,15 @@ public class MessageModelDao extends AbstractDao<MessageModel, Long> {
             cursor.getString(offset + 3), // fromUid
             cursor.getString(offset + 4), // toUid
             cursor.isNull(offset + 5) ? null : clanConverter.convertToEntityProperty(cursor.getString(offset + 5)), // clan
-            cursor.getLong(offset + 6), // time
-            cursor.getLong(offset + 7), // localTime
-            cursor.getShort(offset + 8) != 0, // isRead
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // sessionId
-            cursor.getShort(offset + 10) != 0, // isMine
-            cursor.isNull(offset + 11) ? null : sendStatusConverter.convertToEntityProperty(cursor.getString(offset + 11)), // sendStatus
-            cursor.getShort(offset + 12) != 0, // downloading
-            cursor.isNull(offset + 13) ? null : bodyConverter.convertToEntityProperty(cursor.getString(offset + 13)) // body
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // clan_id
+            cursor.getLong(offset + 7), // time
+            cursor.getLong(offset + 8), // localTime
+            cursor.getShort(offset + 9) != 0, // isRead
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // sessionId
+            cursor.getShort(offset + 11) != 0, // isMine
+            cursor.isNull(offset + 12) ? null : sendStatusConverter.convertToEntityProperty(cursor.getString(offset + 12)), // sendStatus
+            cursor.getShort(offset + 13) != 0, // downloading
+            cursor.isNull(offset + 14) ? null : bodyConverter.convertToEntityProperty(cursor.getString(offset + 14)) // body
         );
         return entity;
     }
@@ -226,14 +239,15 @@ public class MessageModelDao extends AbstractDao<MessageModel, Long> {
         entity.setFromUid(cursor.getString(offset + 3));
         entity.setToUid(cursor.getString(offset + 4));
         entity.setClan(cursor.isNull(offset + 5) ? null : clanConverter.convertToEntityProperty(cursor.getString(offset + 5)));
-        entity.setTime(cursor.getLong(offset + 6));
-        entity.setLocalTime(cursor.getLong(offset + 7));
-        entity.setIsRead(cursor.getShort(offset + 8) != 0);
-        entity.setSessionId(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setIsMine(cursor.getShort(offset + 10) != 0);
-        entity.setSendStatus(cursor.isNull(offset + 11) ? null : sendStatusConverter.convertToEntityProperty(cursor.getString(offset + 11)));
-        entity.setDownloading(cursor.getShort(offset + 12) != 0);
-        entity.setBody(cursor.isNull(offset + 13) ? null : bodyConverter.convertToEntityProperty(cursor.getString(offset + 13)));
+        entity.setClan_id(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setTime(cursor.getLong(offset + 7));
+        entity.setLocalTime(cursor.getLong(offset + 8));
+        entity.setIsRead(cursor.getShort(offset + 9) != 0);
+        entity.setSessionId(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setIsMine(cursor.getShort(offset + 11) != 0);
+        entity.setSendStatus(cursor.isNull(offset + 12) ? null : sendStatusConverter.convertToEntityProperty(cursor.getString(offset + 12)));
+        entity.setDownloading(cursor.getShort(offset + 13) != 0);
+        entity.setBody(cursor.isNull(offset + 14) ? null : bodyConverter.convertToEntityProperty(cursor.getString(offset + 14)));
      }
     
     @Override

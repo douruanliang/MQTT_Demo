@@ -2,7 +2,7 @@ package io.dourl.mqtt.thread;
 
 /**
  * 带有成功失败回调的Runnable
- * Created by zhangpeng on 16/5/16.
+ * Created by dourl on 16/5/16.
  */
 public abstract class CallbackRunnable implements Runnable {
 

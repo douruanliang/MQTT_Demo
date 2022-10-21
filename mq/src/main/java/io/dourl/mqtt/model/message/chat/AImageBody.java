@@ -3,7 +3,7 @@ package io.dourl.mqtt.model.message.chat;
 import io.dourl.mqtt.base.BaseObject;
 
 /**
- * Created by zhangpeng on 16/4/25.
+ * Created by dourl on 16/4/25.
  */
 public class AImageBody extends BaseMsgBody {
 

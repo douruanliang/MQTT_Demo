@@ -4,7 +4,7 @@ import io.dourl.mqtt.bean.MessageModel;
 
 /**
  * 聊天类消息事件
- * Created by zhangpeng on 16/1/7.
+ * Created by dourl on 16/1/7.
  */
 public class ChatMsgEvent {
 

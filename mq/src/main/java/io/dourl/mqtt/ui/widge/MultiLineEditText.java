@@ -9,7 +9,6 @@ import androidx.appcompat.widget.AppCompatEditText;
 
 /**
  * 支持多行输入的情况下还可以显示IME_ACTION_SEND
- * Created by zhangpeng on 16/1/25.
  */
 public class MultiLineEditText extends AppCompatEditText {
     public MultiLineEditText(Context context) {
