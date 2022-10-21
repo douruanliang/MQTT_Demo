@@ -4,20 +4,15 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
-import java.util.UUID;
-
 import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
-import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.event.ChatMsgEvent;
 import io.dourl.mqtt.event.SessionEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.manager.MessageManager;
-import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.MessageType;
 import io.dourl.mqtt.model.message.chat.RedPacketBody;
@@ -27,6 +22,7 @@ import io.dourl.mqtt.storage.MessageDao;
 import io.dourl.mqtt.storage.SessionDao;
 import io.dourl.mqtt.storage.SessionManager;
 import io.dourl.mqtt.storage.UserDao;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 /**
  * 处理聊天消息
