@@ -11,10 +11,12 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_test_main.xml" value="0.29739583333333336" />
         <entry key="app/src/main/res/layout/fragment_address.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_social.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_address.xml" value="0.24375" />
+        <entry key="app/src/main/res/layout/item_ads.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/item_image.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.222265625" />
         <entry key="mq/src/main/res/drawable/audio_play_out.xml" value="0.1855" />
         <entry key="mq/src/main/res/drawable/bg_white_corner_17dp.xml" value="0.1485" />

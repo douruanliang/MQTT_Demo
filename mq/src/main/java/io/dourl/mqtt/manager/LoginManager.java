@@ -143,7 +143,7 @@ public class LoginManager {
         return mFromUser;
     }
 
-    public  String getCurrentUserId() {
+    public static String getCurrentUserId() {
         return "lenovo";
     }
 }

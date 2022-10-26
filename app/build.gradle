@@ -16,6 +16,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        buildConfigField "String", "API_KEY", "\"29814877-9b82885adcda5aa627867d3e2\""
+
     }
 
     buildFeatures {
@@ -50,6 +52,9 @@ dependencies {
     def tinyPinyin = '2.0.3'
     implementation "com.github.promeg:tinypinyin:$tinyPinyin"
     implementation "com.github.promeg:tinypinyin-lexicons-android-cncity:$tinyPinyin"
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
 
     implementation project(path: ':mq')
     implementation project(path: ':base')

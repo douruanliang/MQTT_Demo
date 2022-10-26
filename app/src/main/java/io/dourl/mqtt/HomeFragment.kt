@@ -1,10 +1,20 @@
 package io.dourl.mqtt
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import io.dourl.mqtt.adapter.AdapterImage
+import io.dourl.mqtt.databinding.FragmentHomeBinding
+import io.dourl.mqtt.utils.log.LoggerUtil
+import io.dourl.mqtt.view_model.MainViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +31,18 @@ class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var binding: FragmentHomeBinding
+
+    private val viewModelFactory: MainViewModelFactory = MainViewModelFactory()
+    private lateinit var viewModel: MainViewModel
+    private val adapterImage = AdapterImage()
+
+    private val observerImages = Observer<List<Pics>> {
+
+        LoggerUtil.d("home", it.toString())
+        adapterImage.submitList(it)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -33,9 +55,52 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
+        startObservers()
+        startRecyclerView()
+        binding.title.setOnClickListener { viewModel.getAllPics(); }
+
+    }
+    private fun startRecyclerView() = binding.recyclerVIewSreen.apply {
+        adapter = adapterImage
+        layoutManager = LinearLayoutManager(requireContext())
+        addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
+                    hideSoftInput()
+
+                }
+            }
+        )
+    }
+
+    fun View.hideSoftInput() {
+        val inputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    private fun startObservers() {
+        viewModel = viewModelFactory.create(MainViewModel::class.java)
+        viewModel.getAllPics()
+
+        viewModel.pics.observe(viewLifecycleOwner, observerImages)
+
+        viewModel.toastLiveData.observe(
+            viewLifecycleOwner
+        ) {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        }
+
+
+    }
+
 
     companion object {
         /**
@@ -56,6 +121,7 @@ class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+
         @JvmStatic
         fun newInstance() = HomeFragment()
     }
