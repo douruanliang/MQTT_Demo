@@ -39,13 +39,21 @@ android {
 
 dependencies {
 
-   /* implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'*/
-
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["constraint-layout"]
     implementation rootProject.ext.dependencies["material"]
+
+
+    // 协程核心库
+    implementation rootProject.ext.dependencies["kotlinx-coroutines-core"]
+    // 协程Android支持库
+    implementation rootProject.ext.dependencies["kotlinx-coroutines-android"]
+    // 协程Java8支持库
+    implementation rootProject.ext.dependencies["kotlinx-coroutines-jdk8"]
+    // lifecycle对于协程的扩展封装
+    implementation rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
+    implementation rootProject.ext.dependencies["lifecycle-runtime-ktx"]
+    implementation rootProject.ext.dependencies["lifecycle-livedata-ktx"]
 
 
     //TinyPinyin 汉字转拼音

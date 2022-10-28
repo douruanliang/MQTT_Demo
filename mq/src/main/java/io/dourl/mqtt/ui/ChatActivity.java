@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.MessagePaging;
 import io.dourl.mqtt.bean.SessionModel;
@@ -60,6 +59,7 @@ import io.dourl.mqtt.ui.widge.RecordView;
 import io.dourl.mqtt.ui.widge.TitleBar;
 import io.dourl.mqtt.utils.AppContextUtil;
 import io.dourl.mqtt.utils.ImSmileUtils;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.reactivex.functions.Consumer;
 
 
@@ -69,7 +69,7 @@ import io.reactivex.functions.Consumer;
  * @author dourl
  * @date 2022/3/8
  */
-public class ChatActivity extends BaseActivity implements View.OnClickListener,RecordView.AudioRecordListener {
+public class ChatActivity extends BaseActivity implements View.OnClickListener, RecordView.AudioRecordListener {
     private static final String TAG = "ChatActivity";
     RecyclerView mRecyclerView;
     TextView noticeContent;
@@ -144,6 +144,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(false);
         mAdapter = new ChatAdapter(new ArrayList<MessageModel>());
+
         mAdapter.register(TextBody.class, new ChatTextProvider());
         mRecyclerView.setAdapter(mAdapter);
         setupMessageList();
@@ -153,7 +154,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == linearLayoutManager.getItemCount() - 1) {
-                    LoggerUtil.d(TAG,"reach top");
+                    LoggerUtil.d(TAG, "reach top");
 //                    mPtrLayout.autoRefresh(true, 200);
                     getMsgsByPage(0);
                 }
@@ -166,7 +167,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
             @Override
             public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
                 if (bottom < oldBottom - 300) {
-                    LoggerUtil.d(TAG,"LayoutChange oldBottom");
+                    LoggerUtil.d(TAG, "LayoutChange oldBottom");
                     mRecyclerView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -179,6 +180,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
         initEmoji();
 
     }
+
     protected EmojiconMenuBase emojiconMenu;
 
     private void initEmoji() {
@@ -233,6 +235,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
         }
 
     }
+
     private void setupInputBar() {
         mEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -323,7 +326,9 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
     protected void sendTxtMessage() {
         String text = mEditText.getText().toString();
         if (text != null && text.length() > 0) {
-            MessageManager.getInstance().sendTextMessage(mBaseUser, text);
+            for (int i = 0; i < 100000; i++) {
+                MessageManager.getInstance().sendTextMessage(mBaseUser, text+i);
+            }
             mEditText.setText("");
             scrollToBottom();
         } else {
@@ -359,7 +364,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
                             mMsgUnread.setVisibility(View.VISIBLE);
                             mMsgUnread.setText(getString(R.string.hint_chat_unread_msg, mUnreadCount));
                         }
-                          mEditText.setText(model.getDraft());
+                        mEditText.setText(model.getDraft());
                     }
                     getMsgsByPage(mUnreadCount);
                     SessionManager.getInstance().resetUnreadCount(mSessionID);
@@ -375,7 +380,9 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
         });
 
     }
+
     public static final int PRE_PAGE_COUNT = 10; //最少10
+
     @SuppressLint("CheckResult")
     private void getMsgsByPage(int unread) {
         MessageDao.getMsgsBySessionIdObservable(mSessionID, mLastMsgId, PRE_PAGE_COUNT + unread).subscribe(new Consumer<MessagePaging>() {
@@ -440,16 +447,16 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
 
     @Override
     public void onClick(View v) {
-        int id  = v.getId();
+        int id = v.getId();
         if (id == R.id.btn_send) {
             sendTxtMessage();
-        }else if (id == R.id.btnFace){
+        } else if (id == R.id.btnFace) {
             toggleEmojicon();
-        }else if (id == R.id.btnRecord){
+        } else if (id == R.id.btnRecord) {
             checkPermission();
             showRecordButton(true);
             hideKeyboard();
-        }else if (id == R.id.btnKeyboard){
+        } else if (id == R.id.btnKeyboard) {
             showRecordButton(false);
         }
 
@@ -465,11 +472,11 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(ChatMsgEvent event) {
-        LoggerUtil.d(TAG,"ChatMsgEvent: %s", event);
+        LoggerUtil.d(TAG, "ChatMsgEvent: %s", event);
         if (event.getSessionId().equalsIgnoreCase(String.valueOf(mSessionID))) {
             if (event.getMessage().getBodyType() == BodyType.TYPE_GROUP_APPLY_NUM) {
                 try {
-                   // showCountHint(Integer.parseInt(event.getMessage().getContentDesc().toString()));
+                    // showCountHint(Integer.parseInt(event.getMessage().getContentDesc().toString()));
                 } catch (Exception e) {
                 }
             } else {

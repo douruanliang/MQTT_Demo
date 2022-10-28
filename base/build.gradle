@@ -31,17 +31,18 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+
+    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["constraint-layout"]
+    implementation rootProject.ext.dependencies["material"]
+    implementation rootProject.ext.dependencies["core-ktx"]
 
 
 
     /*=============================lifecycle==============================================*/
-    api "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    api "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    api "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-    api 'androidx.databinding:databinding-runtime:7.2.2'
+    implementation rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
+    implementation rootProject.ext.dependencies["lifecycle-runtime-ktx"]
+    implementation rootProject.ext.dependencies["lifecycle-livedata-ktx"]
+    implementation rootProject.ext.dependencies["databinding"]
     /*=============================lifecycle==============================================*/
 }

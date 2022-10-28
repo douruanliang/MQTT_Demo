@@ -1,7 +1,6 @@
 package io.dourl.mqtt.ui.adpater.chat;
 
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.customenum.ManagerType;
@@ -17,11 +15,9 @@ import io.dourl.mqtt.model.message.chat.AudioBody;
 import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.ImageBody;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import me.drakeet.multitype.MultiTypeAdapter;
 
-/**
- * Created by SpiritTalk on 17/1/13.
- */
 
 public class ChatAdapter extends MultiTypeAdapter {
     /**
@@ -114,7 +110,7 @@ public class ChatAdapter extends MultiTypeAdapter {
     public void addData(MessageModel message) {
         mDataList.add(0, message);
         notifyItemInserted(0);
-        LoggerUtil.d(TAG,"add msg at: 0 Status: %s", message.getSendStatus());
+        LoggerUtil.d(TAG, "add msg at: 0 Status: %s", message.getSendStatus());
 
     }
 

@@ -1,34 +1,19 @@
 package io.dourl.mqtt.ui.adpater.chat;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.text.Spannable;
-import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.List;
 
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.utils.chat.TextBodyContentUtils;
 
-
-
-/**
- * Created by SpiritTalk on 17/1/13.
- */
 
 public class ChatTextProvider extends ChatFrameProvider<TextBody, ChatTextProvider.ViewHolder> {
 
