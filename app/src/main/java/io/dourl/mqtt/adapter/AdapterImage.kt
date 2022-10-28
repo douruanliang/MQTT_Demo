@@ -7,7 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
+import coil.size.Scale
+import coil.transform.CircleCropTransformation
 import io.dourl.mqtt.Pics
 import io.dourl.mqtt.R
 
@@ -61,13 +63,21 @@ class ImageViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
         textViewName.text = pics.user
 
-        Glide.with(itemView.context)
+        imageViewAvatar.load(pics.userImageURL){
+            transformations(CircleCropTransformation())
+            placeholder(R.mipmap.ic_launcher_round)
+            error(R.mipmap.ic_launcher_round)
+        }
+        imageViewPhoto.load(pics.largeImageURL){
+            scale(Scale.FILL)
+        }
+       /* Glide.with(itemView.context)
             .load(pics.largeImageURL)
             .into(imageViewPhoto)
 
         Glide.with(itemView.context)
             .load(pics.userImageURL)
-            .into(imageViewAvatar)
+            .into(imageViewAvatar)*/
     }
 
 }

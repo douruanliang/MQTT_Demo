@@ -135,6 +135,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener,R
                 finish();
             }
         });
+        mTitleBar.setTitle(mSessionID);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         linearLayoutManager.setAutoMeasureEnabled(true);

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import io.dourl.mqtt.databinding.ActivityMainBinding;
+import io.dourl.mqtt.manager.MqttManager;
 import io.dourl.mqtt.ui.AddressFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
+        MqttManager.wakeMqtt();
     }
 
     @Override

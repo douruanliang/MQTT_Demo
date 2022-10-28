@@ -29,13 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpApiBase {
     protected static final int LIMIT = 20;
-    /**
-     * 0为正式线上环境，1为开发环境
-     */
-    // static int HOST = BuildConfig.HOST;
     private static SharedPreferences sp;
-    // private final static String[] IPS = {BuildConfig.API_HOST, BuildConfig.DEBUG_API_HOST};
-
     public static String getSecureBaseUrl() {
         // return HOST == 0 ? "https://" + IPS[HOST] : "http://" + IPS[HOST];
         return "http://" + BuildConfig.API_HOST + ":9090";

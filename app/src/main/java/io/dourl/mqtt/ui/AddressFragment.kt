@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import io.dourl.base.mvvm.DataBindingFragment
 import io.dourl.mqtt.R
 import io.dourl.mqtt.bean.CityBean
+import io.dourl.mqtt.bean.UserModel
 import io.dourl.mqtt.databinding.FragmentAddressBinding
 import io.dourl.mqtt.decoration.DividerItemDecoration
 import io.dourl.mqtt.decoration.LetterCategoryDecoration
@@ -109,10 +109,21 @@ class AddressFragment : DataBindingFragment<FragmentAddressBinding>() {
         }
 
         override fun onBindViewHolder(holder: ViewHodler, position: Int) {
-            holder.address.text = mDatas[position].name
-            holder.content.setOnClickListener({
-                Toast.makeText(context, "pos:$position", Toast.LENGTH_SHORT).show()
-            })
+            val name = mDatas[position].name
+            holder.address.text = name
+            holder.content.setOnClickListener {
+                // Toast.makeText(context, "pos:$position", Toast.LENGTH_SHORT).show()
+                if (name.equals("boss") || name.equals("lenovo") ) {
+                    val mToUser = UserModel()
+                    mToUser.apply {
+                        setUid(name)
+                        setAge(90)
+                    }
+                    ChatActivity.intentTo(context, "u" + mToUser.getUid(), mToUser)
+                }
+
+
+            }
         }
 
         override fun getItemCount(): Int {
