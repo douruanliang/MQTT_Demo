@@ -21,16 +21,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.MessagePaging;
@@ -41,7 +40,6 @@ import io.dourl.mqtt.event.MsgStatusUpdateEvent;
 import io.dourl.mqtt.manager.EventBusManager;
 import io.dourl.mqtt.manager.MessageManager;
 import io.dourl.mqtt.model.message.chat.BodyType;
-import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.message.emoji.DefaultEmojiconDatas;
 import io.dourl.mqtt.model.message.emoji.Emojicon;
 import io.dourl.mqtt.model.message.emoji.EmojiconGroupEntity;
@@ -50,7 +48,6 @@ import io.dourl.mqtt.storage.MessageDao;
 import io.dourl.mqtt.storage.SessionDao;
 import io.dourl.mqtt.storage.SessionManager;
 import io.dourl.mqtt.ui.adpater.chat.ChatAdapter;
-import io.dourl.mqtt.ui.adpater.chat.ChatTextProvider;
 import io.dourl.mqtt.ui.widge.EmojiconMenu;
 import io.dourl.mqtt.ui.widge.EmojiconMenuBase;
 import io.dourl.mqtt.ui.widge.MultiLineEditText;
@@ -69,7 +66,7 @@ import io.reactivex.functions.Consumer;
  * @author dourl
  * @date 2022/3/8
  */
-public class ChatActivity extends BaseActivity implements View.OnClickListener, RecordView.AudioRecordListener {
+public class ChatActivity2 extends BaseActivity implements View.OnClickListener, RecordView.AudioRecordListener {
     private static final String TAG = "ChatActivity";
     RecyclerView mRecyclerView;
     TextView noticeContent;
@@ -103,7 +100,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener, 
     private boolean rightShown = false;
 
     public static void intentTo(Context context, String sessionId) {
-        Intent intent = new Intent(context, ChatActivity.class);
+        Intent intent = new Intent(context, ChatActivity2.class);
         Bundle bundle = new Bundle();
         bundle.putString("session_id", sessionId);
         intent.putExtras(bundle);
@@ -111,7 +108,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     public static void intentTo(Context context, String sessionId, UserModel user) {
-        Intent intent = new Intent(context, ChatActivity.class);
+        Intent intent = new Intent(context, ChatActivity2.class);
         Bundle bundle = new Bundle();
         bundle.putString("session_id", sessionId);
         bundle.putParcelable("user", user);
@@ -144,8 +141,6 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener, 
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setHasFixedSize(false);
         mAdapter = new ChatAdapter(new ArrayList<MessageModel>());
-
-        mAdapter.register(TextBody.class, new ChatTextProvider());
         mRecyclerView.setAdapter(mAdapter);
         setupMessageList();
         setupInputBar();
@@ -199,7 +194,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener, 
             public void onExpressionClicked(Emojicon emojicon) {
                 if (emojicon.getType() != Emojicon.Type.BIG_EXPRESSION) {
                     if (emojicon.getEmojiText() != null) {
-                        mEditText.append(ImSmileUtils.getSmiledText(ChatActivity.this, emojicon.getEmojiText()));
+                        mEditText.append(ImSmileUtils.getSmiledText(ChatActivity2.this, emojicon.getEmojiText()));
                     }
                 } else {
 //                    sendBigExpressionMessage(emojicon.getName(), emojicon.getIdentityCode());

@@ -1,9 +1,5 @@
 package io.dourl.base.mvvm
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 
@@ -18,7 +14,8 @@ abstract class BaseVMFragment<B : ViewDataBinding, VM : BaseViewModel> : DataBin
 
     override fun injectViewModel() {
         val vm = createViewModel()
-        viewModel = ViewModelProvider(this,BaseViewModel.createViewModelFactory(vm)).get(vm::class.java)
+        viewModel =
+            ViewModelProvider(this, BaseViewModel.createViewModelFactory(vm)).get(vm::class.java)
         lifecycle.addObserver(viewModel);
     }
 

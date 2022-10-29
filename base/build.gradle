@@ -13,6 +13,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
+    buildFeatures {
+        // compose true
+        dataBinding  true
+    }
 
     buildTypes {
         release {
@@ -31,18 +35,16 @@ android {
 
 dependencies {
 
+    implementation "androidx.appcompat:appcompat:$versions.appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayoutVersion"
+    implementation "com.google.android.material:material:$versions.materialVersion"
 
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation rootProject.ext.dependencies["constraint-layout"]
-    implementation rootProject.ext.dependencies["material"]
-    implementation rootProject.ext.dependencies["core-ktx"]
+    // architecture components
+    implementation "androidx.fragment:fragment-ktx:$versions.fragmentVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycleVersion"
 
+    // coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
 
-
-    /*=============================lifecycle==============================================*/
-    implementation rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
-    implementation rootProject.ext.dependencies["lifecycle-runtime-ktx"]
-    implementation rootProject.ext.dependencies["lifecycle-livedata-ktx"]
-    implementation rootProject.ext.dependencies["databinding"]
-    /*=============================lifecycle==============================================*/
 }

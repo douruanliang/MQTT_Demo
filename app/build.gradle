@@ -1,9 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android-extensions'
 }
-
 android {
     compileSdk 31
 
@@ -39,21 +37,17 @@ android {
 
 dependencies {
 
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation rootProject.ext.dependencies["constraint-layout"]
-    implementation rootProject.ext.dependencies["material"]
+    implementation "androidx.appcompat:appcompat:$versions.appcompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayoutVersion"
+    implementation "com.google.android.material:material:$versions.materialVersion"
 
+    // architecture components
+    implementation "androidx.fragment:fragment-ktx:$versions.fragmentVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.lifecycleVersion"
 
-    // 协程核心库
-    implementation rootProject.ext.dependencies["kotlinx-coroutines-core"]
-    // 协程Android支持库
-    implementation rootProject.ext.dependencies["kotlinx-coroutines-android"]
-    // 协程Java8支持库
-    implementation rootProject.ext.dependencies["kotlinx-coroutines-jdk8"]
-    // lifecycle对于协程的扩展封装
-    implementation rootProject.ext.dependencies["lifecycle-viewmodel-ktx"]
-    implementation rootProject.ext.dependencies["lifecycle-runtime-ktx"]
-    implementation rootProject.ext.dependencies["lifecycle-livedata-ktx"]
+    // coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutinesVersion"
 
 
     //TinyPinyin 汉字转拼音
@@ -67,8 +61,6 @@ dependencies {
 
     implementation project(path: ':mq')
     implementation project(path: ':base')
-
-
 }
 
 

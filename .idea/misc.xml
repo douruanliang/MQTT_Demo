@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1403242147922999" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/selector_main_tab_circle.xml" value="0.184" />
         <entry key="app/src/main/res/drawable/selector_publish.xml" value="0.1" />
@@ -14,10 +15,11 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_social.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_address.xml" value="0.24375" />
+        <entry key="app/src/main/res/layout/item_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ads.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/item_image.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.222265625" />
+        <entry key="mq/src/main/res/drawable/audio_play_in.xml" value="0.1" />
         <entry key="mq/src/main/res/drawable/audio_play_out.xml" value="0.1855" />
         <entry key="mq/src/main/res/drawable/bg_white_corner_17dp.xml" value="0.1485" />
         <entry key="mq/src/main/res/drawable/black_btn_nor.xml" value="0.1855" />

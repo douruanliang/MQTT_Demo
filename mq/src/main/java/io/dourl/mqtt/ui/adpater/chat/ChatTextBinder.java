@@ -15,7 +15,7 @@ import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.utils.chat.TextBodyContentUtils;
 
 
-public class ChatTextProvider extends ChatFrameProvider<TextBody, ChatTextProvider.ViewHolder> {
+public class ChatTextBinder extends ChatFrameBinder<TextBody, ChatTextBinder.ViewHolder> {
 
     @Override
     RecyclerView.ViewHolder onCreateContentViewHolder(LayoutInflater inflater, ViewGroup parent) {

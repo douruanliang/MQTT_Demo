@@ -15,13 +15,13 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import com.drakeet.multitype.ItemViewBinder;
 
 import java.util.HashMap;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.model.BaseUser;
@@ -33,15 +33,11 @@ import io.dourl.mqtt.model.message.chat.ImageBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.message.chat.VideoBody;
 import io.dourl.mqtt.utils.IMTextBodyUtils;
-import me.drakeet.multitype.ItemViewProvider;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 
-/**
- * Created by SpiritTalk on 17/1/12.
- */
-
-public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHolder extends RecyclerView.ViewHolder>
-        extends ItemViewProvider<MessageModel, ChatFrameProvider.FrameHolder> {
+public abstract class ChatFrameBinder<Content extends BaseMsgBody, SubViewHolder extends RecyclerView.ViewHolder>
+        extends ItemViewBinder<MessageModel, ChatFrameBinder.FrameHolder> {
     protected static int textPadding;
     protected static int avatarSize;
     protected static int imageMargin;
@@ -57,8 +53,10 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
 
     abstract void onBindContentViewHolder(SubViewHolder holder, Content content, boolean isMine);
 
+
+    @NonNull
     @Override
-    protected FrameHolder onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
+    public FrameHolder onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
         textPadding = parent.getResources().getDimensionPixelSize(R.dimen.chat_item_text_padding);
         avatarSize = parent.getResources().getDimensionPixelSize(R.dimen.chat_avatarSize);
         imageMargin = parent.getResources().getDimensionPixelSize(R.dimen.chat_item_image_margin);
@@ -67,13 +65,14 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
         coverMaxWidth = (int) (coverMaxWidth * 0.8);
         coverMaxHeight = coverMaxWidth * 4 / 3;
         mAdapter = (ChatAdapter) getAdapter();
-        View root = inflater.inflate(R.layout.item_chat_frame, parent, false);
-        RecyclerView.ViewHolder contentHolder = onCreateContentViewHolder(inflater, parent);
+        View root = layoutInflater.inflate(R.layout.item_chat_frame, parent, false);
+        RecyclerView.ViewHolder contentHolder = onCreateContentViewHolder(layoutInflater, parent);
         return new FrameHolder(root, contentHolder);
     }
 
+
     @Override
-    protected void onBindViewHolder(@NonNull FrameHolder holder, @NonNull final MessageModel messageModel) {
+    public void onBindViewHolder(@NonNull FrameHolder holder, @NonNull final MessageModel messageModel) {
         mMessageModel = messageModel;
         holder.bindData(messageModel, mAdapter.mClanMember, mAdapter.mMyManagrType);
         if (!(messageModel.getBody() instanceof HintBody)) {
@@ -209,8 +208,8 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
             return null;
         }
         int[] value = new int[2];
-        value[0] = width > coverMaxWidth ? coverMaxWidth : width;
-        value[1] = (int) (((float) height / width) * value[0]) > coverMaxHeight ? coverMaxHeight : (int) (((float) height / width) * value[0]);
+        value[0] = Math.min(width, coverMaxWidth);
+        value[1] = Math.min((int) (((float) height / width) * value[0]), coverMaxHeight);
         LoggerUtil.d("cover max width: " + coverMaxWidth);
         LoggerUtil.d(String.format("cover [%d,%d] to [%d,%d]", width, height, value[0], value[1]));
         return value;
@@ -237,7 +236,7 @@ public abstract class ChatFrameProvider<Content extends BaseMsgBody, SubViewHold
             mContext = itemView.getContext();
             tvTime = itemView.findViewById(R.id.tvTime);
             mNickNameLayout = itemView.findViewById(R.id.nickname_layout);
-            tvNickName  = itemView.findViewById(R.id.nickname);
+            tvNickName = itemView.findViewById(R.id.nickname);
             mLevelLogo = itemView.findViewById(R.id.level_logo);
             tvHint = itemView.findViewById(R.id.tvHint);
             mContentLayout = itemView.findViewById(R.id.content_layout);

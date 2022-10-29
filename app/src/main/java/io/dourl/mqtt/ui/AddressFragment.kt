@@ -17,7 +17,7 @@ import io.dourl.mqtt.decoration.DividerItemDecoration
 import io.dourl.mqtt.decoration.LetterCategoryDecoration
 import io.dourl.mqtt.helper.IIndexBarDataHelper
 import io.dourl.mqtt.helper.IndexBarDataHelperImpl
-import kotlinx.android.synthetic.main.item_address.view.*
+
 
 
 private const val ARG_PARAM1 = "param1"
@@ -87,8 +87,6 @@ class AddressFragment : DataBindingFragment<FragmentAddressBinding>() {
 
 
     private fun initDatas(data: Array<String>) {
-
-        //微信的头部 也是可以右侧IndexBar导航索引的，
         // 但是它不需要被ItemDecoration设一个标题titile
         mDatas.add(CityBean("新的朋友", true).setBaseLetter(INDEX_STRING_TOP) as CityBean)
         mDatas.add(CityBean("群聊", true).setBaseLetter(INDEX_STRING_TOP) as CityBean)
@@ -119,7 +117,7 @@ class AddressFragment : DataBindingFragment<FragmentAddressBinding>() {
                         setUid(name)
                         setAge(90)
                     }
-                    ChatActivity.intentTo(context, "u" + mToUser.getUid(), mToUser)
+                    context?.let { it1 -> ChatActivity.intentTo(it1, "u" + mToUser.getUid(), mToUser) }
                 }
 
 
@@ -131,8 +129,8 @@ class AddressFragment : DataBindingFragment<FragmentAddressBinding>() {
         }
 
         internal inner class ViewHodler(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val address: TextView = itemView.tvAddress
-            val content: LinearLayout = itemView.content
+            val address: TextView = itemView.findViewById(R.id.tvAddress)
+            val content: LinearLayout = itemView.findViewById(R.id.content)
         }
     }
 

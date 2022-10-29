@@ -1,6 +1,8 @@
 package io.dourl.mqtt.ui.adpater.chat;
 
 
+import com.drakeet.multitype.MultiTypeAdapter;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,7 +18,6 @@ import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.ImageBody;
 import io.dourl.mqtt.utils.log.LoggerUtil;
-import me.drakeet.multitype.MultiTypeAdapter;
 
 
 public class ChatAdapter extends MultiTypeAdapter {
@@ -79,17 +80,6 @@ public class ChatAdapter extends MultiTypeAdapter {
     }
 
 
-    @NonNull
-    @Override
-    public Class onFlattenClass(@NonNull Object item) {
-        BaseMsgBody body = ((MessageModel) item).getBody();
-        if (body == null) {
-            //BugTagsUtils.sendException(new IllegalStateException(GsonManager.getGson().toJson(item)));
-            return BaseMsgBody.class;
-        } else {
-            return body.getClass();
-        }
-    }
 
     public void setData(List<MessageModel> messages) {
         if (messages != null && !messages.isEmpty()) {
