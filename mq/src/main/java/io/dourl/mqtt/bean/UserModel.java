@@ -48,7 +48,7 @@ public class UserModel implements BaseObject, Parcelable {
     protected int max_exp;
     protected int id_change_times;
     protected int from_third;
-    protected Integer is_cryptomate_agent = 0;//是否为代理商0：不是 1：是
+
 
     /**
      * 性别 0:未知 1:男 2:女
@@ -91,12 +91,6 @@ public class UserModel implements BaseObject, Parcelable {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
-    }
-
-    public boolean isAgent() {
-        if (is_cryptomate_agent == null)
-            return false;
-        return is_cryptomate_agent == 1;
     }
 
     public String getName() {
@@ -387,15 +381,7 @@ public class UserModel implements BaseObject, Parcelable {
         dest.writeInt(this.max_exp);
         dest.writeInt(this.id_change_times);
         dest.writeInt(this.from_third);
-        dest.writeValue(this.is_cryptomate_agent);
-    }
 
-    public Integer getIs_cryptomate_agent() {
-        return this.is_cryptomate_agent;
-    }
-
-    public void setIs_cryptomate_agent(Integer is_cryptomate_agent) {
-        this.is_cryptomate_agent = is_cryptomate_agent;
     }
 
     protected UserModel(Parcel in) {
@@ -425,7 +411,7 @@ public class UserModel implements BaseObject, Parcelable {
         this.max_exp = in.readInt();
         this.id_change_times = in.readInt();
         this.from_third = in.readInt();
-        this.is_cryptomate_agent = (Integer) in.readValue(Integer.class.getClassLoader());
+
     }
 
     @Generated(hash = 49380387)
@@ -461,7 +447,6 @@ public class UserModel implements BaseObject, Parcelable {
         this.max_exp = max_exp;
         this.id_change_times = id_change_times;
         this.from_third = from_third;
-        this.is_cryptomate_agent = is_cryptomate_agent;
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {

@@ -15,10 +15,10 @@ import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.converter.PropertyConverter;
-import org.jetbrains.annotations.NotNull;
 
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.base.MqttBaseApp;
@@ -712,7 +712,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
 
     @Generated(hash = 115542965)
     public MessageModel(Long id, String msgid, MessageType type, @NotNull String fromUid, @NotNull String toUid, ClanModel clan, String clan_id, long time, long localTime, boolean isRead,
-            String sessionId, boolean isMine, Status sendStatus, boolean downloading, BaseMsgBody body) {
+                        String sessionId, boolean isMine, Status sendStatus, boolean downloading, BaseMsgBody body) {
         this.id = id;
         this.msgid = msgid;
         this.type = type;
