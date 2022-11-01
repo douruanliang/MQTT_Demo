@@ -53,6 +53,16 @@ public class SessionItemBinder extends ItemViewBinder<SessionModel, SessionItemB
     @Override
     public void onBindViewHolder(@NonNull SessionViewHolder sessionViewHolder, SessionModel sessionModel) {
         sessionViewHolder.bindData(sessionModel);
+        sessionViewHolder.itemView.setOnClickListener(view -> {
+            switch (sessionModel.getMsgType()) {
+                case CHAT_GROUP:
+                    GroupChatActivity.intentTo(view.getContext(), sessionModel.getSessionID(), sessionModel.getClan());
+                    break;
+                case CHAT_NORMAL:
+                    ChatActivity.intentTo(view.getContext(), sessionModel.getSessionID(), sessionModel.getUser());
+                    break;
+            }
+        });
     }
 
     public static class SessionViewHolder extends RecyclerView.ViewHolder {
@@ -104,7 +114,7 @@ public class SessionItemBinder extends ItemViewBinder<SessionModel, SessionItemB
                     if (user != null) {
                         // mImageViewAvatar.setImageUrl(user.getAvatar());
                         mTextViewName.setText(user.getName());
-                        mUserAgent.setVisibility(user.isAgent() ? View.VISIBLE : View.GONE);
+                        // mUserAgent.setVisibility(user.isAgent() ? View.VISIBLE : View.GONE);
                     }
                     mVipIcon.setVisibility(View.GONE);
                     mUnReceiveIcon.setVisibility(View.GONE);
@@ -131,7 +141,7 @@ public class SessionItemBinder extends ItemViewBinder<SessionModel, SessionItemB
             }
 
             setColor();
-             mTextViewTime.setText(MessageTimeUtils.formatDateTime(itemView.getContext(), data.getCreateTime()));
+            mTextViewTime.setText(MessageTimeUtils.formatDateTime(itemView.getContext(), data.getCreateTime()));
             if (data.getUnreadMsgCount() > 0) {
                 mTextViewUnRead.setVisibility(View.VISIBLE);
                 String text = null;

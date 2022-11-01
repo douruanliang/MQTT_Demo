@@ -384,6 +384,10 @@ public class UserModel implements BaseObject, Parcelable {
 
     }
 
+    public void setMax_exp(Integer max_exp) {
+        this.max_exp = max_exp;
+    }
+
     protected UserModel(Parcel in) {
         this.uid = in.readString();
         this.username = in.readString();
@@ -414,13 +418,47 @@ public class UserModel implements BaseObject, Parcelable {
 
     }
 
-    @Generated(hash = 49380387)
+    @Keep
     public UserModel(String uid, String username, String fullname, String email, String mobile,
             String avatar, String avatar_thumb, int push_notify, String share_link, int age,
             String country, String province, String city, int level, int game_count, String birthday,
             String color, int gender, int is_friend, String country_code, int city_code,
             int save_static, int now_exp, int max_exp, int id_change_times, int from_third,
             Integer is_cryptomate_agent) {
+        this.uid = uid;
+        this.username = username;
+        this.fullname = fullname;
+        this.email = email;
+        this.mobile = mobile;
+        this.avatar = avatar;
+        this.avatar_thumb = avatar_thumb;
+        this.push_notify = push_notify;
+        this.share_link = share_link;
+        this.age = age;
+        this.country = country;
+        this.province = province;
+        this.city = city;
+        this.level = level;
+        this.game_count = game_count;
+        this.birthday = birthday;
+        this.color = color;
+        this.gender = gender;
+        this.is_friend = is_friend;
+        this.country_code = country_code;
+        this.city_code = city_code;
+        this.save_static = save_static;
+        this.now_exp = now_exp;
+        this.max_exp = max_exp;
+        this.id_change_times = id_change_times;
+        this.from_third = from_third;
+    }
+
+    @Generated(hash = 161751038)
+    public UserModel(String uid, String username, String fullname, String email, String mobile,
+            String avatar, String avatar_thumb, int push_notify, String share_link, int age,
+            String country, String province, String city, int level, int game_count, String birthday,
+            String color, int gender, int is_friend, String country_code, int city_code,
+            int save_static, int now_exp, int max_exp, int id_change_times, int from_third) {
         this.uid = uid;
         this.username = username;
         this.fullname = fullname;

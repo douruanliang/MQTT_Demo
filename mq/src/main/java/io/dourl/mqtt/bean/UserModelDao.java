@@ -48,7 +48,6 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
         public final static Property Max_exp = new Property(23, int.class, "max_exp", false, "MAX_EXP");
         public final static Property Id_change_times = new Property(24, int.class, "id_change_times", false, "ID_CHANGE_TIMES");
         public final static Property From_third = new Property(25, int.class, "from_third", false, "FROM_THIRD");
-        public final static Property Is_cryptomate_agent = new Property(26, Integer.class, "is_cryptomate_agent", false, "IS_CRYPTOMATE_AGENT");
     }
 
 
@@ -89,8 +88,7 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
                 "\"NOW_EXP\" INTEGER NOT NULL ," + // 22: now_exp
                 "\"MAX_EXP\" INTEGER NOT NULL ," + // 23: max_exp
                 "\"ID_CHANGE_TIMES\" INTEGER NOT NULL ," + // 24: id_change_times
-                "\"FROM_THIRD\" INTEGER NOT NULL ," + // 25: from_third
-                "\"IS_CRYPTOMATE_AGENT\" INTEGER);"); // 26: is_cryptomate_agent
+                "\"FROM_THIRD\" INTEGER NOT NULL );"); // 25: from_third
     }
 
     /** Drops the underlying database table. */
@@ -184,11 +182,6 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
         stmt.bindLong(24, entity.getMax_exp());
         stmt.bindLong(25, entity.getId_change_times());
         stmt.bindLong(26, entity.getFrom_third());
- 
-        Integer is_cryptomate_agent = entity.getIs_cryptomate_agent();
-        if (is_cryptomate_agent != null) {
-            stmt.bindLong(27, is_cryptomate_agent);
-        }
     }
 
     @Override
@@ -276,11 +269,6 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
         stmt.bindLong(24, entity.getMax_exp());
         stmt.bindLong(25, entity.getId_change_times());
         stmt.bindLong(26, entity.getFrom_third());
- 
-        Integer is_cryptomate_agent = entity.getIs_cryptomate_agent();
-        if (is_cryptomate_agent != null) {
-            stmt.bindLong(27, is_cryptomate_agent);
-        }
     }
 
     @Override
@@ -316,8 +304,7 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
             cursor.getInt(offset + 22), // now_exp
             cursor.getInt(offset + 23), // max_exp
             cursor.getInt(offset + 24), // id_change_times
-            cursor.getInt(offset + 25), // from_third
-            cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26) // is_cryptomate_agent
+            cursor.getInt(offset + 25) // from_third
         );
         return entity;
     }
@@ -350,7 +337,6 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
         entity.setMax_exp(cursor.getInt(offset + 23));
         entity.setId_change_times(cursor.getInt(offset + 24));
         entity.setFrom_third(cursor.getInt(offset + 25));
-        entity.setIs_cryptomate_agent(cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26));
      }
     
     @Override
