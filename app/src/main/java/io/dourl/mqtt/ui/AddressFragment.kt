@@ -17,7 +17,8 @@ import io.dourl.mqtt.decoration.DividerItemDecoration
 import io.dourl.mqtt.decoration.LetterCategoryDecoration
 import io.dourl.mqtt.helper.IIndexBarDataHelper
 import io.dourl.mqtt.helper.IndexBarDataHelperImpl
-
+import io.dourl.mqtt.manager.LoginManager
+import io.dourl.mqtt.model.ClanModel
 
 
 private const val ARG_PARAM1 = "param1"
@@ -61,11 +62,10 @@ class AddressFragment : DataBindingFragment<FragmentAddressBinding>() {
     override fun getLayoutId(): Int = R.layout.fragment_address
 
     override fun injectViewModel() {
-
+        initDatas(resources.getStringArray(R.array.provinces));
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        initDatas(resources.getStringArray(R.array.provinces));
         //先排序
         mDataHelper.sortSourceDatas(mDatas)
         //汉语->拼音
@@ -111,13 +111,26 @@ class AddressFragment : DataBindingFragment<FragmentAddressBinding>() {
             holder.address.text = name
             holder.content.setOnClickListener {
                 // Toast.makeText(context, "pos:$position", Toast.LENGTH_SHORT).show()
-                if (name.equals("boss") || name.equals("lenovo") ) {
+                // 测试 非自己
+                if ((name == "boss" || name =="xiaomi"|| name == "lenovo")&& name != LoginManager.getCurrentUserId()) {
                     val mToUser = UserModel()
                     mToUser.apply {
-                        setUid(name)
-                        setAge(90)
+                        uid =name
+                        fullname = name
+                        age =90
                     }
                     context?.let { it1 -> ChatActivity.intentTo(it1, "u" + mToUser.getUid(), mToUser) }
+                }
+
+                if(name == "kamen_qun"){
+                    val clanModel = ClanModel()
+                    clanModel.id = name
+                    clanModel.leader = 120
+                    clanModel.name = name
+
+                    context?.let { it1 ->
+                        GroupChatActivity.intentTo(it1, clanModel.id, clanModel)
+                    }
                 }
 
 

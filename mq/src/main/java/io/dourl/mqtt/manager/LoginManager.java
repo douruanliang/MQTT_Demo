@@ -139,11 +139,11 @@ public class LoginManager {
         UserModel  mFromUser = new UserModel();
         mFromUser.setUid(getCurrentUserId());
         mFromUser.setAge(30);
-        mFromUser.setFullname("战boss千年-boss");
+        mFromUser.setFullname(getCurrentUserId()+"千年-boss");
         return mFromUser;
     }
 
     public static String getCurrentUserId() {
-        return "lenovo";
+        return "boss";
     }
 }

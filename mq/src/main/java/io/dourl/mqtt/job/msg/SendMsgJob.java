@@ -12,7 +12,7 @@ import java.util.UUID;
 import io.dourl.http.api.SendMsgApis;
 import io.dourl.http.model.BaseResponse;
 import io.dourl.http.retrofit.RetrofitManager;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
@@ -100,8 +100,8 @@ public class SendMsgJob extends BaseMessageJob {
         }
         switch (mMessageModel.getBodyType()) {
             case TYPE_IMAGE: {//图片需要压缩
-                File imageFile = MediaFilesUtils.getSessionImageFile(BaseApp.getApp(), mMessageModel.getSessionId());
-                mMessageModel.setLocalPath(ImageUtils.scaleImageFile(BaseApp.getApp(), file, imageFile,
+                File imageFile = MediaFilesUtils.getSessionImageFile(MqttBaseApp.getApp(), mMessageModel.getSessionId());
+                mMessageModel.setLocalPath(ImageUtils.scaleImageFile(MqttBaseApp.getApp(), file, imageFile,
                         Constants.IMAGE_SCALE_SIZE, Constants.IMAGE_SCALE_SIZE).getPath());
                 final BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
@@ -123,7 +123,7 @@ public class SendMsgJob extends BaseMessageJob {
                 int r = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION));
                 Bitmap bm = retriever.getFrameAtTime(0);
                 retriever.release();
-                File coverFile = MediaFilesUtils.getSessionImageFile(BaseApp.getApp(), mMessageModel.getSessionId());
+                File coverFile = MediaFilesUtils.getSessionImageFile(MqttBaseApp.getApp(), mMessageModel.getSessionId());
                 ImageUtils.writeBitmapToFile(bm, Bitmap.CompressFormat.JPEG, 80, coverFile);
                 VideoBody videoBody = (VideoBody) mMessageModel.getBody();
                 videoBody.setCoverPath(coverFile.getPath());

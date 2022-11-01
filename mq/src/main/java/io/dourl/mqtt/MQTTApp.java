@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import io.dourl.http.HttpApiBase;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.utils.DeviceInfoUtils;
 
@@ -22,7 +22,7 @@ public class MQTTApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        BaseApp.init(this);
+        MqttBaseApp.init(this);
         HttpApiBase.init(this);
         Constants.SCREENWIDTH = DeviceInfoUtils.getScreenWidth(this);
 

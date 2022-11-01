@@ -9,7 +9,7 @@ import android.content.Context;
  * @author dourl
  * @date 2022/2/24
  */
-public class BaseApp {
+public class MqttBaseApp {
     @SuppressLint("StaticFieldLeak")
     private static Context sApp;
 

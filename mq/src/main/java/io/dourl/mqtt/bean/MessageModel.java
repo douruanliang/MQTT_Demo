@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import android.text.Spannable;
 
-import androidx.annotation.Keep;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -22,7 +21,7 @@ import org.greenrobot.greendao.converter.PropertyConverter;
 import org.jetbrains.annotations.NotNull;
 
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.base.BaseObject;
 import io.dourl.mqtt.model.ClanModel;
 import io.dourl.mqtt.model.message.ReceiveMessage;
@@ -202,7 +201,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getPushBody() {
         if (body != null) {
-            return GSON.toJson(new ReceiveMessage(type,body,fromUid,clan_id));
+            return GSON.toJson(new ReceiveMessage(type,body,from));
         }
         return "";
     }
@@ -237,20 +236,20 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         switch (getBodyType()) {
             case TYPE_TEXT:
                 Spannable builder;
-                builder = TextBodyContentUtils.getSpannableContent(BaseApp.getApp(), ((TextBody) body).getContent());
+                builder = TextBodyContentUtils.getSpannableContent(MqttBaseApp.getApp(), ((TextBody) body).getContent());
                 return builder.toString();
             case TYPE_IMAGE:
             case TYPE_A_IMAGE:
-                result = BaseApp.getApp().getString(R.string.image_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.image_content_desc);
                 break;
             case TYPE_AUDIO:
-                result = BaseApp.getApp().getString(R.string.audio_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.audio_content_desc);
                 break;
             case TYPE_VIDEO:
-                result = BaseApp.getApp().getString(R.string.video_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.video_content_desc);
                 break;
             case TYPE_FANCY_SMILE_BALL:
-                result = BaseApp.getApp().getString(R.string.empty_emoji_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.empty_emoji_content_desc);
                 break;
             case TYPE_CHAT_REJECT:
             case TYPE_GROUP_ADD_USER:
@@ -277,11 +276,11 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
                 break;
             case TYPE_RED_PACKET:
                 RedPacketBody.ContentEntity contentEntity = ((RedPacketBody) body).getContent().get(0);
-                result = BaseApp.getApp().getString(R.string.red_pkg_content_desc, contentEntity.getCoin_type().toUpperCase(), contentEntity.getC());
+                result = MqttBaseApp.getApp().getString(R.string.red_pkg_content_desc, contentEntity.getCoin_type().toUpperCase(), contentEntity.getC());
                 break;
 
             case TYPE_RED_PACKET_COLLECT:
-                result = ((RedPacketOpenBody) body).createSpan(BaseApp.getApp()).toString();
+                result = ((RedPacketOpenBody) body).createSpan(MqttBaseApp.getApp()).toString();
                 break;
         }
         return result;

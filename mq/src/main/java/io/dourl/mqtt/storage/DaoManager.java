@@ -7,7 +7,7 @@ import androidx.annotation.WorkerThread;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import io.dourl.mqtt.BuildConfig;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.DaoMaster;
 import io.dourl.mqtt.bean.DaoSession;
@@ -57,7 +57,7 @@ public class DaoManager {
         }
         if (mDaoSession == null) {
             String name = "implus" + LoginManager.getInstance().getCurrentUserId();
-            DbOpenHelper helper = new DbOpenHelper(BaseApp.getApp(), name, null);
+            DbOpenHelper helper = new DbOpenHelper(MqttBaseApp.getApp(), name, null);
             helper.close();
             SQLiteDatabase db = helper.getWritableDatabase();
             mDaoMaster = new DaoMaster(db);

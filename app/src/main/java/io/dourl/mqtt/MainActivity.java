@@ -12,8 +12,10 @@ import androidx.fragment.app.FragmentTransaction;
 import io.dourl.mqtt.databinding.ActivityMainBinding;
 import io.dourl.mqtt.manager.MqttManager;
 import io.dourl.mqtt.ui.AddressFragment;
+import io.dourl.mqtt.ui.BaseActivity;
+import io.dourl.mqtt.ui.SessionFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
     public static final int TO_POST = 4; // 发帖
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private HomeFragment mHomeFragment;
     private SocialFragment mSocialFragment;
+    private SessionFragment mSessionFragment;
     private AddressFragment mAddressFragment;
     private MyFragment myFragment;
     private Fragment mContent;
@@ -69,10 +72,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (mHomeFragment == null)
                 mHomeFragment = HomeFragment.newInstance();
             switchContent(mHomeFragment);
-        } else if (startPage == SocialFragment.Companion.getTO_CIRCLE()) {
-            if (mSocialFragment == null)
-                mSocialFragment = SocialFragment.newInstance();
-            switchContent(mSocialFragment);
+        } else if (startPage == SessionFragment.Companion.getTO_CIRCLE()) {
+            if (mSessionFragment == null)
+                mSessionFragment = SessionFragment.newInstance();
+            switchContent(mSessionFragment);
         } else if (startPage == AddressFragment.Companion.getTO_ADDRESS()) {
             if (mAddressFragment == null)
                 mAddressFragment = AddressFragment.newInstance();

@@ -27,7 +27,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
 
     @Override
     public void run() {
-        if (!LoginManager.getInstance().isLogin()) {
+        if (!LoginManager.isLogin()) {
             Log.d(TAG, "not login! do nothing when receive msg");
             return;
         }
@@ -53,7 +53,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
                 MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
                 break;
             case CHAT_GROUP:
-                if (parsedMsg.getFromUid().equals(LoginManager.getInstance().getCurrentUserId()))
+                if (parsedMsg.getFromUid().equals(LoginManager.getCurrentUserId()))
                     break;
                 MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
                 break;

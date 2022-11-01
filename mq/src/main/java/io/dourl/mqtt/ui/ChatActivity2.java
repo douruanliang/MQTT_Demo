@@ -66,7 +66,7 @@ import io.reactivex.functions.Consumer;
  * @author dourl
  * @date 2022/3/8
  */
-public class ChatActivity2 extends BaseActivity implements View.OnClickListener, RecordView.AudioRecordListener {
+public class ChatActivity2 extends BaseActivity {
     private static final String TAG = "ChatActivity";
     RecyclerView mRecyclerView;
     TextView noticeContent;
@@ -116,7 +116,7 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener,
         context.startActivity(intent);
     }
 
-
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -330,7 +330,7 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener,
             // sendEmptyTxtMessage();
         }
         if (!mBaseUser.isFriend()) {
-            /*HINT_LIMIT--;
+            *//*HINT_LIMIT--;
             if (HINT_LIMIT == -1) {
                 new ChatHintDialog(this, mMainLayout, new ChatHintDialog.OnFunClickListener() {
                     @Override
@@ -339,7 +339,7 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener,
                         doContactsAction();
                     }
                 }).show();
-            }*/
+            }*//*
         }
     }
 
@@ -510,5 +510,5 @@ public class ChatActivity2 extends BaseActivity implements View.OnClickListener,
     @Override
     public void recordFinished(String path, int time) {
         MessageManager.getInstance().sendAudioMessage(mBaseUser, path, time);
-    }
+    }*/
 }

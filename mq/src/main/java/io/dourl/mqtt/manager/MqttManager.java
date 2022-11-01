@@ -12,7 +12,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.concurrent.Future;
 
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.core.ActionListener;
 import io.dourl.mqtt.core.MqttCallbackHandler;
 import io.dourl.mqtt.core.MqttConstant;
@@ -50,8 +50,8 @@ public class MqttManager {
             Log.e(TAG, "user not login");
             return;
         }
-        String cId = LoginManager.getInstance().getCurrentUserId();
-        mqttAndroidClient = new MqttAndroidClient(BaseApp.getApp(),
+        String cId = LoginManager.getCurrentUserId();
+        mqttAndroidClient = new MqttAndroidClient(MqttBaseApp.getApp(),
                 MqttConstant.URI, cId);
         if (BuildConfig.DEBUG) {
             mqttAndroidClient.setTraceCallback(new MqttTraceCallback());
@@ -104,7 +104,7 @@ public class MqttManager {
         mqttAndroidClient.setCallback(new MqttCallbackHandler());
         try {
             return mqttAndroidClient.connect(conOpt, null,
-                    new ActionListener((Application) BaseApp.getApp(), ActionListener.Action.CONNECT, null));
+                    new ActionListener((Application) MqttBaseApp.getApp(), ActionListener.Action.CONNECT, null));
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -173,8 +173,9 @@ public class MqttManager {
     public static void connectAndSubinJob() {
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
                 TopicUtils.getImTopic(), 1, true));
+        //测试群
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
-                TopicUtils.getNewsTopic(), 1, true));
+                TopicUtils.getGimTopic("kamen_qun"), 1, true));
     }
 
     public static void wakeMqtt() {

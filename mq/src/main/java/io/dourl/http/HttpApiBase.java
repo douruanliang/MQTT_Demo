@@ -4,15 +4,16 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import org.eclipse.paho.android.service.BuildConfig;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import io.dourl.http.api.CommandInterface;
 import io.dourl.http.callback.CallAdapterFactory;
 import io.dourl.http.retrofit.RetrofitManager;
-import io.dourl.mqtt.BuildConfig;
 import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.utils.StorageUtils;
@@ -30,9 +31,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HttpApiBase {
     protected static final int LIMIT = 20;
     private static SharedPreferences sp;
+
     public static String getSecureBaseUrl() {
         // return HOST == 0 ? "https://" + IPS[HOST] : "http://" + IPS[HOST];
-        return "http://" + BuildConfig.API_HOST + ":9090";
+        return "http://" + io.dourl.mqtt.BuildConfig.API_HOST+ ":9090";
     }
 
     public static final int DEFAULT_MAX_CONNECTIONS = 5;
@@ -43,6 +45,7 @@ public class HttpApiBase {
 
     @SuppressWarnings("ConstantConditions")
     public static void init(Application context) {
+
         initHost(context);
         //LoggerUtil.d("Init old_host is %d, BuildConfig Host is %d", HOST/*BuildConfig.HOST*/);
         Cache cache = new Cache(StorageUtils.getOwnCacheDirectory(context, "net"), 50 * 1024 * 1024);
@@ -133,10 +136,6 @@ public class HttpApiBase {
         urlBuilder.addQueryParameter("app_channel", Constants.CHANNEL);
         urlBuilder.addQueryParameter("os_version", Constants.OS_VERSION);
         urlBuilder.addQueryParameter("os_name", "Android");
-        urlBuilder.addQueryParameter("network_country_iso", Constants.NETWORKCOUNTRYISO);
-        urlBuilder.addQueryParameter("network_operator", Constants.NETWORKOPERATOR);
-        urlBuilder.addQueryParameter("sim_operator", Constants.SIMOPERATOR);
-        urlBuilder.addQueryParameter("sim_country_iso", Constants.SIMCOUNTRYISO);
         urlBuilder.addQueryParameter("package_name", Constants.PACKAGE_NAME);
         if (LoginManager.isLogin()) {
             urlBuilder.addQueryParameter("access_token", LoginManager.getToken());

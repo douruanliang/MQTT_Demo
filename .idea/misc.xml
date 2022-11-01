@@ -7,17 +7,22 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.168" />
         <entry key="app/src/main/res/drawable/selector_main_tab_circle.xml" value="0.184" />
         <entry key="app/src/main/res/drawable/selector_publish.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/session_item_bg.xml" value="0.1575" />
+        <entry key="app/src/main/res/drawable/session_item_bg_top.xml" value="0.1195" />
         <entry key="app/src/main/res/drawable/shape_white_border_top.xml" value="0.184" />
+        <entry key="app/src/main/res/drawable/unreadnum_bg.xml" value="0.1575" />
         <entry key="app/src/main/res/layout/activity_compose.xml" value="0.23645833333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_test_main.xml" value="0.29739583333333336" />
         <entry key="app/src/main/res/layout/fragment_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_my.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_session.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_social.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_ads.xml" value="0.2598958333333333" />
         <entry key="app/src/main/res/layout/item_image.xml" value="0.2598958333333333" />
+        <entry key="app/src/main/res/layout/item_session.xml" value="0.20277777777777778" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.222265625" />
         <entry key="mq/src/main/res/drawable/audio_play_in.xml" value="0.1" />
         <entry key="mq/src/main/res/drawable/audio_play_out.xml" value="0.1855" />

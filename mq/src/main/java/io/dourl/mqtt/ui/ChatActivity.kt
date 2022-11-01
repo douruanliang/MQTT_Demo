@@ -208,6 +208,7 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setupInputBar() {
         mEditText!!.setOnKeyListener { v, keyCode, event -> // test on Mac virtual machine: ctrl map to KEYCODE_UNKNOWN
             if (keyCode == KeyEvent.KEYCODE_UNKNOWN) {

@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.google.gson.Gson;
 
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.event.ChatMsgEvent;
@@ -53,7 +53,7 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         }
         if (mMessageModel.getBodyType() == BodyType.TYPE_TEXT) {
             TextBody body = (TextBody) mMessageModel.getBody();
-            body.createSpan(BaseApp.getApp());
+            body.createSpan(MqttBaseApp.getApp());
         } else if (mMessageModel.getBodyType() == BodyType.TYPE_IMAGE) {
         } else if (mMessageModel.getBodyType() == BodyType.TYPE_AUDIO) {
             mMessageModel.setDownloading(true);

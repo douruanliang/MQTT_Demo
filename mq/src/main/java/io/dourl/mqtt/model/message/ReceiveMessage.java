@@ -53,11 +53,11 @@ public class ReceiveMessage implements BaseObject {
         return fromUid;
     }
 
-    public ReceiveMessage(MessageType type, BaseMsgBody body, String uid, String clan_id) {
+    public ReceiveMessage(MessageType type, BaseMsgBody body, UserModel from) {
         this.type = type;
         this.body = body;
-        this.fromUid = uid;
-        this.clan_id = clan_id;
+        this.from = from;
+        this.fromUid = from.getUid();
     }
 
     public ReceiveMessage(MessageType type, BaseMsgBody body,UserModel from, ClanModel clan) {
