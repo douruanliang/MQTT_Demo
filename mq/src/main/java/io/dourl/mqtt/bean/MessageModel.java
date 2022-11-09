@@ -10,7 +10,7 @@ import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.JsonAdapter;
-
+import io.dourl.mqtt.utils.AESUtil;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -201,7 +201,8 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getPushBody() {
         if (body != null) {
-            return GSON.toJson(new ReceiveMessage(type,body,from));
+            return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from)),toUid);
+           // return GSON.toJson(new ReceiveMessage(type,body,from));
         }
         return "";
     }
@@ -213,7 +214,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getGPushBody() {
         if (body != null) {
-            return GSON.toJson(new ReceiveMessage(type,body,from,clan));
+            return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from,clan)),toUid);
         }
         return "";
     }

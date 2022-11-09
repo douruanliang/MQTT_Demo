@@ -3,6 +3,8 @@ package io.dourl.mqtt.job.msg;
 
 import android.util.Log;
 
+import io.dourl.mqtt.utils.AESUtil;
+
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import io.dourl.mqtt.job.MsgJobManager;
@@ -22,7 +24,8 @@ public class ReceiveMsgJob extends BaseMessageJob {
 
     public ReceiveMsgJob(String topic, MqttMessage mqttMessage) {
         this.mTopic = topic;
-        this.mqttMessage = new String(mqttMessage.getPayload());
+        this.mqttMessage = AESUtil.INSTANCE.decrypt(new String(mqttMessage.getPayload()));
+       // this.mqttMessage = new String(mqttMessage.getPayload());
     }
 
     @Override
