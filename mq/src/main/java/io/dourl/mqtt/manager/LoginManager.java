@@ -12,8 +12,6 @@ import io.dourl.mqtt.model.BaseUser;
  */
 @SuppressWarnings("unused")
 public class LoginManager {
-
-    private static LoginManager mInstance;
     private BaseUser mCurrentUser;
 
     private static class Holder {
@@ -101,7 +99,6 @@ public class LoginManager {
     }
 
     private void clearMemory() {
-        mInstance = null;
         clearStaticProperties();
     }
 
@@ -144,6 +141,6 @@ public class LoginManager {
     }
 
     public static String getCurrentUserId() {
-        return "lenovo";
+        return "boss";
     }
 }
