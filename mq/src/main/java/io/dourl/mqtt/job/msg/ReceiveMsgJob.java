@@ -3,14 +3,13 @@ package io.dourl.mqtt.job.msg;
 
 import android.util.Log;
 
-import io.dourl.mqtt.utils.AESUtil;
-
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import io.dourl.mqtt.job.MsgJobManager;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.model.message.ReceiveMessage;
+import io.dourl.mqtt.utils.AESUtil;
 import io.dourl.mqtt.utils.TopicUtils;
 
 /**
@@ -24,8 +23,8 @@ public class ReceiveMsgJob extends BaseMessageJob {
 
     public ReceiveMsgJob(String topic, MqttMessage mqttMessage) {
         this.mTopic = topic;
-        this.mqttMessage = AESUtil.INSTANCE.decrypt(new String(mqttMessage.getPayload()));
-       // this.mqttMessage = new String(mqttMessage.getPayload());
+        this.mqttMessage = new String(mqttMessage.getPayload());
+        // this.mqttMessage = new String(mqttMessage.getPayload());
     }
 
     @Override
@@ -38,12 +37,12 @@ public class ReceiveMsgJob extends BaseMessageJob {
 //             Log.d(TAG,(mTopic + "is not sub by client!!!");
 //            return;
 //        }
-        String msgString = mqttMessage;
+        //String msgString = mqttMessage;
         //类型分类
-        if (mTopic.contains("user") || mTopic.contains("group")) {
-            processImMessage(msgString);
+        if (mTopic.contains("user")||mTopic.contains("group")) {
+            processImMessage(AESUtil.INSTANCE.decrypt(mqttMessage,mTopic));
         } else if (TopicUtils.getNewsTopic().equalsIgnoreCase(mTopic)) {
-            processNewsMessage(msgString);
+            processNewsMessage(mqttMessage);
         }
     }
 

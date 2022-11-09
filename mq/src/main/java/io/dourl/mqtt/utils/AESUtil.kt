@@ -79,6 +79,19 @@ object AESUtil {
         }
     }
 
+    fun decrypt(content: String,key: String): String? {
+        return try {
+            val cipher =
+                Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM)
+            val sKeySpec: Key = SecretKeySpec(generateKey(key), KEY_ALGORITHM)
+            cipher.init(Cipher.DECRYPT_MODE, sKeySpec, generateIV(base64Decode(IV_KEY))) // 初始化
+            val decrypted = cipher.doFinal(base64Decode(content))
+            String(decrypted)
+        } catch (e: Exception) {
+            throw RuntimeException(e)
+        }
+    }
+
     // 生成iv
     @Throws(Exception::class)
     fun generateIV(iv: ByteArray?): AlgorithmParameters? {
