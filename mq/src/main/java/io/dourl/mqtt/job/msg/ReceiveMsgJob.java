@@ -37,12 +37,12 @@ public class ReceiveMsgJob extends BaseMessageJob {
 //             Log.d(TAG,(mTopic + "is not sub by client!!!");
 //            return;
 //        }
-        //String msgString = mqttMessage;
+        String msgString = mqttMessage;
         //类型分类
-        if (mTopic.contains("user")||mTopic.contains("group")) {
-            processImMessage(AESUtil.INSTANCE.decrypt(mqttMessage,mTopic));
+        if (mTopic.contains("user") || mTopic.contains("group")) {
+            processImMessage(msgString);
         } else if (TopicUtils.getNewsTopic().equalsIgnoreCase(mTopic)) {
-            processNewsMessage(mqttMessage);
+            processNewsMessage(msgString);
         }
     }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.utils.chat.TextBodyContentUtils;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 
 public class ChatTextBinder extends ChatFrameBinder<TextBody, ChatTextBinder.ViewHolder> {
@@ -41,28 +42,8 @@ public class ChatTextBinder extends ChatFrameBinder<TextBody, ChatTextBinder.Vie
 
         public void bindData(TextBody textBody, boolean isMine) {
             if (textBody.getSpanContent() == null) {
-                final StringBuilder builder = new StringBuilder();
                 // 设置内容
-                Spannable span = null;
-//                for (TextBody.TextEntity textEntity : textBody.getContent()) {
-//                    if (textEntity.getT().equals("notice")) {
-//                        List<TextBody.TextEntity> notice = new Gson().fromJson(textEntity.getC(), new TypeToken<List<TextBody.TextEntity>>() {
-//                        }.getType());
-//                        String title = mContext.getResources().getString(R.string.chat_all);
-//                        builder.append(title);
-//                        builder.append("\n");
-//                        for (TextBody.TextEntity item : notice) {
-//                            builder.append(item.getC());
-//                        }
-//                        span = Spannable.Factory.getInstance().newSpannable(builder.toString());
-//                        span.setSpan(new ForegroundColorSpan(Color.BLUE), builder.indexOf(title), builder.indexOf(title) + title.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-//                    } else {
-//                        builder.append(textEntity.getC());
-//                        // 设置内容
-//                        span = ImSmileUtils.getSmiledText(mContext, builder.toString());
-//                    }
-//                }
-                span = TextBodyContentUtils.getSpannableContent(mContext, textBody.getContent());
+                Spannable span = TextBodyContentUtils.getSpannableContent(mContext, textBody.getContent());
                 mTextView.setText(span, TextView.BufferType.SPANNABLE);
             } else {
                 mTextView.setText(textBody.getSpanContent(), TextView.BufferType.SPANNABLE);

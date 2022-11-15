@@ -1,24 +1,25 @@
 package io.dourl.mqtt.utils
+
 import android.util.Base64
-import io.dourl.mqtt.manager.LoginManager
 import io.dourl.mqtt.utils.log.LoggerUtil
-import java.security.AlgorithmParameters
-import java.security.InvalidKeyException
-import java.security.Key
-import java.security.NoSuchProviderException
+import java.lang.Exception
+import java.lang.RuntimeException
+import java.security.*
+import java.util.*
 import javax.crypto.Cipher
+import javax.crypto.KeyGenerator
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 
 /**
- * 简单的加密
+ * JUST 专用
  */
 object AESUtil {
 
     private const val KEY_ALGORITHM = "AES"
     private const val TAG = "AESUtil"
-    private val KEY = LoginManager.getCurrentUserId() // 用户ID
+    private val KEY = "cE1id0ZhcWpkOycmeHE/dw=="
     private val IV_KEY = "bmBQNm5yMXYxQyV0L21yNQ=="
 
 
@@ -27,9 +28,9 @@ object AESUtil {
      */
     private const val DEFAULT_CIPHER_ALGORITHM = "AES/CBC/PKCS7Padding"
 
-    fun test(content: String) {//可以用来自测测试
+    fun test(content:String) {//可以用来自测测试
         LoggerUtil.e(TAG, "原文=$content")
-        val s1 = encrypt(content, "")
+        val s1 = encrypt(content)
         LoggerUtil.e(TAG, "加密结果=$s1")
         val decrypt = decrypt(s1)
         LoggerUtil.e(TAG, "解密结果=$decrypt")
@@ -38,13 +39,10 @@ object AESUtil {
     /**
      *加密
      */
-    fun encrypt(originalContent: String?, key: String?): String? {
+    fun encrypt(originalContent: String?): String? {
         return try {
             val cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM)
-            val skeySpec = SecretKeySpec(
-                key?.let { generateKey(it) },
-                KEY_ALGORITHM
-            ) //返回基本编码格式的密钥，如果此密钥不支持编码，则返回
+            val skeySpec = SecretKeySpec(base64Decode(KEY), KEY_ALGORITHM)
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, IvParameterSpec(base64Decode(IV_KEY)))
             val encrypted = cipher.doFinal(originalContent?.toByteArray())
             base64Encode(encrypted)
@@ -52,7 +50,6 @@ object AESUtil {
             throw RuntimeException(e)
 
         }
-
     }
 
     /**
@@ -70,7 +67,7 @@ object AESUtil {
         return try {
             val cipher =
                 Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM)
-            val sKeySpec: Key = SecretKeySpec(generateKey(KEY), KEY_ALGORITHM)
+            val sKeySpec: Key = SecretKeySpec(base64Decode(KEY), KEY_ALGORITHM)
             cipher.init(Cipher.DECRYPT_MODE, sKeySpec, generateIV(base64Decode(IV_KEY))) // 初始化
             val decrypted = cipher.doFinal(base64Decode(content))
             String(decrypted)
@@ -79,18 +76,6 @@ object AESUtil {
         }
     }
 
-    fun decrypt(content: String,key: String): String? {
-        return try {
-            val cipher =
-                Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM)
-            val sKeySpec: Key = SecretKeySpec(generateKey(key), KEY_ALGORITHM)
-            cipher.init(Cipher.DECRYPT_MODE, sKeySpec, generateIV(base64Decode(IV_KEY))) // 初始化
-            val decrypted = cipher.doFinal(base64Decode(content))
-            String(decrypted)
-        } catch (e: Exception) {
-            throw RuntimeException(e)
-        }
-    }
 
     // 生成iv
     @Throws(Exception::class)
@@ -115,43 +100,40 @@ object AESUtil {
         return Base64.decode(data, Base64.NO_WRAP)
     }
 
-    /**
-     * 补充字典
-     */
-    private const val DIC = "1231g81f5456hhssg84h1f9q3f2x789s"
 
-    @Throws(java.lang.Exception::class)
-    private fun generateKey(key: String): ByteArray? {
-        val dics = DIC.toByteArray(charset("UTF-8"))
-        val bkeys = key.toByteArray(charset("UTF-8"))
-        var keys = bkeys
-        val keylength = bkeys.size
-        if (keylength > 0 && keylength < 16) {
-            keys = ByteArray(16)
-            System.arraycopy(bkeys, 0, keys, 0, keylength)
-            for (i in keylength..15) {
-                keys[i] = dics[i]
+    /**
+     * 使用指定的字符串生成秘钥
+     */
+    fun getKeyByPass(keyRaw: String): String {
+        return try {
+            val kg = KeyGenerator.getInstance("AES")
+            // kg.init(128);//要生成多少位，只需要修改这里即可128, 192或256
+            //SecureRandom是生成安全随机数序列，password.getBytes()是种子，只要种子相同，序列就一样，所以生成的秘钥就一样。
+            kg.init(128, SecureRandom(keyRaw.toByteArray()))
+            val sk = kg.generateKey()
+            val b = sk.encoded
+            byteToHexString(b)
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+            ""
+        }
+    }
+
+    private fun byteToHexString(bytes: ByteArray): String {
+        val sb = StringBuffer()
+        for (i in bytes.indices) {
+            val strHex = Integer.toHexString(bytes[i].toInt())
+            if (strHex.length > 3) {
+                sb.append(strHex.substring(6))
+            } else {
+                if (strHex.length < 2) {
+                    sb.append("0$strHex")
+                } else {
+                    sb.append(strHex)
+                }
             }
         }
-        if (keylength > 16 && keylength < 24) {
-            keys = ByteArray(24)
-            System.arraycopy(bkeys, 0, keys, 0, keylength)
-            for (i in keylength..23) {
-                keys[i] = dics[i]
-            }
-        }
-        if (keylength > 24 && keylength < 32) {
-            keys = ByteArray(32)
-            System.arraycopy(bkeys, 0, keys, 0, keylength)
-            for (i in keylength..31) {
-                keys[i] = dics[i]
-            }
-        }
-        if (keylength > 32) {
-            keys = ByteArray(32)
-            System.arraycopy(bkeys, 0, keys, 0, 32)
-        }
-        return keys
+        return sb.toString()
     }
 
 

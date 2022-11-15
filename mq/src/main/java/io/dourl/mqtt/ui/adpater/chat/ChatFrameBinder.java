@@ -32,6 +32,7 @@ import io.dourl.mqtt.model.message.chat.HintBody;
 import io.dourl.mqtt.model.message.chat.ImageBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.message.chat.VideoBody;
+import io.dourl.mqtt.utils.DeviceInfoUtils;
 import io.dourl.mqtt.utils.IMTextBodyUtils;
 import io.dourl.mqtt.utils.log.LoggerUtil;
 
@@ -180,7 +181,7 @@ public abstract class ChatFrameBinder<Content extends BaseMsgBody, SubViewHolder
         popupView.setOutsideTouchable(true);
         popupView.setBackgroundDrawable(new BitmapDrawable(view.getContext().getResources(), (Bitmap) null));
         popView.measure(0, 0);
-        //popupView.showAsDropDown(view, (view.getWidth() - popView.getMeasuredWidth()) / 2, -view.getHeight() - popView.getMeasuredHeight() - (float)DeviceInfoUtils.dip2px(5));
+        popupView.showAsDropDown(view, (view.getWidth() - popView.getMeasuredWidth()) / 2, (-view.getHeight() - popView.getMeasuredHeight() -  DeviceInfoUtils.dip2px(view.getContext(), 5)));
 
     }
 

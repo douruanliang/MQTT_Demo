@@ -201,8 +201,8 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getPushBody() {
         if (body != null) {
-            return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from)),"user/"+toUid);
-           // return GSON.toJson(new ReceiveMessage(type,body,from));
+            //return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from)),"user/"+toUid);
+            return GSON.toJson(new ReceiveMessage(type,body,from));
         }
         return "";
     }
@@ -214,7 +214,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getGPushBody() {
         if (body != null) {
-            return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from,clan)),"group/"+toUid);
+            return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from,clan)));
         }
         return "";
     }

@@ -8,7 +8,6 @@ import io.dourl.mqtt.model.BaseUser;
 /**
  * 已登录用户管理类
  * user信息存储到文件中
- * Created by Zhp on 2014/6/9.
  */
 @SuppressWarnings("unused")
 public class LoginManager {

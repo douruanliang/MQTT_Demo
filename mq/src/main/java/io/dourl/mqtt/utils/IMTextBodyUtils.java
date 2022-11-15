@@ -19,9 +19,8 @@ import io.dourl.mqtt.model.message.chat.HintBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
 
 /**
- * Created by zhangheng on 2018/3/20.
+ *
  */
-
 public class IMTextBodyUtils {
 
     public static List<TextBody.TextEntity> createTextBody(String content) {

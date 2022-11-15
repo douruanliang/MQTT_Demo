@@ -60,7 +60,6 @@ public class SendMsgJob extends BaseMessageJob {
             dbOp();
             EventBusManager.getInstance().post(new SessionEvent(mSession));
             doUpload();
-            dbOp();
             doSend();
         } catch (Exception e) {
             e.printStackTrace();
@@ -223,6 +222,7 @@ public class SendMsgJob extends BaseMessageJob {
             }
 
         }*/
+        dbOp();
         LoggerUtil.d("upload success, so do send");
     }
 
@@ -286,6 +286,7 @@ public class SendMsgJob extends BaseMessageJob {
     }
 
     protected void notifyNew() {
+        LoggerUtil.d(TAG,"notify New");
         EventBusManager.getInstance().post(new ChatMsgEvent(mMessageModel.getSessionId(), mMessageModel));
     }
 
@@ -296,6 +297,7 @@ public class SendMsgJob extends BaseMessageJob {
     }
 
     protected void dbOp() {
+        LoggerUtil.d(TAG,"db update");
         try {
             SessionDao.updateSendStatus(mSession.getSessionID(), mMessageModel.getSendStatus());
             MessageDao.insertOrUpdate(mMessageModel).await();
