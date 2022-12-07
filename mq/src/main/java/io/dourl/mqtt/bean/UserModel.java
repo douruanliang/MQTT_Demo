@@ -25,29 +25,29 @@ public class UserModel implements BaseObject, Parcelable {
     protected String uid;
     protected String username;
     protected String fullname;
-    protected String email;
-    protected String mobile;
+    protected transient String email;
+    protected transient String mobile;
     protected String avatar;
-    protected String avatar_thumb;
-    protected int push_notify;
-    protected String share_link;
-    protected int age;
-    protected String country;
-    protected String province;
-    protected String city;
-    protected int level;
-    protected int game_count;
-    protected String birthday;
-    protected String color;
-    protected int gender;
-    protected int is_friend;
-    protected String country_code;
-    protected int city_code;
-    protected int save_static;//是否自动保存到相册
-    protected int now_exp;
-    protected int max_exp;
-    protected int id_change_times;
-    protected int from_third;
+    protected transient String avatar_thumb;
+    protected transient int push_notify;
+    protected transient String share_link;
+    protected transient int age;
+    protected transient String country;
+    protected transient String province;
+    protected transient String city;
+    protected transient int level;
+    protected transient int game_count;
+    protected transient String birthday;
+    protected transient String color;
+    protected transient int gender;
+    protected transient int is_friend;
+    protected transient String country_code;
+    protected transient int city_code;
+    protected transient int save_static;//是否自动保存到相册
+    protected transient int now_exp;
+    protected transient int max_exp;
+    protected transient int id_change_times;
+    protected transient int from_third;
 
 
     /**
@@ -453,38 +453,12 @@ public class UserModel implements BaseObject, Parcelable {
         this.from_third = from_third;
     }
 
-    @Generated(hash = 161751038)
-    public UserModel(String uid, String username, String fullname, String email, String mobile,
-            String avatar, String avatar_thumb, int push_notify, String share_link, int age,
-            String country, String province, String city, int level, int game_count, String birthday,
-            String color, int gender, int is_friend, String country_code, int city_code,
-            int save_static, int now_exp, int max_exp, int id_change_times, int from_third) {
+    @Generated(hash = 828527667)
+    public UserModel(String uid, String username, String fullname, String avatar) {
         this.uid = uid;
         this.username = username;
         this.fullname = fullname;
-        this.email = email;
-        this.mobile = mobile;
         this.avatar = avatar;
-        this.avatar_thumb = avatar_thumb;
-        this.push_notify = push_notify;
-        this.share_link = share_link;
-        this.age = age;
-        this.country = country;
-        this.province = province;
-        this.city = city;
-        this.level = level;
-        this.game_count = game_count;
-        this.birthday = birthday;
-        this.color = color;
-        this.gender = gender;
-        this.is_friend = is_friend;
-        this.country_code = country_code;
-        this.city_code = city_code;
-        this.save_static = save_static;
-        this.now_exp = now_exp;
-        this.max_exp = max_exp;
-        this.id_change_times = id_change_times;
-        this.from_third = from_third;
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {

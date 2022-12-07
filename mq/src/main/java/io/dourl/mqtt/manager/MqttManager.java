@@ -82,7 +82,9 @@ public class MqttManager {
             //userName = LoginManager.getToken() + "_2" +" Constants.DEVICEID";
             userName = LoginManager.getInstance().getCurrentUserId();
             //password = "DigestUtils.md5Hex(userName + LoginManager.getSecret())";
-            password = LoginManager.getSecret() + LoginManager.getInstance().getCurrentUserId();
+          //  password = LoginManager.getSecret() + LoginManager.getInstance().getCurrentUserId();
+            // 测试环境 TODO
+            password = LoginManager.getInstance().getCurrentUserId();
         } else {
             return null;
         }

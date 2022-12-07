@@ -24,7 +24,6 @@ public class ReceiveMsgJob extends BaseMessageJob {
     public ReceiveMsgJob(String topic, MqttMessage mqttMessage) {
         this.mTopic = topic;
         this.mqttMessage = new String(mqttMessage.getPayload());
-        // this.mqttMessage = new String(mqttMessage.getPayload());
     }
 
     @Override

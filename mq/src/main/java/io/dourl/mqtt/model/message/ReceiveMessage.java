@@ -53,6 +53,8 @@ public class ReceiveMessage implements BaseObject {
         return fromUid;
     }
 
+
+
     public ReceiveMessage(MessageType type, BaseMsgBody body, UserModel from) {
         this.type = type;
         this.body = body;
@@ -68,4 +70,6 @@ public class ReceiveMessage implements BaseObject {
         this.clan = clan;
         this.clan_id = clan.id;
     }
+
+
 }

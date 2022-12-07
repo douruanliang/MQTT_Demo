@@ -13,7 +13,6 @@ import javax.crypto.spec.SecretKeySpec
 
 
 /**
- * JUST 专用
  */
 object AESUtil {
 

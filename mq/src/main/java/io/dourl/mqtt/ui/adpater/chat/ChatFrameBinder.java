@@ -288,9 +288,9 @@ public abstract class ChatFrameBinder<Content extends BaseMsgBody, SubViewHolder
                 } else {
                     if (messageModel.getClan() != null) {
                         mNickNameLayout.setVisibility(View.VISIBLE);
-                        tvNickName.setText(messageModel.getFromUser().getFullNameOrUserName());
+                        tvNickName.setText(messageModel.getFrom().getFullNameOrUserName());
 
-                        BaseUser user = members.get(messageModel.getFromUser().getUid());
+                        BaseUser user = members.get(messageModel.getFrom().getUid());
                         if (user != null) {
                             tvNickName.setText(user.getDisplayName());
                             if (!TextUtils.isEmpty(user.levellogo)) {

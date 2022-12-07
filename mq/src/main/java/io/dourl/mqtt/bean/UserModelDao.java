@@ -25,29 +25,7 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
         public final static Property Uid = new Property(0, String.class, "uid", true, "UID");
         public final static Property Username = new Property(1, String.class, "username", false, "USERNAME");
         public final static Property Fullname = new Property(2, String.class, "fullname", false, "FULLNAME");
-        public final static Property Email = new Property(3, String.class, "email", false, "EMAIL");
-        public final static Property Mobile = new Property(4, String.class, "mobile", false, "MOBILE");
-        public final static Property Avatar = new Property(5, String.class, "avatar", false, "AVATAR");
-        public final static Property Avatar_thumb = new Property(6, String.class, "avatar_thumb", false, "AVATAR_THUMB");
-        public final static Property Push_notify = new Property(7, int.class, "push_notify", false, "PUSH_NOTIFY");
-        public final static Property Share_link = new Property(8, String.class, "share_link", false, "SHARE_LINK");
-        public final static Property Age = new Property(9, int.class, "age", false, "AGE");
-        public final static Property Country = new Property(10, String.class, "country", false, "COUNTRY");
-        public final static Property Province = new Property(11, String.class, "province", false, "PROVINCE");
-        public final static Property City = new Property(12, String.class, "city", false, "CITY");
-        public final static Property Level = new Property(13, int.class, "level", false, "LEVEL");
-        public final static Property Game_count = new Property(14, int.class, "game_count", false, "GAME_COUNT");
-        public final static Property Birthday = new Property(15, String.class, "birthday", false, "BIRTHDAY");
-        public final static Property Color = new Property(16, String.class, "color", false, "COLOR");
-        public final static Property Gender = new Property(17, int.class, "gender", false, "GENDER");
-        public final static Property Is_friend = new Property(18, int.class, "is_friend", false, "IS_FRIEND");
-        public final static Property Country_code = new Property(19, String.class, "country_code", false, "COUNTRY_CODE");
-        public final static Property City_code = new Property(20, int.class, "city_code", false, "CITY_CODE");
-        public final static Property Save_static = new Property(21, int.class, "save_static", false, "SAVE_STATIC");
-        public final static Property Now_exp = new Property(22, int.class, "now_exp", false, "NOW_EXP");
-        public final static Property Max_exp = new Property(23, int.class, "max_exp", false, "MAX_EXP");
-        public final static Property Id_change_times = new Property(24, int.class, "id_change_times", false, "ID_CHANGE_TIMES");
-        public final static Property From_third = new Property(25, int.class, "from_third", false, "FROM_THIRD");
+        public final static Property Avatar = new Property(3, String.class, "avatar", false, "AVATAR");
     }
 
 
@@ -66,29 +44,7 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
                 "\"UID\" TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: uid
                 "\"USERNAME\" TEXT," + // 1: username
                 "\"FULLNAME\" TEXT," + // 2: fullname
-                "\"EMAIL\" TEXT," + // 3: email
-                "\"MOBILE\" TEXT," + // 4: mobile
-                "\"AVATAR\" TEXT," + // 5: avatar
-                "\"AVATAR_THUMB\" TEXT," + // 6: avatar_thumb
-                "\"PUSH_NOTIFY\" INTEGER NOT NULL ," + // 7: push_notify
-                "\"SHARE_LINK\" TEXT," + // 8: share_link
-                "\"AGE\" INTEGER NOT NULL ," + // 9: age
-                "\"COUNTRY\" TEXT," + // 10: country
-                "\"PROVINCE\" TEXT," + // 11: province
-                "\"CITY\" TEXT," + // 12: city
-                "\"LEVEL\" INTEGER NOT NULL ," + // 13: level
-                "\"GAME_COUNT\" INTEGER NOT NULL ," + // 14: game_count
-                "\"BIRTHDAY\" TEXT," + // 15: birthday
-                "\"COLOR\" TEXT," + // 16: color
-                "\"GENDER\" INTEGER NOT NULL ," + // 17: gender
-                "\"IS_FRIEND\" INTEGER NOT NULL ," + // 18: is_friend
-                "\"COUNTRY_CODE\" TEXT," + // 19: country_code
-                "\"CITY_CODE\" INTEGER NOT NULL ," + // 20: city_code
-                "\"SAVE_STATIC\" INTEGER NOT NULL ," + // 21: save_static
-                "\"NOW_EXP\" INTEGER NOT NULL ," + // 22: now_exp
-                "\"MAX_EXP\" INTEGER NOT NULL ," + // 23: max_exp
-                "\"ID_CHANGE_TIMES\" INTEGER NOT NULL ," + // 24: id_change_times
-                "\"FROM_THIRD\" INTEGER NOT NULL );"); // 25: from_third
+                "\"AVATAR\" TEXT);"); // 3: avatar
     }
 
     /** Drops the underlying database table. */
@@ -116,72 +72,10 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
             stmt.bindString(3, fullname);
         }
  
-        String email = entity.getEmail();
-        if (email != null) {
-            stmt.bindString(4, email);
-        }
- 
-        String mobile = entity.getMobile();
-        if (mobile != null) {
-            stmt.bindString(5, mobile);
-        }
- 
         String avatar = entity.getAvatar();
         if (avatar != null) {
-            stmt.bindString(6, avatar);
+            stmt.bindString(4, avatar);
         }
- 
-        String avatar_thumb = entity.getAvatar_thumb();
-        if (avatar_thumb != null) {
-            stmt.bindString(7, avatar_thumb);
-        }
-        stmt.bindLong(8, entity.getPush_notify());
- 
-        String share_link = entity.getShare_link();
-        if (share_link != null) {
-            stmt.bindString(9, share_link);
-        }
-        stmt.bindLong(10, entity.getAge());
- 
-        String country = entity.getCountry();
-        if (country != null) {
-            stmt.bindString(11, country);
-        }
- 
-        String province = entity.getProvince();
-        if (province != null) {
-            stmt.bindString(12, province);
-        }
- 
-        String city = entity.getCity();
-        if (city != null) {
-            stmt.bindString(13, city);
-        }
-        stmt.bindLong(14, entity.getLevel());
-        stmt.bindLong(15, entity.getGame_count());
- 
-        String birthday = entity.getBirthday();
-        if (birthday != null) {
-            stmt.bindString(16, birthday);
-        }
- 
-        String color = entity.getColor();
-        if (color != null) {
-            stmt.bindString(17, color);
-        }
-        stmt.bindLong(18, entity.getGender());
-        stmt.bindLong(19, entity.getIs_friend());
- 
-        String country_code = entity.getCountry_code();
-        if (country_code != null) {
-            stmt.bindString(20, country_code);
-        }
-        stmt.bindLong(21, entity.getCity_code());
-        stmt.bindLong(22, entity.getSave_static());
-        stmt.bindLong(23, entity.getNow_exp());
-        stmt.bindLong(24, entity.getMax_exp());
-        stmt.bindLong(25, entity.getId_change_times());
-        stmt.bindLong(26, entity.getFrom_third());
     }
 
     @Override
@@ -203,72 +97,10 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
             stmt.bindString(3, fullname);
         }
  
-        String email = entity.getEmail();
-        if (email != null) {
-            stmt.bindString(4, email);
-        }
- 
-        String mobile = entity.getMobile();
-        if (mobile != null) {
-            stmt.bindString(5, mobile);
-        }
- 
         String avatar = entity.getAvatar();
         if (avatar != null) {
-            stmt.bindString(6, avatar);
+            stmt.bindString(4, avatar);
         }
- 
-        String avatar_thumb = entity.getAvatar_thumb();
-        if (avatar_thumb != null) {
-            stmt.bindString(7, avatar_thumb);
-        }
-        stmt.bindLong(8, entity.getPush_notify());
- 
-        String share_link = entity.getShare_link();
-        if (share_link != null) {
-            stmt.bindString(9, share_link);
-        }
-        stmt.bindLong(10, entity.getAge());
- 
-        String country = entity.getCountry();
-        if (country != null) {
-            stmt.bindString(11, country);
-        }
- 
-        String province = entity.getProvince();
-        if (province != null) {
-            stmt.bindString(12, province);
-        }
- 
-        String city = entity.getCity();
-        if (city != null) {
-            stmt.bindString(13, city);
-        }
-        stmt.bindLong(14, entity.getLevel());
-        stmt.bindLong(15, entity.getGame_count());
- 
-        String birthday = entity.getBirthday();
-        if (birthday != null) {
-            stmt.bindString(16, birthday);
-        }
- 
-        String color = entity.getColor();
-        if (color != null) {
-            stmt.bindString(17, color);
-        }
-        stmt.bindLong(18, entity.getGender());
-        stmt.bindLong(19, entity.getIs_friend());
- 
-        String country_code = entity.getCountry_code();
-        if (country_code != null) {
-            stmt.bindString(20, country_code);
-        }
-        stmt.bindLong(21, entity.getCity_code());
-        stmt.bindLong(22, entity.getSave_static());
-        stmt.bindLong(23, entity.getNow_exp());
-        stmt.bindLong(24, entity.getMax_exp());
-        stmt.bindLong(25, entity.getId_change_times());
-        stmt.bindLong(26, entity.getFrom_third());
     }
 
     @Override
@@ -282,29 +114,7 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // uid
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // username
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // fullname
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // email
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // mobile
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // avatar
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // avatar_thumb
-            cursor.getInt(offset + 7), // push_notify
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // share_link
-            cursor.getInt(offset + 9), // age
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // country
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // province
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // city
-            cursor.getInt(offset + 13), // level
-            cursor.getInt(offset + 14), // game_count
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // birthday
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // color
-            cursor.getInt(offset + 17), // gender
-            cursor.getInt(offset + 18), // is_friend
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // country_code
-            cursor.getInt(offset + 20), // city_code
-            cursor.getInt(offset + 21), // save_static
-            cursor.getInt(offset + 22), // now_exp
-            cursor.getInt(offset + 23), // max_exp
-            cursor.getInt(offset + 24), // id_change_times
-            cursor.getInt(offset + 25) // from_third
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // avatar
         );
         return entity;
     }
@@ -314,29 +124,7 @@ public class UserModelDao extends AbstractDao<UserModel, String> {
         entity.setUid(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setUsername(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setFullname(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setEmail(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setMobile(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
-        entity.setAvatar(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setAvatar_thumb(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setPush_notify(cursor.getInt(offset + 7));
-        entity.setShare_link(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setAge(cursor.getInt(offset + 9));
-        entity.setCountry(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setProvince(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setCity(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setLevel(cursor.getInt(offset + 13));
-        entity.setGame_count(cursor.getInt(offset + 14));
-        entity.setBirthday(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setColor(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setGender(cursor.getInt(offset + 17));
-        entity.setIs_friend(cursor.getInt(offset + 18));
-        entity.setCountry_code(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setCity_code(cursor.getInt(offset + 20));
-        entity.setSave_static(cursor.getInt(offset + 21));
-        entity.setNow_exp(cursor.getInt(offset + 22));
-        entity.setMax_exp(cursor.getInt(offset + 23));
-        entity.setId_change_times(cursor.getInt(offset + 24));
-        entity.setFrom_third(cursor.getInt(offset + 25));
+        entity.setAvatar(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override
