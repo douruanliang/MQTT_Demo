@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.WorkerThread;
 
+import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import io.dourl.mqtt.BuildConfig;
@@ -56,12 +57,14 @@ public class DaoManager {
             return;
         }
         if (mDaoSession == null) {
-            String name = "implus" + LoginManager.getInstance().getCurrentUserId();
+            String name = "implus" + LoginManager.getCurrentUserId();
             DbOpenHelper helper = new DbOpenHelper(MqttBaseApp.getApp(), name, null);
-            helper.close();
-            SQLiteDatabase db = helper.getWritableDatabase();
+            //helper.close();
+           // SQLiteDatabase db = helper.getWritableDatabase();
+            Database db = helper.getEncryptedWritableDb(LoginManager.getCurrentUserId()); //加密
             mDaoMaster = new DaoMaster(db);
             mDaoSession = mDaoMaster.newSession();
+
             mSessionModelDao = mDaoSession.getSessionModelDao();
             mMessageModelDao = mDaoSession.getMessageModelDao();
             mUserModelDao = mDaoSession.getUserModelDao();
@@ -73,17 +76,14 @@ public class DaoManager {
     }
 
     public MessageModelDao getMsgDao() {
-//        initDb();
         return mMessageModelDao;
     }
 
     public SessionModelDao getSessionDao() {
-//        initDb();
         return mSessionModelDao;
     }
 
     public UserModelDao getUserDao() {
-//        initDb();
         return mUserModelDao;
     }
 
