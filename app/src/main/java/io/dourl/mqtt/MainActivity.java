@@ -41,6 +41,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         initView();
 
+        initTest();
+
+        System.out.println("----22222----");
+
+    }
+
+    private void initTest() {
+        System.out.println("----000----");
+        if (true){
+            return;
+        }
+        System.out.println("----11111----");
     }
 
     private void initView() {

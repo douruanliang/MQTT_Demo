@@ -1,6 +1,8 @@
 package io.dourl.mqtt.ui.adpater.chat;
 
 
+import android.nfc.Tag;
+
 import com.drakeet.multitype.MultiTypeAdapter;
 
 import androidx.annotation.NonNull;
@@ -14,7 +16,6 @@ import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.customenum.ManagerType;
 import io.dourl.mqtt.model.message.chat.AudioBody;
-import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.ImageBody;
 import io.dourl.mqtt.utils.log.LoggerUtil;
@@ -36,19 +37,13 @@ public class ChatAdapter extends MultiTypeAdapter {
         super(list);
         mDataList = list;
     }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        checkIsShowTime(position);
-        super.onBindViewHolder(holder, position);
-    }
-
     /**
      * 判断当前消息是否需要显示时间
      *
      * @param position
      */
     private void checkIsShowTime(int position) {
+        LoggerUtil.d(TAG,"checkIsShowTime  "+position);
         // 超出长度，直接返回
         if (position >= mDataList.size()) return;
 

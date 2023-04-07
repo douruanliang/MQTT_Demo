@@ -5,6 +5,7 @@ import android.text.Spannable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -50,7 +51,7 @@ public class ChatTextBinder extends ChatFrameBinder<TextBody, ChatTextBinder.Vie
             }
 
             mTextView.setMaxWidth(textWidth);
-            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mTextView.getLayoutParams();
+            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTextView.getLayoutParams();
             if (isMine) {
                 mTextView.setBackgroundResource(R.drawable.round_corner_rect_green);
                 mTextView.setTextColor(mContext.getResources().getColor(R.color.white));

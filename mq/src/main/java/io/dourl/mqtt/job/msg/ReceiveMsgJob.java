@@ -47,16 +47,17 @@ public class ReceiveMsgJob extends BaseMessageJob {
 
     private void processImMessage(String msgString) {
         ReceiveMessage parsedMsg = GsonManager.getGson().fromJson(msgString, ReceiveMessage.class);
+
         switch (parsedMsg.getType()) {
             case UN_RECOGNIZE:
                 break;
             case CHAT_NORMAL:
-                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
+                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(parsedMsg.getMsg()));
                 break;
             case CHAT_GROUP:
                 if (parsedMsg.getFromUid().equals(LoginManager.getCurrentUserId()))
                     break;
-                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
+                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(parsedMsg.getMsg()));
                 break;
 //            case TRANSACTION:
 //                break;

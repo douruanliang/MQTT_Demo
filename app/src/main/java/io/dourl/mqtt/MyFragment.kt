@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.*
+import kotlin.coroutines.suspendCoroutine
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +30,15 @@ class MyFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        lifecycleScope.launch {
+
+        }
+        val single = newSingleThreadContext("AA")
+
+        GlobalScope.launch(single) {
+
+        }
     }
 
     override fun onCreateView(
@@ -38,14 +50,7 @@ class MyFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MyFragment.
-         */
+
         val TO_ME: Int = 3 // 我
 
         @JvmStatic
@@ -59,5 +64,18 @@ class MyFragment : Fragment() {
 
         @JvmStatic
         fun newInstance() = MyFragment()
+    }
+
+    suspend fun testSuspendMethod(){
+
+        var out = suspendCoroutine<String> {
+             lifecycleScope.launch{
+                 println("我是lifecycleScope")
+                 it.resumeWith(Result.success("我是返回值"))
+             }
+            println("我是suspendCoroutine")
+        }
+
+        println("我是testSuspendMethod")
     }
 }

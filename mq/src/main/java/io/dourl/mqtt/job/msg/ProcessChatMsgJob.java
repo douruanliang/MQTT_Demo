@@ -38,13 +38,10 @@ public class ProcessChatMsgJob extends BaseMessageJob {
         this.mMsgString = msg;
     }
 
-
     @Override
     public void run() {
         if (mMessageModel == null && !TextUtils.isEmpty(mMsgString)) {
-            mMessageModel = null;
-            Gson gson = GsonManager.getGson();
-            mMessageModel = gson.fromJson(mMsgString, MessageModel.class);
+            mMessageModel = GsonManager.getGson().fromJson(mMsgString, MessageModel.class);
         }
         if (mMessageModel != null) {
             makeReceivedMessage(mMessageModel);

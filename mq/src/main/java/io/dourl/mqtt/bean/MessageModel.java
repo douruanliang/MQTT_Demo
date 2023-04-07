@@ -64,9 +64,9 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
     }
 
     /**
-     * msgId : cc1c6c0f95638ce19e14cc1b4856f1f412c08eab
+     * msgId : cc1c6c0f95638ce19e14cc1b4856f1f412c02eb
      * type : 1
-     * from : {"id":"10042","fullname":"鹏鹏","sessionIcon":"http://7xo8e9.com2.z0.glb.qiniucdn.com/avatar/2ddeafaeadc29828b9c77ef0e3281abe.jpg","sex":"1","truthful":"0","age":"25","intro":"你好地球"}
+     * from : {"id":"10042","fullname":"张三","sessionIcon":"http://7xo8e9.com2.z0.glb.qiniucdn.com/avatar/2ddeafaeadc29828b9c77ef0e3281abe.jpg","sex":"1","truthful":"0","age":"25","intro":"你好地球"}
      * body : {"type":1,"content":[{"t":"txt","c":"en"}]}
      * time : 1452063976626
      */
@@ -201,12 +201,10 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getPushBody() {
         if (body != null) {
-            //return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from)),"user/"+toUid);
-            return GSON.toJson(new ReceiveMessage(type,body,from));
+            return GSON.toJson(new ReceiveMessage(type,fromUid,this));
         }
         return "";
     }
-
 
     /**
      * 群发
@@ -214,7 +212,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getGPushBody() {
         if (body != null) {
-            return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from,clan)));
+          //  return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from,clan)));
         }
         return "";
     }
@@ -538,6 +536,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
                 ", body=" + body +
                 '}';
     }
+
 
     public Long getId() {
         return this.id;

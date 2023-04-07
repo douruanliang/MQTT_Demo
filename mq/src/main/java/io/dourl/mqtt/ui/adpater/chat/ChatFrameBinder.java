@@ -3,6 +3,7 @@ package io.dourl.mqtt.ui.adpater.chat;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.drakeet.multitype.ItemViewBinder;
 import java.util.HashMap;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.bean.MessageModel;
@@ -34,6 +36,7 @@ import io.dourl.mqtt.model.message.chat.TextBody;
 import io.dourl.mqtt.model.message.chat.VideoBody;
 import io.dourl.mqtt.utils.DeviceInfoUtils;
 import io.dourl.mqtt.utils.IMTextBodyUtils;
+import io.dourl.mqtt.utils.MessageTimeUtils;
 import io.dourl.mqtt.utils.log.LoggerUtil;
 
 
@@ -54,7 +57,6 @@ public abstract class ChatFrameBinder<Content extends BaseMsgBody, SubViewHolder
 
     abstract void onBindContentViewHolder(SubViewHolder holder, Content content, boolean isMine);
 
-
     @NonNull
     @Override
     public FrameHolder onCreateViewHolder(@NonNull LayoutInflater layoutInflater, @NonNull ViewGroup parent) {
@@ -72,6 +74,7 @@ public abstract class ChatFrameBinder<Content extends BaseMsgBody, SubViewHolder
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull FrameHolder holder, @NonNull final MessageModel messageModel) {
         mMessageModel = messageModel;
@@ -254,12 +257,12 @@ public abstract class ChatFrameBinder<Content extends BaseMsgBody, SubViewHolder
 
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void bindData(final MessageModel messageModel, HashMap<String, BaseUser> members, ManagerType type) {
             // 设置时间
             if (messageModel.isShowTime()) {
                 tvTime.setVisibility(View.VISIBLE);
-                //TODO 时间格式
-                // tvTime.setText(MessageTimeUtils.formatDateTime(mContext, messageModel.getTime()));
+                 tvTime.setText(MessageTimeUtils.formatDateTime(mContext, messageModel.getTime()));
             } else {
                 tvTime.setVisibility(View.GONE);
             }
