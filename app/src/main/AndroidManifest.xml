@@ -11,9 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MQTT_Demo"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ComposeActivity"
-            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

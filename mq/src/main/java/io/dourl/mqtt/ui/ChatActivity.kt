@@ -209,7 +209,7 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
         if (mEmojiMenuContainer!!.visibility == View.VISIBLE) {
             mEmojiMenuContainer!!.visibility = View.GONE
         } else {
-            Handler().postDelayed({ mEmojiMenuContainer!!.visibility = View.VISIBLE }, 50)
+            sHandler.postDelayed({ mEmojiMenuContainer!!.visibility = View.VISIBLE }, 50)
             hideKeyboard()
         }
     }

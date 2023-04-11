@@ -104,7 +104,7 @@ public class Constants{
     public static final int REQUEST_CODE_SCAN_QRCODE = 13;
 
 
-    public static String PROVIDER = ".fileprovider";
+    public static String PROVIDER = ".fileProvider";
 
     public static String FILE_PROVIDER;
 

@@ -577,7 +577,7 @@ public class AndroidUtils {
             throw new NullPointerException();
         }
         Uri uri;
-        if (Build.VERSION.SDK_INT >= 24) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             uri = FileProvider.getUriForFile(context.getApplicationContext(), authority, file);
         } else {
             uri = Uri.fromFile(file);

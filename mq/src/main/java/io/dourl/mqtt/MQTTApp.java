@@ -2,6 +2,7 @@ package io.dourl.mqtt;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,10 +23,9 @@ public class MQTTApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        initConstant();
         MqttBaseApp.init(this);
         HttpApiBase.init(this);
-        Constants.SCREENWIDTH = DeviceInfoUtils.getScreenWidth(this);
-
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             private int activityStartCount = 0;
@@ -73,5 +73,33 @@ public class MQTTApp extends Application {
 
             }
         });
+    }
+
+    private void initConstant() {
+        initSysConstant();
+    }
+
+    /**
+     * 初始化 系统常量
+     */
+    private void initSysConstant() {
+        Constants.PACKAGE_NAME = DeviceInfoUtils.getPackageName(getApplication());
+        Constants.FILE_PROVIDER = Constants.PACKAGE_NAME + Constants.PROVIDER;
+        Constants.VERSION_CODE = DeviceInfoUtils.getVersionCode(getApplication());
+        Constants.VERSION_NAME = DeviceInfoUtils.getVersionName(getApplication());
+        Constants.SCREENDENSITY = DeviceInfoUtils.getScreenDensity(getApplication());
+        Constants.SCREENWIDTH = DeviceInfoUtils.getScreenWidth(getApplication());
+        Constants.SCREENHEIGHT = DeviceInfoUtils.getScreenHeight(getApplication());
+        Constants.SCREENDENSITYDPI = DeviceInfoUtils.getScreenDensityDpi(getApplication());
+        Constants.SCREENSCALEDDENSIT = DeviceInfoUtils.getScreenScaledDensity(getApplication());
+        Constants.NETWORKCOUNTRYISO = DeviceInfoUtils.getNetworkCountryIso(getApplication());
+        Constants.SIMCOUNTRYISO = DeviceInfoUtils.getSimCountryIso(getApplication());
+        Constants.NETWORKOPERATOR = DeviceInfoUtils.getNetworkOperator(getApplication());
+        Constants.SIMOPERATOR = DeviceInfoUtils.getSimOperator(getApplication());
+        Constants.STATUSBAR_HEIGHT = DeviceInfoUtils.getStatusBarHeight(getApplication());
+    }
+
+    private Context getApplication() {
+        return this;
     }
 }
