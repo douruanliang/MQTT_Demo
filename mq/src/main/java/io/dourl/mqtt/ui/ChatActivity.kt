@@ -23,6 +23,7 @@ import io.dourl.mqtt.R
 import io.dourl.mqtt.bean.MessageModel
 import io.dourl.mqtt.bean.SessionModel
 import io.dourl.mqtt.bean.UserModel
+import io.dourl.mqtt.constants.Constants
 import io.dourl.mqtt.event.ChatMsgEvent
 import io.dourl.mqtt.event.MsgStatusUpdateEvent
 import io.dourl.mqtt.manager.EventBusManager
@@ -39,12 +40,15 @@ import io.dourl.mqtt.ui.adpater.chat.*
 import io.dourl.mqtt.ui.widge.*
 import io.dourl.mqtt.ui.widge.EmojiconMenuBase.EmojiconMenuListener
 import io.dourl.mqtt.ui.widge.RecordView.AudioRecordListener
+import io.dourl.mqtt.utils.AndroidUtils
 import io.dourl.mqtt.utils.AppContextUtil
 import io.dourl.mqtt.utils.ImSmileUtils
+import io.dourl.mqtt.utils.MediaFilesUtils
 import io.dourl.mqtt.utils.log.LoggerUtil
 import io.reactivex.functions.Consumer
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.io.File
 import java.util.*
 
 /**
@@ -64,8 +68,8 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
 
     @JvmField
     var mEditText: MultiLineEditText? = null
-    var mBtnSend: ImageView? = null
-    var btnAlbum: ImageButton? = null
+    lateinit var mBtnSend: ImageView
+    lateinit var btnAlbum: ImageButton
     var btnPhoto: ImageButton? = null
     var btnRecord: ImageButton? = null
     var mBtnFace: ImageButton? = null
@@ -86,6 +90,8 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
     protected var mMsgUnread: TextView? = null
     protected var ctrlPress = false
     private var rightShown = false
+    protected var mSendFile: File? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -282,7 +288,7 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
 
     protected open fun sendTxtMessage() {
         val text = mEditText!!.text.toString()
-        if (text != null && text.length > 0) {
+        if (text.length > 0) {
             MessageManager.getInstance().sendTextMessage(mBaseUser, text)
             mEditText!!.setText("")
             scrollToBottom()
@@ -301,6 +307,9 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
                 }).show();
             }*/
         }
+    }
+    protected open fun sendImageMessage(path: String?) {
+        MessageManager.getInstance().sendImageMessage(mBaseUser, path)
     }
 
     protected fun scrollToBottom() {
@@ -368,6 +377,8 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
         recordView?.setRecordStateView(recordStateView)
         recordView?.setAudioRecordListener(this)
         btnKeyboard = findViewById(R.id.btnKeyboard)
+        btnAlbum = findViewById(R.id.btnAlbum)
+        btnAlbum.setOnClickListener(this)
     }
 
     protected open fun init() {
@@ -397,7 +408,14 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
             hideKeyboard()
         } else if (id == R.id.btnKeyboard) {
             showRecordButton(false)
+        } else if (id == R.id.btnAlbum){
+            choosePhoto();
         }
+    }
+
+    private fun choosePhoto() {
+        mSendFile = MediaFilesUtils.getImageFile(this);
+        AndroidUtils.openAlbum(this, mSendFile, false, 0, 0, Constants.REQUEST_CODE_OPEN_ALBUM, Constants.FILE_PROVIDER);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -451,6 +469,24 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
     override fun recordFinished(path: String, time: Int) {
         MessageManager.getInstance().sendAudioMessage(mBaseUser, path, time)
     }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == Constants.REQUEST_CODE_OPEN_ALBUM) {
+            if (mSendFile != null) {
+             val filePath =   AndroidUtils.parseActivityMediaResult(this, mSendFile, requestCode, resultCode, data, Constants.REQUEST_CODE_TAKE_PHOTO, Constants.REQUEST_CODE_OPEN_ALBUM);
+                if (filePath != null) {
+                    sendImageMessage(filePath);
+                }
+            }
+        }
+    }
+
+
 
     companion object {
         private const val TAG = "ChatActivity"
