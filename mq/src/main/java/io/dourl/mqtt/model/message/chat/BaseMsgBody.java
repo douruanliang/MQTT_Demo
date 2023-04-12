@@ -87,10 +87,6 @@ public class BaseMsgBody implements BaseObject {
         return getServerUrl();
     }
 
-    public String getServerPath() {
-        return getServerUrl();
-    }
-
     protected String getServerUrl() {
         return null;
     }

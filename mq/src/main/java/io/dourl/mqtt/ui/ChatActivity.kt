@@ -283,7 +283,7 @@ open class ChatActivity : BaseActivity(), View.OnClickListener, AudioRecordListe
     }
 
     private fun toggleEditMode() {
-        Handler().postDelayed({ mEmojiMenuContainer!!.visibility = View.GONE }, 50)
+        sHandler.postDelayed({ mEmojiMenuContainer!!.visibility = View.GONE }, 50)
     }
 
     protected open fun sendTxtMessage() {

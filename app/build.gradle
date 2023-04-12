@@ -15,6 +15,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "API_KEY", "\"29814877-9b82885adcda5aa627867d3e2\""
+        buildConfigField "String", "APPLICATION_ID", "\"${applicationId}\""
 
     }
 

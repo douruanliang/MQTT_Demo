@@ -99,7 +99,7 @@ public class MQTTApp extends Application {
         Constants.STATUSBAR_HEIGHT = DeviceInfoUtils.getStatusBarHeight(getApplication());
     }
 
-    private Context getApplication() {
+    public Context getApplication() {
         return this;
     }
 }

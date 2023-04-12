@@ -60,8 +60,6 @@ public class MessageManager {
     public MessageModel sendTextMessage(UserModel baseUser, String content) {
         MessageModel textMessage = new MessageModel();
         textMessage.setTo(baseUser);
-     /*   //加密
-        content = AESUtil.INSTANCE.encrypt(content);*/
         TextBody body = new TextBody();
         List<TextBody.TextEntity> textEntities = IMTextBodyUtils.createTextBody(content);
         body.setContent(textEntities);

@@ -34,6 +34,15 @@
                 android:resource="@xml/file_path" />
         </provider>
 
+        <receiver android:name=".receiver.MqttReceiver"
+            android:enabled="true"
+            android:exported="false"
+            android:protectionLevel="signature">
+            <intent-filter>
+                <!-- 用于唤醒mqtt 注意 applicationId-->
+                <action android:name="${applicationId}.ACTION_WAKE_MQTT"/>
+            </intent-filter>></receiver>
+
     </application>
   
 </manifest>

@@ -115,7 +115,9 @@ dependencies {
     implementation 'com.google.protobuf:protobuf-lite:3.0.0'
 
 
-
+     //引入第三方库glide
+    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
 
 

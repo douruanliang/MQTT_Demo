@@ -174,7 +174,7 @@ public class MqttManager {
 
     public static void connectAndSubinJob() {
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
-                TopicUtils.getImTopic(), 1, true));
+                TopicUtils.getImTopic(), 1, false));
         //测试群
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
                 TopicUtils.getGimTopic("kamen_qun"), 1, true));

@@ -12,9 +12,13 @@
  */
 package io.dourl.mqtt.core;
 
+import android.content.Intent;
 import android.util.Log;
 
 
+import io.dourl.mqtt.MQTTApp;
+import io.dourl.mqtt.base.MqttBaseApp;
+import io.dourl.mqtt.constants.IntentAction;
 import io.dourl.mqtt.utils.MessageThreadPool;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -47,9 +51,9 @@ public class MqttCallbackHandler implements MqttCallback {
             if (BuildConfig.DEBUG) {
                 cause.printStackTrace();
             }
-            /*if (BaseApp.getApp() != null) {
-                BaseApp.getApp().sendBroadcast(new Intent(IntentAction.ACTION_WAKE_MQTT));
-            }*/
+            if (MqttBaseApp.getApp() != null) {
+                MqttBaseApp.getApp().sendBroadcast(new Intent(IntentAction.ACTION_WAKE_MQTT));
+            }
             EventBusManager.getInstance().post(new MqttOpFailEvent(ActionListener.Action.CONNECT));
         }
        Log.e(TAG,"connectionLost, cause: " + (cause != null ? cause.getMessage() : null));

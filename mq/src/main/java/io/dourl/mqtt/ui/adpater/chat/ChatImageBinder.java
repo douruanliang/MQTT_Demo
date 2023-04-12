@@ -1,6 +1,7 @@
 package io.dourl.mqtt.ui.adpater.chat;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import java.io.File;
+
 import io.dourl.mqtt.R;
 import io.dourl.mqtt.model.message.chat.ImageBody;
+import io.dourl.mqtt.utils.AppContextUtil;
 
 
 public class ChatImageBinder extends ChatFrameBinder<ImageBody, ChatImageBinder.ViewHolder> {
@@ -43,15 +51,16 @@ public class ChatImageBinder extends ChatFrameBinder<ImageBody, ChatImageBinder.
 
         public void bindData(ImageBody imageBody, boolean isMine) {
             //RoundingParams params = mImageView.getHierarchy().getRoundingParams();
+            final String coverUrl = imageBody.getLocalOrServerPath();
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mImageView.getLayoutParams();
             if (isMine) {
                 lp.leftMargin = 0;
                 lp.rightMargin = imageMargin;
-                //params.setCornersRadii(AppContextUtil.dip2px(10), 0, AppContextUtil.dip2px(10), AppContextUtil.dip2px(10));
+                Glide.with(mContext).load(new File(coverUrl)).into(mImageView);
             } else {
                 lp.leftMargin = imageMargin;
                 lp.rightMargin = 0;
-                //params.setCornersRadii(0, AppContextUtil.dip2px(10), AppContextUtil.dip2px(10), AppContextUtil.dip2px(10));
+                Glide.with(mContext).load(coverUrl).into(mImageView);
             }
             int[] values = getCoverWidthHeight(imageBody.getContent().getW(), imageBody.getContent().getH());
             if (values != null) {
@@ -59,11 +68,6 @@ public class ChatImageBinder extends ChatFrameBinder<ImageBody, ChatImageBinder.
                 lp.height = values[1];
             }
             mImageView.setLayoutParams(lp);
-            //mImageView.getHierarchy().setRoundingParams(params);
-           // mImageView.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.CENTER_CROP);
-            final String coverUrl = imageBody.getLocalOrServerPath();
-            /*mImageView.setImageUrl(coverUrl, R.color.gray, ScalingUtils.ScaleType.CENTER_CROP,
-                    FrescoHelper.TransformType.NONE, FrescoHelper.ProgressBarType.CIRCLE, null, null, true);*/
         }
     }
 }

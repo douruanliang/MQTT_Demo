@@ -331,7 +331,8 @@ public class AndroidUtils {
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = null;
         try {
-            if (Build.VERSION.SDK_INT > 19) {
+            final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+            if (isKitKat &&  DocumentsContract.isDocumentUri(context, uri) ) {
                 // Will return "image:x*"
                 String wholeID = DocumentsContract.getDocumentId(uri);
                 // Split at colon, use second item in the array
