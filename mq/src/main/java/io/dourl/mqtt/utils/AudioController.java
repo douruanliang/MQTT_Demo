@@ -9,11 +9,10 @@ import android.text.TextUtils;
 import java.io.File;
 import java.io.IOException;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.event.AudioPlayStatusEvent;
 import io.dourl.mqtt.manager.EventBusManager;
-import io.dourl.mqtt.manager.MessageManager;
 import io.dourl.mqtt.model.message.chat.AudioBody;
 
 

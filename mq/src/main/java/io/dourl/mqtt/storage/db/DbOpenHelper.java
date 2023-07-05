@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import org.greenrobot.greendao.database.Database;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.DaoMaster;
 import io.dourl.mqtt.bean.MessageModelDao;
 import io.dourl.mqtt.bean.SessionModelDao;
@@ -16,7 +16,7 @@ import io.dourl.mqtt.bean.UserModelDao;
  * 数据库升级操作需要在此类中完成
  */
 @SuppressWarnings("unchecked")
-public class DbOpenHelper extends DaoMaster.OpenHelper {
+public class DbOpenHelper extends DaoMaster.DevOpenHelper {
 
     public static int sOldVersion = 0;
 

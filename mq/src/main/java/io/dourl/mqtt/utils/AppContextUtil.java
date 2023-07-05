@@ -4,8 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.DimenRes;
 
-import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.base.BaseObject;
+import io.dourl.mqtt.base.MqttBaseApp;
 
 /**
  * File description.
@@ -15,14 +14,14 @@ import io.dourl.mqtt.base.BaseObject;
  */
 public class AppContextUtil {
     public static Context getContext() {
-        return BaseApp.getApp();
+        return MqttBaseApp.getApp();
     }
 
     /**
      * dip转px
      */
     public static int dip2px(float dpValue) {
-        final float scale = BaseApp.getApp().getResources().getDisplayMetrics().density;
+        final float scale = MqttBaseApp.getApp().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -33,11 +32,11 @@ public class AppContextUtil {
      * 将sp转换为px
      */
     public static int sp2px(float spValue) {
-        final float fontScale = BaseApp.getApp().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = MqttBaseApp.getApp().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
     public static int getDimen(@DimenRes int resId) {
-        return BaseApp.getApp().getResources().getDimensionPixelSize(resId);
+        return MqttBaseApp.getApp().getResources().getDimensionPixelSize(resId);
     }
 }

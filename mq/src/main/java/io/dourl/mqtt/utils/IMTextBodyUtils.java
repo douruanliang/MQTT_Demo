@@ -1,7 +1,6 @@
 package io.dourl.mqtt.utils;
 
 import android.text.Spannable;
-import android.text.TextUtils;
 
 
 import java.util.ArrayList;
@@ -13,16 +12,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.HintBody;
 import io.dourl.mqtt.model.message.chat.TextBody;
 
 /**
- * Created by zhangheng on 2018/3/20.
+ *
  */
-
 public class IMTextBodyUtils {
 
     public static List<TextBody.TextEntity> createTextBody(String content) {
@@ -93,7 +91,7 @@ public class IMTextBodyUtils {
 
         for (BaseUser user : mAtUsers) {
             if (!ats.containsValue(user))
-                ats.put(Pattern.compile(Pattern.quote(BaseApp.getApp().getString(R.string.at, user.getFullNameOrUserName()))), user);
+                ats.put(Pattern.compile(Pattern.quote(MqttBaseApp.getApp().getString(R.string.at, user.getFullNameOrUserName()))), user);
         }
 
         Spannable spannable = Spannable.Factory.getInstance().newSpannable(content);
@@ -101,7 +99,7 @@ public class IMTextBodyUtils {
         for (Map.Entry<Pattern, Object> entry : ats.entrySet()) {
             Matcher matcher = entry.getKey().matcher(spannable);
             while (matcher.find()) {
-                atEntities.add(new TextBody.TextEntity(TextBody.TextEntity.TextEntityType.txt, BaseApp.getApp().getString(R.string.at, ((BaseUser) entry.getValue()).getFullNameOrUserName()), matcher.start(), matcher.end()));
+                atEntities.add(new TextBody.TextEntity(TextBody.TextEntity.TextEntityType.txt, MqttBaseApp.getApp().getString(R.string.at, ((BaseUser) entry.getValue()).getFullNameOrUserName()), matcher.start(), matcher.end()));
             }
         }
 

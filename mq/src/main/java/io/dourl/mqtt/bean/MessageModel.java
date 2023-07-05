@@ -5,24 +5,23 @@ import android.os.Parcelable;
 
 import android.text.Spannable;
 
-import androidx.annotation.Keep;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.JsonAdapter;
-
+import io.dourl.mqtt.utils.AESUtil;
 import org.greenrobot.greendao.annotation.Convert;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.converter.PropertyConverter;
-import org.jetbrains.annotations.NotNull;
 
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.base.BaseObject;
 import io.dourl.mqtt.model.ClanModel;
 import io.dourl.mqtt.model.message.ReceiveMessage;
@@ -65,9 +64,9 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
     }
 
     /**
-     * msgId : cc1c6c0f95638ce19e14cc1b4856f1f412c08eab
+     * msgId : cc1c6c0f95638ce19e14cc1b4856f1f412c02eb
      * type : 1
-     * from : {"id":"10042","fullname":"鹏鹏","sessionIcon":"http://7xo8e9.com2.z0.glb.qiniucdn.com/avatar/2ddeafaeadc29828b9c77ef0e3281abe.jpg","sex":"1","truthful":"0","age":"25","intro":"你好地球"}
+     * from : {"id":"10042","fullname":"张三","sessionIcon":"http://7xo8e9.com2.z0.glb.qiniucdn.com/avatar/2ddeafaeadc29828b9c77ef0e3281abe.jpg","sex":"1","truthful":"0","age":"25","intro":"你好地球"}
      * body : {"type":1,"content":[{"t":"txt","c":"en"}]}
      * time : 1452063976626
      */
@@ -202,11 +201,10 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getPushBody() {
         if (body != null) {
-            return GSON.toJson(new ReceiveMessage(type,body,fromUid,clan_id));
+            return GSON.toJson(new ReceiveMessage(type,fromUid,this));
         }
         return "";
     }
-
 
     /**
      * 群发
@@ -214,7 +212,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
      */
     public String getGPushBody() {
         if (body != null) {
-            return GSON.toJson(new ReceiveMessage(type,body,from,clan));
+          //  return AESUtil.INSTANCE.encrypt(GSON.toJson(new ReceiveMessage(type,body,from,clan)));
         }
         return "";
     }
@@ -237,20 +235,20 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
         switch (getBodyType()) {
             case TYPE_TEXT:
                 Spannable builder;
-                builder = TextBodyContentUtils.getSpannableContent(BaseApp.getApp(), ((TextBody) body).getContent());
+                builder = TextBodyContentUtils.getSpannableContent(MqttBaseApp.getApp(), ((TextBody) body).getContent());
                 return builder.toString();
             case TYPE_IMAGE:
             case TYPE_A_IMAGE:
-                result = BaseApp.getApp().getString(R.string.image_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.image_content_desc);
                 break;
             case TYPE_AUDIO:
-                result = BaseApp.getApp().getString(R.string.audio_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.audio_content_desc);
                 break;
             case TYPE_VIDEO:
-                result = BaseApp.getApp().getString(R.string.video_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.video_content_desc);
                 break;
             case TYPE_FANCY_SMILE_BALL:
-                result = BaseApp.getApp().getString(R.string.empty_emoji_content_desc);
+                result = MqttBaseApp.getApp().getString(R.string.empty_emoji_content_desc);
                 break;
             case TYPE_CHAT_REJECT:
             case TYPE_GROUP_ADD_USER:
@@ -277,11 +275,11 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
                 break;
             case TYPE_RED_PACKET:
                 RedPacketBody.ContentEntity contentEntity = ((RedPacketBody) body).getContent().get(0);
-                result = BaseApp.getApp().getString(R.string.red_pkg_content_desc, contentEntity.getCoin_type().toUpperCase(), contentEntity.getC());
+                result = MqttBaseApp.getApp().getString(R.string.red_pkg_content_desc, contentEntity.getCoin_type().toUpperCase(), contentEntity.getC());
                 break;
 
             case TYPE_RED_PACKET_COLLECT:
-                result = ((RedPacketOpenBody) body).createSpan(BaseApp.getApp()).toString();
+                result = ((RedPacketOpenBody) body).createSpan(MqttBaseApp.getApp()).toString();
                 break;
         }
         return result;
@@ -539,6 +537,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
                 '}';
     }
 
+
     public Long getId() {
         return this.id;
     }
@@ -713,7 +712,7 @@ public class MessageModel implements BaseObject, Parcelable, Cloneable {
 
     @Generated(hash = 115542965)
     public MessageModel(Long id, String msgid, MessageType type, @NotNull String fromUid, @NotNull String toUid, ClanModel clan, String clan_id, long time, long localTime, boolean isRead,
-            String sessionId, boolean isMine, Status sendStatus, boolean downloading, BaseMsgBody body) {
+                        String sessionId, boolean isMine, Status sendStatus, boolean downloading, BaseMsgBody body) {
         this.id = id;
         this.msgid = msgid;
         this.type = type;

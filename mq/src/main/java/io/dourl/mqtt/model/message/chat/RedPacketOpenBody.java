@@ -11,9 +11,8 @@ import android.text.style.ClickableSpan;
 import android.view.View;
 import java.util.List;
 
-import androidx.core.content.ContextCompat;
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.base.BaseObject;
 import io.dourl.mqtt.manager.LoginManager;
 
@@ -55,7 +54,7 @@ public class RedPacketOpenBody extends BaseMsgBody {
             //领取人信息 占位符1
             String to = "";
             if (!TextUtils.isEmpty(entity.getTo_uid()) && entity.getTo_uid().equals(mUid)) {
-                to = BaseApp.getApp().getString(R.string.you);
+                to = MqttBaseApp.getApp().getString(R.string.you);
             } else {
                 to = entity.getTo_name();
             }
@@ -64,18 +63,18 @@ public class RedPacketOpenBody extends BaseMsgBody {
             if (!TextUtils.isEmpty(entity.getTo_uid()) && entity.getTo_uid().equals(mUid)) {
 
                 if (!TextUtils.isEmpty(entity.getFrom_uid()) && entity.getFrom_uid().equals(mUid)) {
-                    from = BaseApp.getApp().getString(R.string.yourself);
+                    from = MqttBaseApp.getApp().getString(R.string.yourself);
                 } else {
-                    from = entity.getC() + BaseApp.getApp().getString(R.string.of);
+                    from = entity.getC() + MqttBaseApp.getApp().getString(R.string.of);
                 }
 
             } else {
                 if (!TextUtils.isEmpty(entity.getFrom_uid()) && entity.getFrom_uid().equals(mUid))
-                    from = BaseApp.getApp().getString(R.string.your);
+                    from = MqttBaseApp.getApp().getString(R.string.your);
             }
 
 
-            String redPacket = BaseApp.getApp().getString(R.string.red_packet);
+            String redPacket = MqttBaseApp.getApp().getString(R.string.red_packet);
             SpannableString spannableStr = new SpannableString(redPacket);
 
             //添加点击事件
@@ -99,11 +98,11 @@ public class RedPacketOpenBody extends BaseMsgBody {
                 //发送人信息（用于 %s的红包被领取完） 占位符3
                 String owner = "";
                 if (!TextUtils.isEmpty(entity.getFrom_uid()) && entity.getFrom_uid().equals(mUid)) {
-                    owner =BaseApp.getApp().getString(R.string.your);
+                    owner = MqttBaseApp.getApp().getString(R.string.your);
                 } else {
-                    owner = entity.getC() + BaseApp.getApp().getString(R.string.of);
+                    owner = entity.getC() + MqttBaseApp.getApp().getString(R.string.of);
                 }
-                builder.append(BaseApp.getApp().getString(R.string.red_packet_format_2, owner));
+                builder.append(MqttBaseApp.getApp().getString(R.string.red_packet_format_2, owner));
             }
         }
         setSpanContent(builder);

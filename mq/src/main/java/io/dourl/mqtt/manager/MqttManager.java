@@ -12,10 +12,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.util.concurrent.Future;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
-import io.dourl.mqtt.core.OperationCallback;
-import io.dourl.mqtt.utils.TopicUtils;
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.core.ActionListener;
 import io.dourl.mqtt.core.MqttCallbackHandler;
 import io.dourl.mqtt.core.MqttConstant;
@@ -23,6 +20,7 @@ import io.dourl.mqtt.core.MqttTraceCallback;
 import io.dourl.mqtt.job.MsgJobManager;
 import io.dourl.mqtt.job.core.MqttConAndSubJob;
 import io.dourl.mqtt.job.core.MqttDestroyJob;
+import io.dourl.mqtt.utils.TopicUtils;
 
 /**
  * Mqtt连接管理类
@@ -45,39 +43,52 @@ public class MqttManager {
 
     public void init() {
         if (mqttAndroidClient != null) {
-             Log.e(TAG,"already init");
+            Log.e(TAG, "already init");
             return;
         }
         if (!LoginManager.isLogin()) {
-             Log.e(TAG,"user not login");
+            Log.e(TAG, "user not login");
             return;
         }
-        String cId = LoginManager.getInstance().getCurrentUserId();
-        mqttAndroidClient = new MqttAndroidClient(BaseApp.getApp(),
+        String cId = LoginManager.getCurrentUserId();
+        mqttAndroidClient = new MqttAndroidClient(MqttBaseApp.getApp(),
                 MqttConstant.URI, cId);
         if (BuildConfig.DEBUG) {
             mqttAndroidClient.setTraceCallback(new MqttTraceCallback());
             mqttAndroidClient.setTraceEnabled(true);
         }
-         Log.e(TAG,"mqtt init success");
+        Log.e(TAG, "mqtt init success");
     }
 
     public MqttAndroidClient getClient() {
         return mqttAndroidClient;
     }
 
+    /**
+     *  Clean Session 标志告诉代理客户端是否要建立持久会话
+     *  在持久会话 (CleanSession = false) 中，代理会存储客户端的所有订阅以及以服务质量 (QoS) 级别 1 或 2 订阅的客户端的所有丢失消息。
+     *  如果会话不是持久的 (CleanSession = true )，代理不为客户端存储任何内容，并清除任何先前持久会话中的所有信息。
+     *
+     *  cleanSession标志是MQTT协议中对一个客户端建立TCP连接后是否关心之前状态的定义。具体语义如下：
+     * cleanSession=true：客户端再次上线时，将不再关心之前所有的订阅关系以及离线消息。
+     * cleanSession=false：客户端再次上线时，还需要处理之前的离线消息，而之前的订阅关系也会持续生效。
+     * @param cleanSession
+     * @return
+     */
     public IMqttToken connect(boolean cleanSession) {
         String userName, password;
-        //LoggerUtil.e("deviceid: " + Constants.DEVICEID);
+        //LoggerUtils.e("deviceid: " + Constants.DEVICEID);
         if (LoginManager.isLogin()) {
             //userName = LoginManager.getToken() + "_2" +" Constants.DEVICEID";
             userName = LoginManager.getInstance().getCurrentUserId();
             //password = "DigestUtils.md5Hex(userName + LoginManager.getSecret())";
-            password = LoginManager.getSecret()+LoginManager.getInstance().getCurrentUserId();
+          //  password = LoginManager.getSecret() + LoginManager.getInstance().getCurrentUserId();
+            // 测试环境 TODO
+            password = LoginManager.getInstance().getCurrentUserId();
         } else {
             return null;
         }
-       // NotificationHelper.showNoti(ActionListener.Action.CONNECT, false, "CONNECTING");
+        // NotificationHelper.showNoti(ActionListener.Action.CONNECT, false, "CONNECTING");
         MqttConnectOptions conOpt = new MqttConnectOptions();
        /* X509TrustManager tm = new MqttX509TrustManager();
         try {
@@ -95,7 +106,7 @@ public class MqttManager {
         mqttAndroidClient.setCallback(new MqttCallbackHandler());
         try {
             return mqttAndroidClient.connect(conOpt, null,
-                    new ActionListener((Application) BaseApp.getApp(), ActionListener.Action.CONNECT, null));
+                    new ActionListener((Application) MqttBaseApp.getApp(), ActionListener.Action.CONNECT, null));
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -130,7 +141,7 @@ public class MqttManager {
 //
 //        public IMqttToken unSubscribe(String topic) {
 //        if (TextUtils.isEmpty(topic)) {
-//            LoggerUtil.e("sub_topic is null");
+//            LoggerUtils.e("sub_topic is null");
 //            return null;
 //        }
 //        try {
@@ -150,7 +161,7 @@ public class MqttManager {
 //        return null;
 //    }
 
-   public IMqttToken disconnect() {
+    public IMqttToken disconnect() {
         try {
             if (mqttAndroidClient != null) {
                 return mqttAndroidClient.disconnect();
@@ -164,8 +175,9 @@ public class MqttManager {
     public static void connectAndSubinJob() {
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
                 TopicUtils.getImTopic(), 1, true));
+        //测试群
         MsgJobManager.getInstance().addJob(new MqttConAndSubJob(
-                TopicUtils.getNewsTopic(), 1, true));
+                TopicUtils.getGimTopic("kamen_qun"), 1, true));
     }
 
     public static void wakeMqtt() {
@@ -215,7 +227,7 @@ public class MqttManager {
         return MsgJobManager.getInstance().addJob(new MqttDestroyJob());
     }
 
-   public void clear() throws MqttException {
+    public void clear() throws MqttException {
         unRegisterResource();
         mqttAndroidClient = null;
         ourInstance = null;

@@ -9,7 +9,7 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.ui.BaseActivity;
 
 /**
@@ -23,19 +23,19 @@ class NotificationHelper {
     static final int REQUEST_CODE_TESTACTIVITY = 100;
     static void showNoti(ActionListener.Action action, boolean state, String message) {
         //if (BuildConfig.RELEASE) return;
-        Intent intent = new Intent(BaseApp.getApp(), BaseActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(BaseApp.getApp(), REQUEST_CODE_TESTACTIVITY, intent,
+        Intent intent = new Intent(MqttBaseApp.getApp(), BaseActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(MqttBaseApp.getApp(), REQUEST_CODE_TESTACTIVITY, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        NotificationManager manager = (NotificationManager) BaseApp.getApp()
+        NotificationManager manager = (NotificationManager) MqttBaseApp.getApp()
                 .getSystemService(Context.NOTIFICATION_SERVICE);
 
         NotificationCompat.Builder notificationBuilder;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(CHANNEL_DEFAULT,CHANNEL_DEFAULT,NotificationManager.IMPORTANCE_DEFAULT);
             manager.createNotificationChannel(channel);
-            notificationBuilder = new NotificationCompat.Builder(BaseApp.getApp(),CHANNEL_DEFAULT);
+            notificationBuilder = new NotificationCompat.Builder(MqttBaseApp.getApp(),CHANNEL_DEFAULT);
         }else {
-            notificationBuilder = new NotificationCompat.Builder(BaseApp.getApp(), (Notification) null);
+            notificationBuilder = new NotificationCompat.Builder(MqttBaseApp.getApp(), (Notification) null);
         }
 
         notificationBuilder.setAutoCancel(false);
@@ -59,7 +59,7 @@ class NotificationHelper {
     }
 
     static void cancelNoti() {
-        NotificationManager manager = (NotificationManager) BaseApp.getApp()
+        NotificationManager manager = (NotificationManager) MqttBaseApp.getApp()
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         if (manager != null) {
             manager.cancel(999);

@@ -25,30 +25,30 @@ public class UserModel implements BaseObject, Parcelable {
     protected String uid;
     protected String username;
     protected String fullname;
-    protected String email;
-    protected String mobile;
+    protected transient String email;
+    protected transient String mobile;
     protected String avatar;
-    protected String avatar_thumb;
-    protected int push_notify;
-    protected String share_link;
-    protected int age;
-    protected String country;
-    protected String province;
-    protected String city;
-    protected int level;
-    protected int game_count;
-    protected String birthday;
-    protected String color;
-    protected int gender;
-    protected int is_friend;
-    protected String country_code;
-    protected int city_code;
-    protected int save_static;//是否自动保存到相册
-    protected int now_exp;
-    protected int max_exp;
-    protected int id_change_times;
-    protected int from_third;
-    protected Integer is_cryptomate_agent = 0;//是否为代理商0：不是 1：是
+    protected transient String avatar_thumb;
+    protected transient int push_notify;
+    protected transient String share_link;
+    protected transient int age;
+    protected transient String country;
+    protected transient String province;
+    protected transient String city;
+    protected transient int level;
+    protected transient int game_count;
+    protected transient String birthday;
+    protected transient String color;
+    protected transient int gender;
+    protected transient int is_friend;
+    protected transient String country_code;
+    protected transient int city_code;
+    protected transient int save_static;//是否自动保存到相册
+    protected transient int now_exp;
+    protected transient int max_exp;
+    protected transient int id_change_times;
+    protected transient int from_third;
+
 
     /**
      * 性别 0:未知 1:男 2:女
@@ -91,12 +91,6 @@ public class UserModel implements BaseObject, Parcelable {
 
     public void setFullname(String fullname) {
         this.fullname = fullname;
-    }
-
-    public boolean isAgent() {
-        if (is_cryptomate_agent == null)
-            return false;
-        return is_cryptomate_agent == 1;
     }
 
     public String getName() {
@@ -387,15 +381,11 @@ public class UserModel implements BaseObject, Parcelable {
         dest.writeInt(this.max_exp);
         dest.writeInt(this.id_change_times);
         dest.writeInt(this.from_third);
-        dest.writeValue(this.is_cryptomate_agent);
+
     }
 
-    public Integer getIs_cryptomate_agent() {
-        return this.is_cryptomate_agent;
-    }
-
-    public void setIs_cryptomate_agent(Integer is_cryptomate_agent) {
-        this.is_cryptomate_agent = is_cryptomate_agent;
+    public void setMax_exp(Integer max_exp) {
+        this.max_exp = max_exp;
     }
 
     protected UserModel(Parcel in) {
@@ -425,10 +415,10 @@ public class UserModel implements BaseObject, Parcelable {
         this.max_exp = in.readInt();
         this.id_change_times = in.readInt();
         this.from_third = in.readInt();
-        this.is_cryptomate_agent = (Integer) in.readValue(Integer.class.getClassLoader());
+
     }
 
-    @Generated(hash = 49380387)
+    @Keep
     public UserModel(String uid, String username, String fullname, String email, String mobile,
             String avatar, String avatar_thumb, int push_notify, String share_link, int age,
             String country, String province, String city, int level, int game_count, String birthday,
@@ -461,7 +451,14 @@ public class UserModel implements BaseObject, Parcelable {
         this.max_exp = max_exp;
         this.id_change_times = id_change_times;
         this.from_third = from_third;
-        this.is_cryptomate_agent = is_cryptomate_agent;
+    }
+
+    @Generated(hash = 828527667)
+    public UserModel(String uid, String username, String fullname, String avatar) {
+        this.uid = uid;
+        this.username = username;
+        this.fullname = fullname;
+        this.avatar = avatar;
     }
 
     public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {

@@ -11,10 +11,6 @@ import java.util.List;
 import io.dourl.mqtt.base.BaseObject;
 import io.dourl.mqtt.model.typeadapter.BaseClanModel;
 
-/**
- * Created by zhangheng on 2018/1/22.
- * 部落（群聊）
- */
 
 public class ClanModel extends BaseClanModel implements BaseObject, Parcelable {
 

@@ -12,12 +12,25 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 
 import io.dourl.mqtt.R;
 
 public class BaseActivity extends AppCompatActivity {
 
+    public static Handler sHandler = new Handler(Looper.getMainLooper());
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    public static void runOnUi(Runnable runnable) {
+        sHandler.post(runnable);
+    }
 
     protected void checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

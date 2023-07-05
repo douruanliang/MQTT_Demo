@@ -7,7 +7,7 @@ import org.greenrobot.greendao.query.QueryBuilder;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.bean.UserModelDao;
 import io.dourl.mqtt.thread.DaoHandlerThread;

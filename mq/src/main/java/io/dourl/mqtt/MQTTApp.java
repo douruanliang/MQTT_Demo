@@ -2,15 +2,13 @@ package io.dourl.mqtt;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import io.dourl.http.HttpApiBase;
-import io.dourl.mqtt.base.BaseApp;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.constants.Constants;
 import io.dourl.mqtt.utils.DeviceInfoUtils;
 
@@ -24,7 +22,7 @@ public class MQTTApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        BaseApp.init(this);
+        MqttBaseApp.init(this);
         HttpApiBase.init(this);
         Constants.SCREENWIDTH = DeviceInfoUtils.getScreenWidth(this);
 
@@ -39,9 +37,9 @@ public class MQTTApp extends Application {
             @Override
             public void onActivityStarted(@NonNull Activity activity) {
                 activityStartCount++;
-                LoggerUtil.d("app","onActivityStarted"+activityStartCount);
+                //LoggerUtils.d("app","onActivityStarted"+activityStartCount);
                 if (activityStartCount == 1) {
-                    LoggerUtil.d("app","从后台切到前台");
+                   // LoggerUtils.d("app","从后台切到前台");
                 }
             }
 
@@ -59,9 +57,9 @@ public class MQTTApp extends Application {
             public void onActivityStopped(@NonNull Activity activity) {
                 activityStartCount--;
                 //数值从1到0说明是从前台切到后台
-                LoggerUtil.d("app","onActivityStopped"+activityStartCount);
+                //LoggerUtils.d("app","onActivityStopped"+activityStartCount);
                 if (activityStartCount == 0) {
-                    LoggerUtil.d("app","从前台切到后台");
+                   // LoggerUtils.d("app","从前台切到后台");
                 }
             }
 

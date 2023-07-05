@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 
 /**

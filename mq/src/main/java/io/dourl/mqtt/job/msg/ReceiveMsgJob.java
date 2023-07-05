@@ -9,6 +9,7 @@ import io.dourl.mqtt.job.MsgJobManager;
 import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.manager.LoginManager;
 import io.dourl.mqtt.model.message.ReceiveMessage;
+import io.dourl.mqtt.utils.AESUtil;
 import io.dourl.mqtt.utils.TopicUtils;
 
 /**
@@ -27,7 +28,7 @@ public class ReceiveMsgJob extends BaseMessageJob {
 
     @Override
     public void run() {
-        if (!LoginManager.getInstance().isLogin()) {
+        if (!LoginManager.isLogin()) {
             Log.d(TAG, "not login! do nothing when receive msg");
             return;
         }
@@ -46,16 +47,17 @@ public class ReceiveMsgJob extends BaseMessageJob {
 
     private void processImMessage(String msgString) {
         ReceiveMessage parsedMsg = GsonManager.getGson().fromJson(msgString, ReceiveMessage.class);
+
         switch (parsedMsg.getType()) {
             case UN_RECOGNIZE:
                 break;
             case CHAT_NORMAL:
-                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
+                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(parsedMsg.getMsg()));
                 break;
             case CHAT_GROUP:
-                if (parsedMsg.getFromUid().equals(LoginManager.getInstance().getCurrentUserId()))
+                if (parsedMsg.getFromUid().equals(LoginManager.getCurrentUserId()))
                     break;
-                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(msgString));
+                MsgJobManager.getInstance().addJob(new ProcessChatMsgJob(parsedMsg.getMsg()));
                 break;
 //            case TRANSACTION:
 //                break;

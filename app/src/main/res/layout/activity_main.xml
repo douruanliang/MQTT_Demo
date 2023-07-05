@@ -1,36 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/btn_send"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:background="@color/color_2a9c83"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="@string/one"
-        android:textColor="#212121"
-        android:textSize="18sp" />
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/tab_height_main" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_tabView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tab_height_main"
+            android:layout_gravity="bottom"
+            android:background="@drawable/shape_white_border_top"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/main_tab_tv_0"
+                style="@style/main_tab_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:drawableTop="@drawable/selector_main_tab_home"
+                android:text="首页"
+                app:layout_constraintEnd_toStartOf="@id/main_tab_tv_1"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
-    <TextView
-        android:id="@+id/btn_send_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="10dp"
-        android:background="@color/color_c7"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="@string/group"
-        android:textColor="#6D4C41"
-        android:textSize="18sp" />
-</LinearLayout>
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/main_tab_tv_1"
+                style="@style/main_tab_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:drawableTop="@drawable/selector_main_tab_circle"
+                android:text="圈子"
+                app:layout_constraintEnd_toStartOf="@id/main_post_iv"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/main_tab_tv_0" />
+
+
+            <ImageView
+                android:id="@+id/main_post_iv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/selector_main_tab_publish"
+                app:layout_constraintEnd_toStartOf="@id/main_tab_tv_2"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/main_tab_tv_1" />
+
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/main_tab_tv_2"
+                style="@style/main_tab_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:drawableTop="@drawable/selector_main_tab_course"
+                android:text="课程"
+                app:layout_constraintEnd_toStartOf="@id/main_tab_tv_3"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/main_post_iv" />
+
+            <androidx.appcompat.widget.AppCompatCheckedTextView
+                android:id="@+id/main_tab_tv_3"
+                style="@style/main_tab_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:drawableTop="@drawable/selector_main_tab_me"
+                android:text="我的"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_weight="1"
+                app:layout_constraintStart_toEndOf="@id/main_tab_tv_2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </FrameLayout>
+</layout>

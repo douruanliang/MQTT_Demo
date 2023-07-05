@@ -1,6 +1,9 @@
 package io.dourl.mqtt.ui.adpater.chat;
 
 
+import android.nfc.Tag;
+
+import com.drakeet.multitype.MultiTypeAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,20 +12,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
-import io.dourl.mqtt.manager.GsonManager;
 import io.dourl.mqtt.model.BaseUser;
 import io.dourl.mqtt.model.customenum.ManagerType;
 import io.dourl.mqtt.model.message.chat.AudioBody;
-import io.dourl.mqtt.model.message.chat.BaseMsgBody;
 import io.dourl.mqtt.model.message.chat.BodyType;
 import io.dourl.mqtt.model.message.chat.ImageBody;
-import me.drakeet.multitype.MultiTypeAdapter;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
-/**
- * Created by SpiritTalk on 17/1/13.
- */
 
 public class ChatAdapter extends MultiTypeAdapter {
     /**
@@ -40,19 +37,13 @@ public class ChatAdapter extends MultiTypeAdapter {
         super(list);
         mDataList = list;
     }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        checkIsShowTime(position);
-        super.onBindViewHolder(holder, position);
-    }
-
     /**
      * 判断当前消息是否需要显示时间
      *
      * @param position
      */
     private void checkIsShowTime(int position) {
+        LoggerUtil.d(TAG,"checkIsShowTime  "+position);
         // 超出长度，直接返回
         if (position >= mDataList.size()) return;
 
@@ -84,17 +75,6 @@ public class ChatAdapter extends MultiTypeAdapter {
     }
 
 
-    @NonNull
-    @Override
-    public Class onFlattenClass(@NonNull Object item) {
-        BaseMsgBody body = ((MessageModel) item).getBody();
-        if (body == null) {
-            //BugTagsUtils.sendException(new IllegalStateException(GsonManager.getGson().toJson(item)));
-            return BaseMsgBody.class;
-        } else {
-            return body.getClass();
-        }
-    }
 
     public void setData(List<MessageModel> messages) {
         if (messages != null && !messages.isEmpty()) {
@@ -115,7 +95,7 @@ public class ChatAdapter extends MultiTypeAdapter {
     public void addData(MessageModel message) {
         mDataList.add(0, message);
         notifyItemInserted(0);
-        LoggerUtil.d(TAG,"add msg at: 0 Status: %s", message.getSendStatus());
+        LoggerUtil.d(TAG, "add msg at: 0 Status: %s", message.getSendStatus());
 
     }
 

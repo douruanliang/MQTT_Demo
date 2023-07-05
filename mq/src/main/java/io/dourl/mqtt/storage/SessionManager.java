@@ -2,11 +2,10 @@ package io.dourl.mqtt.storage;
 
 
 
-import android.os.FileUtils;
-
 import java.util.List;
 
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.ui.BaseActivity;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
 import io.dourl.mqtt.bean.UserModel;
@@ -152,7 +151,7 @@ public class SessionManager {
             }
 //            mUnreadCount.set(unreadCount);
             if (callback != null) {
-               // BaseActivity.runOnUi(() -> callback.onSuccess(ss));
+               BaseActivity.runOnUi(() -> callback.onSuccess(ss));
             }
         });
     }

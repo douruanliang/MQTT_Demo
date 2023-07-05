@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <!-- 白色背景/字体 -->
+    <color name="md_white">#FFFFFF</color>
+
+    <color name="md_text_black">#333333</color>
+    <color name="md_text_gray_light">#999999</color>
+
+    <!-- 分割线 -->
+    <color name="md_bg_divider">#E5E5E5</color>
 </resources>

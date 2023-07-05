@@ -10,7 +10,7 @@ import android.os.Looper;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import io.dourl.mqtt.BuildConfig;
-import io.dourl.mqtt.base.log.LoggerUtil;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 /**
  * 工作线程，在该线程中处理和维护和DB相关的数据吞吐<br>

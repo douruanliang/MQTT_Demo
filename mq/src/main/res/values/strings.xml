@@ -412,7 +412,7 @@
         <string name="edit_profile_info">Edit profile</string>
 
         <!-- GAME.COM -->
-        <string name="logo_title">GAME.COM</string>
+        <string name="logo_title">zh.COM</string>
 
         <!-- 请输入您的Game ID -->
         <string name="login_name_hint">Enter your Game ID</string>
@@ -452,9 +452,6 @@
 
         <!-- 重试 -->
         <string name="retry">Retry</string>
-
-        <!-- 女，19岁，北京市 朝阳区 -->
-        <string name="long_account_info">Female, 19, Beijing, Chaoyang District</string>
 
         <!-- 头像 -->
         <string name="avatar">Profile Photo</string>

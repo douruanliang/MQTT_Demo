@@ -8,12 +8,9 @@ import io.dourl.mqtt.model.BaseUser;
 /**
  * 已登录用户管理类
  * user信息存储到文件中
- * Created by Zhp on 2014/6/9.
  */
 @SuppressWarnings("unused")
 public class LoginManager {
-
-    private static LoginManager mInstance;
     private BaseUser mCurrentUser;
 
     private static class Holder {
@@ -101,7 +98,6 @@ public class LoginManager {
     }
 
     private void clearMemory() {
-        mInstance = null;
         clearStaticProperties();
     }
 
@@ -139,11 +135,11 @@ public class LoginManager {
         UserModel  mFromUser = new UserModel();
         mFromUser.setUid(getCurrentUserId());
         mFromUser.setAge(30);
-        mFromUser.setFullname("战boss千年-boss");
+        mFromUser.setFullname(getCurrentUserId()+"千年-boss");
         return mFromUser;
     }
 
-    public  String getCurrentUserId() {
-        return "lenovo";
+    public static String getCurrentUserId() {
+        return "boss";
     }
 }

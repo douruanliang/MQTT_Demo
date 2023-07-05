@@ -6,18 +6,16 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-
 import java.util.List;
 
-import io.dourl.mqtt.R;
-import io.dourl.mqtt.base.log.LoggerUtil;
 import io.dourl.mqtt.model.message.chat.TextBody;
+import io.dourl.mqtt.utils.AESUtil;
 import io.dourl.mqtt.utils.ImSmileUtils;
+import io.dourl.mqtt.utils.log.LoggerUtil;
 
 /**
  *
@@ -55,7 +53,7 @@ public class TextBodyContentUtils {
                                 if (url.length() <= 4 || (!url.substring(0, 4).equals("http"))) {
                                     url = "http://" + url;
                                 }
-                               // clickableSpan = new LinkSpan(url);
+                                // clickableSpan = new LinkSpan(url);
                                 start = builder.length();
                                 builder.append(text.u);
                             }
@@ -63,7 +61,7 @@ public class TextBodyContentUtils {
                         case email:
                             start = builder.length();
                             builder.append(text.c);
-                           // clickableSpan = new LinkSpan("mailto:" + text.c);
+                            // clickableSpan = new LinkSpan("mailto:" + text.c);
                             break;
                         case at:
 //                            clickableSpan = new UserSpan(text.c);
@@ -71,13 +69,13 @@ public class TextBodyContentUtils {
                         case notice:
                             List<TextBody.TextEntity> notice = new Gson().fromJson(text.c, new TypeToken<List<TextBody.TextEntity>>() {
                             }.getType());
-                           // builder.append(AppConstant.getApp().getString(R.string.chat_all));
+                            // builder.append(AppConstant.getApp().getString(R.string.chat_all));
                             builder.append(getSpannableContent(mContext, notice));
                             break;
                         case tel:
                             start = builder.length();
                             builder.append(text.c);
-                           // clickableSpan = new LinkSpan("tel:" + text.c);
+                            // clickableSpan = new LinkSpan("tel:" + text.c);
                             break;
                         case emotion:
                             start = builder.length();

@@ -4,9 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import io.dourl.mqtt.base.BaseObject;
 
-/**
- * Created by zhangheng on 2018/5/29.
- */
 
 public enum ManagerType implements BaseObject {
     @SerializedName("-1")

@@ -1,12 +1,13 @@
 package io.dourl.mqtt.manager;
 
 import io.dourl.mqtt.storage.SessionManager;
+import io.dourl.mqtt.utils.AESUtil;
 import io.dourl.mqtt.utils.MessageThreadPool;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import io.dourl.mqtt.base.BaseApp;
+import io.dourl.mqtt.base.MqttBaseApp;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.UserModel;
 import io.dourl.mqtt.job.msg.SendMsgJob;
@@ -59,10 +60,12 @@ public class MessageManager {
     public MessageModel sendTextMessage(UserModel baseUser, String content) {
         MessageModel textMessage = new MessageModel();
         textMessage.setTo(baseUser);
+     /*   //加密
+        content = AESUtil.INSTANCE.encrypt(content);*/
         TextBody body = new TextBody();
         List<TextBody.TextEntity> textEntities = IMTextBodyUtils.createTextBody(content);
         body.setContent(textEntities);
-        body.createSpan(BaseApp.getApp());
+        body.createSpan(MqttBaseApp.getApp());
         setupNormalProperty(textMessage, body);
         sendMessage(textMessage);
         return textMessage;
