@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -13,6 +15,11 @@ import io.dourl.http.api.SendMsgApis;
 import io.dourl.http.model.BaseResponse;
 import io.dourl.http.retrofit.RetrofitManager;
 import io.dourl.mqtt.base.MqttBaseApp;
+import io.dourl.mqtt.upload.UpLoadParam;
+import io.dourl.mqtt.upload.UploadCallback;
+import io.dourl.mqtt.upload.UploadManager;
+import io.dourl.mqtt.upload.UploadType;
+import io.dourl.mqtt.utils.FileUtils;
 import io.dourl.mqtt.utils.log.LoggerUtil;
 import io.dourl.mqtt.bean.MessageModel;
 import io.dourl.mqtt.bean.SessionModel;
@@ -177,7 +184,7 @@ public class SendMsgJob extends BaseMessageJob {
             return;
         }
         LoggerUtil.d("do Upload");
-       /* String key;
+        String key;
         UpLoadParam param = new UpLoadParam(UploadType.image);
         File file = new File(mMessageModel.getLocalPath());
         switch (mMessageModel.getBodyType()) {
@@ -221,18 +228,18 @@ public class SendMsgJob extends BaseMessageJob {
                 break;
             }
 
-        }*/
+        }
         dbOp();
         LoggerUtil.d("upload success, so do send");
     }
 
-    /*protected String doFileUpload(final File file, UpLoadParam p) throws Exception {
+    protected String doFileUpload(final File file, UpLoadParam p) throws Exception {
         if (file == null || !file.exists()) {
             throw new NullPointerException("file not found");
         }
-        LoggerUtil.d("file size %s", FileUtils.showFileSize(file.length()));
+        LoggerUtil.d(TAG,"file size %s", FileUtils.showFileSize(file.length()));
         final String[] result = new String[1];
-        *//*UploadManager.getInstance().uploadFile(file, p, new UploadCallback() {
+        UploadManager.getInstance().uploadFile(file, p, new UploadCallback() {
             @Override
             public void onSuccess(String key) {
                 result[0] = key;
@@ -245,11 +252,11 @@ public class SendMsgJob extends BaseMessageJob {
 
             @Override
             public void onProgress(double p) {
-                LoggerUtil.tag(TAG).d("upload progress %s, %s", file.getName(), String.valueOf(p));
+                LoggerUtil.d(TAG,"upload progress %s, %s", file.getName(), String.valueOf(p));
             }
         }).waitForCompletion();
         return result[0];
-    }*/
+    }
 
     protected void doSend() throws IOException {
         LoggerUtil.d(TAG,"do Send");

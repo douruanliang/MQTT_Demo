@@ -1,4 +1,4 @@
-package io.dourl.mqtt.core;
+package io.dourl.mqtt.manager;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
