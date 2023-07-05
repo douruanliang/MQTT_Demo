@@ -22,12 +22,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String","MQTT_HOST","\"192.168.159.53\"")
-            buildConfigField("String","API_HOST","\"192.168.159.53\"")
+            buildConfigField("String","MQTT_HOST","\"192.168.159.60\"")
+            buildConfigField("String","API_HOST","\"192.168.159.60\"")
         }
         debug {
-            buildConfigField("String","MQTT_HOST","\"192.168.159.53\"")
-            buildConfigField("String","API_HOST","\"192.168.159.53\"")
+            buildConfigField("String","MQTT_HOST","\"192.168.159.60\"")
+            buildConfigField("String","API_HOST","\"192.168.159.60\"")
         }
     }
     compileOptions {
